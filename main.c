@@ -113,4 +113,5 @@ int main_demo_bin(){
 int main(){
     //main_demo_txt();
     main_demo_bin();
+    printf("git test");
 }
