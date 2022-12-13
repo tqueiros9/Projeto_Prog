@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/tiago/CLionProjects/untitled2/cmake-build-debug"
+			"value" : "c:/Users/tiago/CLionProjects/Projeto/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/tiago/CLionProjects/untitled2"
+			"value" : "C:/Users/tiago/CLionProjects/Projeto"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1095,7 +1095,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/tiago/CLionProjects/untitled2/cmake-build-debug"
+			"value" : "C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug"
 		},
 		{
 			"name" : "untitled2_IS_TOP_LEVEL",
@@ -1119,7 +1119,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/tiago/CLionProjects/untitled2"
+			"value" : "C:/Users/tiago/CLionProjects/Projeto"
 		}
 	],
 	"kind" : "cache",
