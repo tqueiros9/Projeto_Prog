@@ -1,32 +1,59 @@
 #include <stdio.h>
 
 #define MAX_TRIP 100
+#define MAX_NOME_FUNCAO 100
+#define MAX_MISSOES 200
 
 //estruturas******************************************
 
-struct tripulante {
+typedef struct tripulante {
+    int nip; // numero de identificacao unico no formato XXXXXX
+    char nome [MAX_NOME_FUNCAO];
+    char funcao [MAX_NOME_FUNCAO]; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master, 5 recuperador, 6 piloto instrutor, 7 aluno
+    int estado; //O = OP, 1 = INOP
     int oper; //data em que estara operacional no formato AAAAMMDD
-    int funcao; //funcao de cada tripulante, 1 piloto, 2 co-piloto, etc.
-    int ID; // numero de identificacao unico no formato XXXX
-
+    int horas_voo;
+    int missoes; //numero total de missoes
 
 }Tripulante;
 
-struct voo {
+typedef struct voo {
+    char nome_missao [MAX_NOME_FUNCAO];
     int n_voo;
     int data; //formato AAAAMMDD
+    Tripulante conj_trip [];
 
 
-}Missao;
+}Missao_unica;
+
+typedef struct missoes{
+    int cont_missoes;
+    Missao_unica conj_missoes [MAX_MISSOES];
+}Missoes;
+
+struct tm{
+    int tm_sec;         /* seconds,  range 0 to 59          */
+    int tm_min;         /* minutes, range 0 to 59           */
+    int tm_hour;        /* hours, range 0 to 23             */
+    int tm_mday;        /* day of the month, range 1 to 31  */
+    int tm_mon;         /* month, range 0 to 11             */
+    int tm_year;        /* The number of years since 1900   */
+    int tm_wday;        /* day of the week, range 0 to 6    */
+    int tm_yday;        /* day in the year, range 0 to 365  */
+    int tm_isdst;       /* daylight saving time             */
+};
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                DEMO BINARIOS
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-typedef struct {
-    char nome[50];
-    int nip;
-} Tripulante;
+
+void marcar_missao(Missoes * total_missoes){
+
+    printf("\n Escolha o tipo de missao:\n 1- \n 2- \n 3- \n");
+
+}
 
 void print_trip(Tripulante * t){
     printf("\n--Trip--\n");
