@@ -2,9 +2,22 @@
 
 #define MAX_TRIP 100
 
+//estruturas******************************************
+
+struct tripulante {
+    int oper; //data em que estara operacional no formato AAAAMMDD
+    int funcao; //funcao de cada tripulante, 1 piloto, 2 co-piloto, etc.
+    int ID; // numero de identificacao unico no formato XXXX
 
 
+}Tripulante;
 
+struct voo {
+    int n_voo;
+    int data; //formato AAAAMMDD
+
+
+}Missao;
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                DEMO BINARIOS
