@@ -20,16 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-    </list>
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="teste 5" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +31,11 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -144,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671419845108</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="teste 5">
+      <created>1671423080145</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671423080145</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +171,7 @@
     <MESSAGE value="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão" />
     <MESSAGE value="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido" />
     <MESSAGE value="ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar" />
-    <option name="LAST_COMMIT_MESSAGE" value="ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar" />
+    <MESSAGE value="teste 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="teste 5" />
   </component>
 </project>
