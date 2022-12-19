@@ -14,7 +14,9 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+void quicksort(){
 
 
-//teste pull final
+
+}
 #endif //FUNCOES_SECUNDARIAS_H
