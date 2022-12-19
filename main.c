@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 #include "estruturas.h"
+#include "funcoes_principais.h"
 #include "funcoes-secundarias.h"
 
 
@@ -87,7 +89,7 @@ int main_demo_bin(){
         int n=3;
         printf("Ficheiro aberto.");
         fwrite(&n, sizeof(int), 1, fp);
-        fwrite(tripulacao, sizeof(Tripulante), 3, fp);
+        fwrite(tripulacao, sizeof(Tripulante), n, fp);
         fclose(fp);
     }
     // vamos ler esse tripulante do ficheiro binário
@@ -113,4 +115,10 @@ int main(){
     int a = 20201211;
     printf(" %d %d %d", a/10000,a%10000/100, a%100);
     printf("Insira a data, no formato DD/MM/AAAA");
+
+
+
+
+
+
 }

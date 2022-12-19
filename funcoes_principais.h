@@ -36,6 +36,11 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 }
 
-void listar_missoes ()
+void listar_missoes (){
+
+
+
+
+}
 
 #endif //FUNCOES_PRINCIPAIS_H
