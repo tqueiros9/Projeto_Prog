@@ -20,8 +20,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="estruturas">
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="estruturas - update em todas as estruturas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
@@ -66,6 +67,11 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="untitled2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="untitled2" TARGET_NAME="untitled2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="untitled2" RUN_TARGET_NAME="untitled2">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -82,7 +88,8 @@
       <updated>1670923314185</updated>
       <workItem from="1670923315937" duration="3926000" />
       <workItem from="1670928228985" duration="662000" />
-      <workItem from="1671325942640" duration="4743000" />
+      <workItem from="1671325942640" duration="5672000" />
+      <workItem from="1671374162810" duration="3452000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -98,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671327309009</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="estruturas - update em todas as estruturas">
+      <created>1671331289603</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671331289603</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +132,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="git test" />
     <MESSAGE value="estruturas" />
-    <option name="LAST_COMMIT_MESSAGE" value="estruturas" />
+    <MESSAGE value="estruturas - update em todas as estruturas" />
+    <option name="LAST_COMMIT_MESSAGE" value="estruturas - update em todas as estruturas" />
   </component>
 </project>
