@@ -20,7 +20,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="teste 5" />
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="teste 3">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,12 +34,14 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -89,7 +94,7 @@
       <workItem from="1670923315937" duration="3926000" />
       <workItem from="1670928228985" duration="662000" />
       <workItem from="1671325942640" duration="5672000" />
-      <workItem from="1671374162810" duration="12416000" />
+      <workItem from="1671374162810" duration="13207000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -140,14 +145,35 @@
       <option name="project" value="LOCAL" />
       <updated>1671419845108</updated>
     </task>
-    <task id="LOCAL-00008" summary="teste 5">
-      <created>1671423080145</created>
+    <task id="LOCAL-00008" summary="pequenas correções">
+      <created>1671422123972</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1671423080145</updated>
+      <updated>1671422123972</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="teste">
+      <created>1671422289935</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671422289935</updated>
+    </task>
+    <task id="LOCAL-00010" summary="teste 2">
+      <created>1671422326197</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671422326197</updated>
+    </task>
+    <task id="LOCAL-00011" summary="teste 3">
+      <created>1671422678779</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671422678779</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +197,10 @@
     <MESSAGE value="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão" />
     <MESSAGE value="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido" />
     <MESSAGE value="ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar" />
-    <MESSAGE value="teste 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="teste 5" />
+    <MESSAGE value="pequenas correções" />
+    <MESSAGE value="teste" />
+    <MESSAGE value="teste 2" />
+    <MESSAGE value="teste 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="teste 3" />
   </component>
 </project>
