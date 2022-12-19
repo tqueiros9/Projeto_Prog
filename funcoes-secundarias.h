@@ -16,6 +16,5 @@
 
 
 
-//teste pull request 5
-
+//teste pull final
 #endif //FUNCOES_SECUNDARIAS_H
