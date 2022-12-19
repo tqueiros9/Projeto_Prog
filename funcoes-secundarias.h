@@ -1,11 +1,9 @@
 #ifndef FUNCOES_SECUNDARIAS_H
 #define FUNCOES_SECUNDARIAS_H
 
+#include "estruturas.h"
 #include <stdio.h>
 #include <time.h>
-#include "estruturas.h"
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -13,9 +11,6 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+// teste pull request 5
 
-
-
-//teste pull request 5
-
-#endif //FUNCOES_SECUNDARIAS_H
+#endif // FUNCOES_SECUNDARIAS_H
