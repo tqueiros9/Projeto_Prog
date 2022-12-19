@@ -20,16 +20,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão">
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido">
+      <change afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/tripulantes.db" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/tripulantes.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
@@ -98,7 +98,7 @@
       <workItem from="1670923315937" duration="3926000" />
       <workItem from="1670928228985" duration="662000" />
       <workItem from="1671325942640" duration="5672000" />
-      <workItem from="1671374162810" duration="5098000" />
+      <workItem from="1671374162810" duration="9821000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -128,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671410614252</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido">
+      <created>1671412457799</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671412457799</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +157,7 @@
     <MESSAGE value="estruturas" />
     <MESSAGE value="estruturas - update em todas as estruturas" />
     <MESSAGE value="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão" />
-    <option name="LAST_COMMIT_MESSAGE" value="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão" />
+    <MESSAGE value="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido" />
+    <option name="LAST_COMMIT_MESSAGE" value="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido" />
   </component>
 </project>

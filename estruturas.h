@@ -5,31 +5,33 @@
 #define MAX_MISSOES 200
 #define MAX_MILITARES 1000
 #define MAX_TIPOS_MISSOES 10
+#define FUNCOES_TRIP 7
 
 //*******************************************************estruturas*****************************************************
 
 typedef struct mission_type {
     char nome [MAX_NOME_FUNCAO];
     int cont_tripulantes_missao;
-    int tipo_tripulantes;
+    int tipo_tripulantes[10];//MUDAR ISTO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 }Mission_type;
 
 typedef struct tripulante {
-    int nip; // numero de identificacao unico no formato XXXXXX
     char nome [MAX_NOME_FUNCAO];
-    char funcao [MAX_NOME_FUNCAO]; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master, 5 recuperador, 6 piloto instrutor, 7 aluno
+    int nip; // numero de identificacao unico no formato XXXXXX
+    int funcao; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,
+                                                                // 5 recuperador, 6 piloto instrutor, 7 aluno
     int estado; //O = OP, 1 = INOP
-    int oper[3]; //data em que estara operacional no formato [AAAA,MM,DD]
+    int oper; //data em que estara operacional no formato AAAAMMDD
     int horas_voo;
     int missoes; //numero total de missoes
 
 }Tripulante;
 
 typedef struct voo {
-    char nome_missao [MAX_NOME_FUNCAO];
     int n_voo;
-    int data[3]; //formato AAAAMMDD
-    Tripulante conj_trip [];
+    int data; //formato AAAAMMDD
+    Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    int tipo_de_missao;
 }Missao_unica;
 
 //*************** estruturas que definem conjutos das estruturas anteriores com um vetor e um contador *****************
@@ -45,7 +47,7 @@ typedef struct missoes{
 }Total_missoes;
 
 typedef struct militares{
-    Tripulante total_tripulantes [MAX_MILITARES];
+    Tripulante total_tripulantes [FUNCOES_TRIP][MAX_MILITARES];
     int cont_militares;
 }Total_militares;
 

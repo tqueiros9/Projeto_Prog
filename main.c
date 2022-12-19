@@ -2,31 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include "estruturas.h"
+#include "funcoes-secundarias.h"
+
 
 #define MAX_TRIP 100
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-                   FUNÇÕES PRINCIPAIS
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao){
-
-    int escolha;
-    printf("\n Escolha o tipo de missao:\n");
-    for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {
-        printf("%d - %s\n", i, tipos_missao->conj_tipos_missao[i].nome);
-    }
-    scanf("%d",&escolha);
-
-    printf("Insira a data, no formato AAAA/MM/DD");
-    scanf("%d//%d//%d",&total_missoes->conj_missoes[total_missoes->cont_missoes].data[0],
-          &total_missoes->conj_missoes[total_missoes->cont_missoes].data[1],
-          &total_missoes->conj_missoes[total_missoes->cont_missoes].data[2]);
 
 
-}
 
 void print_trip(Tripulante * t){
     printf("\n--Trip--\n");
@@ -127,4 +109,8 @@ int main(){
     //main_demo_txt();
     main_demo_bin();
     printf("git test");
+    //teste datas
+    int a = 20201211;
+    printf(" %d %d %d", a/10000,a%10000/100, a%100);
+    printf("Insira a data, no formato DD/MM/AAAA");
 }
