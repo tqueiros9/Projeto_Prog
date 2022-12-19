@@ -2,8 +2,9 @@
 #define FUNCOES_SECUNDARIAS_H
 
 #include <stdio.h>
-#include "estruturas.h"
 #include <time.h>
+#include "estruturas.h"
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

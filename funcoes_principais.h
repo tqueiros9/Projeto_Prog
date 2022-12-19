@@ -1,10 +1,11 @@
 #ifndef FUNCOES_PRINCIPAIS_H
 #define FUNCOES_PRINCIPAIS_H
 
-#include "estruturas.h"
-#include "funcoes-secundarias.h"
 #include <stdio.h>
 #include <time.h>
+#include "estruturas.h"
+#include "funcoes-secundarias.h"
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                    FUNÇÕES PRINCIPAIS
@@ -35,6 +36,6 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 }
 
-
+void listar_missoes ()
 
 #endif //FUNCOES_PRINCIPAIS_H
