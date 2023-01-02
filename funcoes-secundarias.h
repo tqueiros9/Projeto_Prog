@@ -17,6 +17,6 @@
 void quicksort(){
 
 
-
 }
+
 #endif //FUNCOES_SECUNDARIAS_H
