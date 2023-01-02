@@ -17,6 +17,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
     int escolha,data[3], data_final=0;
     printf("\n Escolha o tipo de missao: \n");
+    printf("teste");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
     for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {
