@@ -4,7 +4,7 @@
 #define MAX_NOME_FUNCAO 50
 #define MAX_MISSOES 200
 #define MAX_MILITARES 1000
-#define MAX_TIPOS_MISSOES 10
+#define MAX_TIPOS 10
 #define FUNCOES_TRIP 7
 
 //*******************************************************estruturas*****************************************************
@@ -34,10 +34,14 @@ typedef struct voo {
     int tipo_de_missao;
 }Missao_unica;
 
+typedef struct funcoes_mil{
+    char mil_funcao[MAX_NOME_FUNCAO];
+}tipos_funcoes_mil;
+
 //*************** estruturas que definem conjutos das estruturas anteriores com um vetor e um contador *****************
 
 typedef struct total_tipos_missao {
-    Mission_type conj_tipos_missao[MAX_TIPOS_MISSOES];
+    Mission_type conj_tipos_missao[MAX_TIPOS];
     int cont_tipos_missao;
 }Total_tipos_missao;
 
@@ -50,6 +54,11 @@ typedef struct militares{
     Tripulante total_tripulantes [FUNCOES_TRIP][MAX_MILITARES];
     int cont_militares;
 }Total_militares;
+
+typedef struct total_funcoes_mil{
+    tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
+    int cont_funcoes
+}Total_funcoes_mil;
 
 
 
