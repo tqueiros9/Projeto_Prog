@@ -13,11 +13,17 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-
-void quicksort(){
-
-
+void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes * c, Total_tipos_missao * d){
+    a->cont_funcoes=0;
+    b->cont_militares=0;
+    c->cont_missoes=0;
+    d->cont_tipos_missao=0;
 }
+void imprimir_menu(){
+    printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair");
+}
+
+
 
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 
@@ -30,6 +36,7 @@ void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 void imprimir_lista_militares (Total_militares * lista_militares, int estado, int funcao){
 
     printf("NIP\tNOME\n");
+
     for (int i = 0; i < lista_militares->cont_militares; i++) {
 
         if ((lista_militares->total_tripulantes[i]->estado==estado || lista_militares->total_tripulantes[i]->estado== -1)&&
@@ -37,10 +44,7 @@ void imprimir_lista_militares (Total_militares * lista_militares, int estado, in
             printf("\n%d\t%s", lista_militares->total_tripulantes[i]->nip, lista_militares->total_tripulantes[i]->nome);
 
         }
-
     }
-
-
 }
 
 void imprimir_militar (Total_militares * lista_militares, int nip){

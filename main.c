@@ -108,17 +108,48 @@ int main_demo_bin(){
 
 
 int main(){
+
+    int escolha_menu;
+    Total_tipos_missao todos_tipos_missoes;
+    Total_missoes todas_as_missoes;
+    Total_militares todos_os_militares;
+    Total_funcoes_mil todas_func_mil;
+
+    iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
+
+    //abrir ficheiro
+
     //main_demo_txt();
     main_demo_bin();
     printf("git test");
     //teste datas
-    int a = 20201211;
-    printf(" %d %d %d", a/10000,a%10000/100, a%100);
-    printf("Insira a data, no formato DD/MM/AAAA");
 
 
+    imprimir_menu();
+    scanf("%d",&escolha_menu);
+    while(escolha_menu!=5){
 
+        switch (escolha_menu) {
 
-
+            case 1:
+                marcar_missao(&todas_as_missoes, &todos_tipos_missoes);
+                break;
+            case 2:
+                listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
+                break;
+            case 3:
+                listar_tripulantes(&todos_os_militares, &todas_func_mil);
+                break;
+            case 4:
+                //atualizar estado militares
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("escolha invalida, nao existe essa opcao no menu");
+        }
+        imprimir_menu();
+        scanf("%d",&escolha_menu);
+    }
 
 }

@@ -32,6 +32,7 @@ typedef struct voo {
     int data; //formato AAAAMMDD
     Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     int tipo_de_missao;
+    int cont_tripulantes;
 }Missao_unica;
 
 typedef struct funcoes_mil{
@@ -59,7 +60,6 @@ typedef struct total_funcoes_mil{
     tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
     int cont_funcoes
 }Total_funcoes_mil;
-
 
 
 

@@ -39,13 +39,45 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 }
 
-void listar_missoes (Total_missoes * lista_de_missoes){
-    Total_militares todos_mil;
-    int cont;
-    printf("%d %s %s %s",cont, todos_mil.total_tripulantes[1]->nip,todos_mil.total_tripulantes[1]->nome,todos_mil.total_tripulantes[1]->funcao);
+void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
 
+    int temp, data1, data2, data, controlo=0;
+    printf("insira a data mais antiga no formato DDMMAAAA");
+    scanf("%d", &temp);
+    data1 = temp/1000000 + temp%1000000/10000 + temp%10000;
+    printf("insira a data mais recente no formato DDMMAAAA");
+    scanf("%d", &temp);
+    data2 = temp/1000000 + temp%1000000/10000 + temp%10000;
+    if (data1>data2){
+        printf("as datas nao respeitam o que foi pedido");
+        return;
+    }
 
+    for (int i = 0; i < lista_de_missoes->cont_missoes; i++) {
+
+        data = lista_de_missoes->conj_missoes[i].data;
+
+        if (data >= data1 && data<=data2) {
+
+            printf("\n%d\n%d//%d//%d\n%s", lista_de_missoes->conj_missoes[i].n_voo, data / 10000, data % 10000 / 100,
+                   data / 100,
+                   lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);
+
+            for (int j = 0; j < lista_de_missoes->conj_missoes[i].cont_tripulantes; j++) {
+                printf("\n%s\t%s", lista_de_missoes->conj_missoes[i].conj_trip[j].nome,
+                       lista_funcoes_mil->todas_funcoes[lista_de_missoes->conj_missoes[i].conj_trip[j].funcao].mil_funcao);
+            }
+            printf("\n");
+            controlo = 1;
+        }
+    }
+
+    if (controlo == 0){
+        printf("Não ha missoes nas datas marcadas");
+    }
 }
+
+
 
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
 
