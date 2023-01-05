@@ -20,13 +20,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica">
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="teste github">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
     </list>
@@ -105,7 +102,8 @@
       <workItem from="1671527897400" duration="2375000" />
       <workItem from="1671637956607" duration="2384000" />
       <workItem from="1672418023410" duration="2218000" />
-      <workItem from="1672695514154" duration="721000" />
+      <workItem from="1672695514154" duration="3773000" />
+      <workItem from="1672913862962" duration="4836000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -198,7 +196,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671423517987</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="teste github">
+      <created>1672696252157</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672696252157</updated>
+    </task>
+    <task id="LOCAL-00015" summary="teste github">
+      <created>1672696280223</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672696280223</updated>
+    </task>
+    <task id="LOCAL-00016" summary="teste github">
+      <created>1672696341466</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1672696341466</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,17 +247,7 @@
     <MESSAGE value="teste 3" />
     <MESSAGE value="final" />
     <MESSAGE value="implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/funcoes_principais.h</url>
-          <line>14</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="teste github" />
+    <option name="LAST_COMMIT_MESSAGE" value="teste github" />
   </component>
 </project>
