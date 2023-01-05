@@ -49,39 +49,49 @@ void listar_missoes (Total_missoes * lista_de_missoes){
 
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
 
-    int escolha, escolha2;
-    printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n6 - sair");
+    int escolha, escolha2,nip;
+    printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair");
     scanf("%d", &escolha);
 
-    switch (escolha) {
+    while (escolha!=6) {
+        switch (escolha) {
 
-        case 1:
-            imprimir_lista_militares(lista_de_militares,0,-1);
-            break;
-        case 2:
-            imprimir_lista_militares(lista_de_militares,1,-1);
-            break;
-        case 3:
-            imprimir_funcoes(lista_funcoes_mil);
-            printf("escolha a funcao");
-            scanf("&d", &escolha2);
-            imprimir_lista_militares(lista_de_militares,0,escolha2);
-            break;
-        case 4:
-            imprimir_funcoes(lista_funcoes_mil);
-            printf("escolha a funcao");
-            scanf("&d", &escolha2);
-            imprimir_lista_militares(lista_de_militares,0,escolha2);
-            break;
+            case 1:
+                imprimir_lista_militares(lista_de_militares, 0, -1);
+                break;
+            case 2:
+                imprimir_lista_militares(lista_de_militares, 1, -1);
+                break;
+            case 3:
+                imprimir_funcoes(lista_funcoes_mil);
+                printf("escolha a funcao");
+                scanf("&d", &escolha2);
+                imprimir_lista_militares(lista_de_militares, 0, escolha2);
+                break;
+            case 4:
+                imprimir_funcoes(lista_funcoes_mil);
+                printf("escolha a funcao");
+                scanf("&d", &escolha2);
+                imprimir_lista_militares(lista_de_militares, 0, escolha2);
+                break;
 
-        case 5:
-            imprimir_lista_militares(lista_de_militares,-1,-1);
-        case 6:
-            return;
+            case 5:
+                imprimir_lista_militares(lista_de_militares, -1, -1);
+            case 6:
+                return;
 
-        default:
-            printf("numero introduzido não faz parte do menu");
+            default:
+                printf("numero introduzido não faz parte do menu");
+        }
+
+        printf("deseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1");
+        scanf("%d",&nip);
+        if (escolha!=-1){
+            imprimir_militar(lista_de_militares,nip);
+        }
+
     }
+
 
 }
 
