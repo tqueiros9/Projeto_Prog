@@ -52,7 +52,7 @@ typedef struct missoes{
 }Total_missoes;
 
 typedef struct militares{
-    Tripulante total_tripulantes [FUNCOES_TRIP][MAX_MILITARES];
+    Tripulante total_tripulantes [MAX_MILITARES];
     int cont_militares;
 }Total_militares;
 

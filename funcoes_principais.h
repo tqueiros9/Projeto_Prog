@@ -13,7 +13,7 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao){
+void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares){
 
 
     int escolha,data[3], data_final=0;
@@ -41,6 +41,11 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
 
+    if (lista_de_missoes->cont_missoes==0){
+        printf("não há missoes para imprimir\n");
+        return;
+    }
+
     int temp, data1, data2, data, controlo=0;
     printf("insira a data mais antiga no formato DDMMAAAA");
     scanf("%d", &temp);
@@ -60,8 +65,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         if (data >= data1 && data<=data2) {
 
             printf("\n%d\n%d//%d//%d\n%s", lista_de_missoes->conj_missoes[i].n_voo, data / 10000, data % 10000 / 100,
-                   data / 100,
-                   lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);
+                   data / 100, lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);
 
             for (int j = 0; j < lista_de_missoes->conj_missoes[i].cont_tripulantes; j++) {
                 printf("\n%s\t%s", lista_de_missoes->conj_missoes[i].conj_trip[j].nome,
@@ -82,8 +86,15 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
 
     int escolha, escolha2,nip;
+
+    if (lista_de_militares->cont_militares==0){
+        printf("nao ha militares para imprimir\n");
+        return;
+    }
+
     printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair");
-    scanf("%d", &escolha);
+    scanf(" %d", &escolha);
+
 
     while (escolha!=6) {
         switch (escolha) {
@@ -96,7 +107,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
                 break;
             case 3:
                 imprimir_funcoes(lista_funcoes_mil);
-                printf("escolha a funcao");
+                printf("escolha a funcao\n");
                 scanf("&d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
