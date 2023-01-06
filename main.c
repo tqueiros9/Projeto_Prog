@@ -117,12 +117,12 @@ int main(){
 
     iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
 
-    //abrir ficheiro
 
-    //main_demo_txt();
-    main_demo_bin();
-    printf("git test");
-    //teste datas
+
+    printf("%d %d %d %d", todas_func_mil.cont_funcoes, todos_tipos_missoes.cont_tipos_missao, todas_as_missoes.cont_missoes,todos_os_militares.cont_militares);
+    //teste dados
+
+
 
 
     imprimir_menu();
