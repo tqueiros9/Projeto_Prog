@@ -13,7 +13,7 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares){
+void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares) {
 
 
     int escolha,data[3], data_final=0;
@@ -39,9 +39,9 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 }
 
-void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
+void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil) {
 
-    if (lista_de_missoes->cont_missoes==0){
+    if (lista_de_missoes->cont_missoes==0) {
         printf("não há missoes para imprimir\n");
         return;
     }
@@ -53,7 +53,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
     printf("insira a data mais recente no formato DDMMAAAA");
     scanf("%d", &temp);
     data2 = temp/1000000 + temp%1000000/10000 + temp%10000;
-    if (data1>data2){
+    if (data1>data2) {
         printf("as datas nao respeitam o que foi pedido");
         return;
     }
@@ -76,18 +76,18 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         }
     }
 
-    if (controlo == 0){
+    if (controlo == 0) {
         printf("Não ha missoes nas datas marcadas");
     }
 }
 
 
 
-void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
+void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil) {
 
     int escolha, escolha2,nip;
 
-    if (lista_de_militares->cont_militares==0){
+    if (lista_de_militares->cont_militares==0) {
         printf("nao ha militares para imprimir\n");
         return;
     }
@@ -99,37 +99,37 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
     while (escolha!=6) {
         switch (escolha) {
 
-            case 1:
-                imprimir_lista_militares(lista_de_militares, 0, -1);
-                break;
-            case 2:
-                imprimir_lista_militares(lista_de_militares, 1, -1);
-                break;
-            case 3:
-                imprimir_funcoes(lista_funcoes_mil);
-                printf("escolha a funcao\n");
-                scanf("&d", &escolha2);
-                imprimir_lista_militares(lista_de_militares, 0, escolha2);
-                break;
-            case 4:
-                imprimir_funcoes(lista_funcoes_mil);
-                printf("escolha a funcao");
-                scanf("&d", &escolha2);
-                imprimir_lista_militares(lista_de_militares, 0, escolha2);
-                break;
+        case 1:
+            imprimir_lista_militares(lista_de_militares, 0, -1);
+            break;
+        case 2:
+            imprimir_lista_militares(lista_de_militares, 1, -1);
+            break;
+        case 3:
+            imprimir_funcoes(lista_funcoes_mil);
+            printf("escolha a funcao\n");
+            scanf("&d", &escolha2);
+            imprimir_lista_militares(lista_de_militares, 0, escolha2);
+            break;
+        case 4:
+            imprimir_funcoes(lista_funcoes_mil);
+            printf("escolha a funcao");
+            scanf("&d", &escolha2);
+            imprimir_lista_militares(lista_de_militares, 0, escolha2);
+            break;
 
-            case 5:
-                imprimir_lista_militares(lista_de_militares, -1, -1);
-            case 6:
-                return;
+        case 5:
+            imprimir_lista_militares(lista_de_militares, -1, -1);
+        case 6:
+            return;
 
-            default:
-                printf("numero introduzido não faz parte do menu");
+        default:
+            printf("numero introduzido não faz parte do menu");
         }
 
         printf("deseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1");
         scanf("%d",&nip);
-        if (escolha!=-1){
+        if (escolha!=-1) {
             imprimir_militar(lista_de_militares,nip);
         }
 
