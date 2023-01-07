@@ -12,14 +12,14 @@
 
 
 
-void print_trip(Tripulante * t){
+void print_trip(Tripulante * t) {
     printf("\n--Trip--\n");
     printf("nome: %s\n", t->nome);
     printf("nip:%d\n", t->nip);
     printf("--------------\n");
 }
 
-void print_trip_file(FILE * fp){
+void print_trip_file(FILE * fp) {
     int n, trip_counter;
     Tripulante t;
     // fp é um apontador de FILE já aberto em modo que suporta leitura binária
@@ -41,7 +41,7 @@ void print_trip_file(FILE * fp){
         print_trip(&t);
 
     }
-    if (n != trip_counter){
+    if (n != trip_counter) {
         printf("ERRO");
     }
 
@@ -50,7 +50,7 @@ void print_trip_file(FILE * fp){
 }
 
 
-int print_trip_idx(FILE *fp, int idx){
+int print_trip_idx(FILE *fp, int idx) {
     Tripulante t;
     rewind(fp);
     // fp é um apontador de FILE já aberto em modo que suporta leitura binária
@@ -62,14 +62,14 @@ int print_trip_idx(FILE *fp, int idx){
 }
 
 
-void trip_file_swap(FILE * fp, int idx1, int idx2){
+void trip_file_swap(FILE * fp, int idx1, int idx2) {
     // fp é um apontador de FILE já aberto em modo que suporta leitura e escrita binária
     // idx1 e idx2 são índices de Tripulantes no ficheiro
     // esta função troca os dois tripulantes
 }
 
 
-int main_demo_bin(){
+int main_demo_bin() {
     Tripulante t1 = {"Saramago", 136787};
     Tripulante t2 = {"Asimov", 136786};
     Tripulante t3 = {"Hofstader", 136788};
@@ -81,7 +81,7 @@ int main_demo_bin(){
     FILE * fp, *fp2;
     // vamos escrever um tripulante no ficheiro binário
     fp = fopen("tripulantes.db", "wb");
-    if(fp == NULL){
+    if(fp == NULL) {
         printf("Abertura de ficheiro incorrecta.\n");
         return 1;
     }
@@ -94,7 +94,7 @@ int main_demo_bin(){
     }
     // vamos ler esse tripulante do ficheiro binário
     fp = fopen("tripulantes.db", "rb");
-    if(fp == NULL){
+    if(fp == NULL) {
         printf("Abertura de ficheiro incorrecta.\n");
         return 1;
     }
@@ -107,7 +107,7 @@ int main_demo_bin(){
 }
 
 
-int main(){
+int main() {
 
     int escolha_menu;
     Total_tipos_missao todos_tipos_missoes;
@@ -127,29 +127,29 @@ int main(){
 
     imprimir_menu();
     scanf("%d",&escolha_menu);
-    while(escolha_menu!=5){
+    while(escolha_menu!=5) {
 
         switch (escolha_menu) {
 
-            case 1:
-                marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares);
-                break;
-            case 2:
-                listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
-                break;
-            case 3:
-                listar_tripulantes(&todos_os_militares, &todas_func_mil);
-                break;
-            case 4:
-                //atualizar estado militares
-                break;
-            case 5:
-                //adicionar ficheiro à BD
-                break;
-            case 6:
-                return 0;
-            default:
-                printf("escolha invalida, nao existe essa opcao no menu");
+        case 1:
+            marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares);
+            break;
+        case 2:
+            listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
+            break;
+        case 3:
+            listar_tripulantes(&todos_os_militares, &todas_func_mil);
+            break;
+        case 4:
+            //atualizar estado militares
+            break;
+        case 5:
+            //adicionar ficheiro à BD
+            break;
+        case 6:
+            return 0;
+        default:
+            printf("escolha invalida, nao existe essa opcao no menu");
         }
         imprimir_menu();
         scanf("%d",&escolha_menu);
