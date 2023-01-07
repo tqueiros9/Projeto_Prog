@@ -24,6 +24,64 @@ void imprimir_menu(){
     printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair\n");
 }
 
+void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
+
+    for (int i = 0; i < todos_militares; i++) {
+        if (todos_militares->total_tripulantes[i].nip == nip){
+            todos_militares->total_tripulantes[i].missoes++;
+            todos_militares->total_tripulantes[i].horas_voo+=2;
+        }
+    }
+
+}
+
+void criar_equipa (Total_militares * todos_militares, Total_funcoes_mil * todas_funcoes, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
+
+    int controlo=0, controlo_militar_guardado = 0;
+
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].data = data;
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].cont_tripulantes = tipo_miss_escolhida->cont_tripulantes_missao;
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = data+123;
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].tipo_de_missao = missao_escolhida;
+
+
+    for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
+
+        for (int j = 0; j < todos_militares->cont_militares; j++) {
+
+            if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]){
+
+                for (int k = 0; k < todos_militares->total_tripulantes[j].missoes; k++) {
+                    if(todos_militares->total_tripulantes[j].data_missoes[k] == data){
+                        controlo = 1;
+                        break;
+                    }
+                }
+                if (controlo == 0){
+                    todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i] = todos_militares->total_tripulantes[j];
+                    controlo_militar_guardado = 1;
+                }
+                else{
+                    controlo = 0;
+                }
+
+            }
+            if (controlo_militar_guardado == 1){
+                break;
+            }
+        }
+        if (controlo_militar_guardado == 0){
+            printf("nao ha militares disponiveis para executar a missao");
+            return;
+        }
+    }
+    for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
+        adicionar_horas_missoes(todos_militares,todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i].nip);
+    }
+    todas_missoes->cont_missoes++;
+
+}
+
 int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
 
     for (int i = 0; i < todas_funcoes->cont_funcoes; ++i) {
@@ -33,6 +91,7 @@ int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
     }
 
 }
+
 void adicionar_dados_militares(char * linha, Total_militares * lista_mil_total, Total_funcoes_mil * lista_func){
 
     char s[2]=";";
@@ -81,7 +140,6 @@ void adicionar_dados_militares(char * linha, Total_militares * lista_mil_total, 
 
 }
 
-
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 
     for (int i = 0; i < lista_funcoes->cont_funcoes; i++) {
@@ -104,7 +162,31 @@ void imprimir_lista_militares (Total_militares * lista_militares, int estado, in
     }
 }
 
-void imprimir_militar (Total_militares * lista_militares, int nip){
+int imprimir_militar (Total_militares * lista_militares, int nip){
+
+    char estado[20];
+
+    for (int i = 0; i < lista_militares->cont_militares; i++) {
+
+        if (lista_militares->total_tripulantes[i].nip==nip){
+
+            if (lista_militares->total_tripulantes[i].estado == 0){
+                strcpy(estado, "OPERACIONAL");
+            }
+            else {
+                strcpy(estado, "INOPERACIONAL");
+            }
+
+            printf("%s \n\nnip: %d\n\testado: %s\n", lista_militares->total_tripulantes[i].nome,
+                   lista_militares->total_tripulantes[i].nip, estado);
+            return i;
+
+        }
+    }
+
+}
+
+void imprimir_horas_militar (Total_militares * lista_militares, int nip){
 
     for (int i = 0; i < lista_militares->cont_militares; i++) {
 
