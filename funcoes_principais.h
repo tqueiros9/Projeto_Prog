@@ -37,6 +37,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
     //criação da equipa
 
+
 }
 
 void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
@@ -80,8 +81,6 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         printf("Não ha missoes nas datas marcadas");
     }
 }
-
-
 
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
 
@@ -130,7 +129,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
         printf("deseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1");
         scanf("%d",&nip);
         if (escolha!=-1){
-            imprimir_militar(lista_de_militares,nip);
+            imprimir_horas_militar(lista_de_militares, nip);
         }
 
     }
@@ -138,5 +137,46 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
 
 }
 
+void atualizar_estado(Total_militares * lista_de_militares){
+
+    int nip, escolha, indice, data;
+
+    printf("introduza o nip do militar que pretende modificar o estado\n");
+    scanf("%d", &nip);
+
+    indice = imprimir_militar(lista_de_militares, nip);
+
+    printf("para atualizar o estado insira 1 para mudar para OPERACIONAL, 2 para mudar para INOPERACIONAL e 3 para sair");
+    scanf("%d", &escolha);
+
+    if (escolha == 3)return;
+
+    else if (escolha == 1){
+
+        if (lista_de_militares->total_tripulantes[indice].estado == 0){
+            printf("militar ja se encontra operacional\n");
+            return;
+        }
+
+        lista_de_militares->total_tripulantes[indice].estado = 0;
+        lista_de_militares->total_tripulantes[indice].oper = -1;
+    }
+
+    else if (escolha == 2){
+        if (lista_de_militares->total_tripulantes[indice].estado == 1){
+            printf("militar ja se encontra inoperacional\n");
+            return;
+        }
+        printf("insira a data em que o militar ficará operacional de novo no formato AAAAMMDD");
+        scanf("%d", data);
+        lista_de_militares->total_tripulantes[indice].estado=1;
+        lista_de_militares->total_tripulantes[indice].oper = data;
+    }
+
+    else {
+        printf("operacao invalida");
+    }
+
+}
 
 #endif //FUNCOES_PRINCIPAIS_H

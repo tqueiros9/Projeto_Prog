@@ -24,6 +24,7 @@ typedef struct tripulante {
     int oper; //data em que estara operacional no formato AAAAMMDD
     int horas_voo;
     int missoes; //numero total de missoes
+    int data_missoes[200];
 
 }Tripulante;
 

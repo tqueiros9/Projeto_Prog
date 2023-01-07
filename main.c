@@ -132,7 +132,7 @@ int main(){
         switch (escolha_menu) {
 
             case 1:
-                marcar_missao(&todas_as_missoes, &todos_tipos_missoes);
+                marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares);
                 break;
             case 2:
                 listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
@@ -144,6 +144,9 @@ int main(){
                 //atualizar estado militares
                 break;
             case 5:
+                //adicionar ficheiro à BD
+                break;
+            case 6:
                 return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");
