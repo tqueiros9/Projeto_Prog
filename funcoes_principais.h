@@ -18,7 +18,6 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
     int escolha,data[3], data_final;
     printf("\n Escolha o tipo de missao: \n");
-    printf("teste");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
     for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {
@@ -48,12 +47,14 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
     }
 
     int temp, data1, data2, data, controlo=0;
+
     printf("insira a data mais antiga no formato DDMMAAAA");
     scanf("%d", &temp);
     data1 = temp/1000000 + temp%1000000/10000 + temp%10000;
     printf("insira a data mais recente no formato DDMMAAAA");
     scanf("%d", &temp);
     data2 = temp/1000000 + temp%1000000/10000 + temp%10000;
+
     if (data1>data2){
         printf("as datas nao respeitam o que foi pedido");
         return;

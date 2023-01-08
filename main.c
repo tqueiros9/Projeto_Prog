@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 #include "estruturas.h"
 #include "funcoes_principais.h"
@@ -8,10 +7,6 @@
 
 
 #define MAX_TRIP 100
-
-
-
-
 /*void print_trip_file(FILE * fp){
     int n, trip_counter;
     Tripulante t;
@@ -55,11 +50,11 @@
 }*/
 
 
-void trip_file_swap(FILE * fp, int idx1, int idx2){
+/*void trip_file_swap(FILE * fp, int idx1, int idx2){
     // fp é um apontador de FILE já aberto em modo que suporta leitura e escrita binária
     // idx1 e idx2 são índices de Tripulantes no ficheiro
     // esta função troca os dois tripulantes
-}
+}*/
 
 
 /*int main_demo_bin(){
@@ -109,22 +104,23 @@ int main(){
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
-    iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
+    //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
 
-    char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
-    adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
+    //char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
+    // adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
 
-    imprimir_menu();
+    // imprimir_menu();
+    printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair\n");
     scanf("%d",&escolha_menu);
     while(escolha_menu!=5){
 
         switch (escolha_menu) {
 
             case 1:
-                marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
+     //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
                 break;
             case 2:
-                listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
+            //   listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
                 break;
             case 3:
                 listar_tripulantes(&todos_os_militares, &todas_func_mil);
@@ -137,7 +133,7 @@ int main(){
                 //adicionar ficheiro à BD
                 break;
             case 6:
-                guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
+               // guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
                 return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");

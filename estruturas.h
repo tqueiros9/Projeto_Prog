@@ -38,6 +38,7 @@ typedef struct voo {
 
 typedef struct funcoes_mil{
     char mil_funcao[MAX_NOME_FUNCAO];
+
 }tipos_funcoes_mil;
 
 //*************** estruturas que definem conjutos das estruturas anteriores com um vetor e um contador *****************
