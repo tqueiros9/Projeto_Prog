@@ -2,8 +2,11 @@
 #define FUNCOES_SECUNDARIAS_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
+#include <conio.h>
 #include "estruturas.h"
+
 
 
 
@@ -21,6 +24,7 @@ void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes *
 }
 
 void imprimir_menu(){
+
     printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair\n");
 }
 
@@ -112,18 +116,18 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
             case 1:
                 strcpy(lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].nome, temp);
                 break;
-                /*case 2:
+            case 2:
                     lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].funcao= verifica_funcao(temp, lista_func);
                     break;
-                case 3:
+            case 3:
                     help = strcmp(temp,"OP");
                     if(help==0)lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].estado = 0;
                     else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].estado = 1;
                     break;
-                case 4:
+            case 4:
                     if (help!=0)lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper = atoi(temp);
                     else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper=-1;
-                    break;*/
+                    break;
             case 5:
                 lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].horas_voo = atoi(temp);
                 break;
@@ -144,23 +148,35 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 
     for (int i = 0; i < lista_funcoes->cont_funcoes; i++) {
-        printf("%s",lista_funcoes->todas_funcoes[i].mil_funcao);
+        printf("%d - %s\n",i,lista_funcoes->todas_funcoes[i].mil_funcao);
     }
 }
 
 //recebe lista de militares, o seu estado 0 = OP e 1 = INOP
 void imprimir_lista_militares (Total_militares * lista_militares, int estado, int funcao){
 
-    printf("NIP\tNOME\n");
+    //testes---------------
+
+    //-----------
+
+    if (lista_militares->cont_militares==0){
+        printf("nao ha militares na base de dados\n");
+        return;
+    }
+
+    printf("\n----LISTA DE MILITARES----\n");
+    printf("NIP\tNOME");
 
     for (int i = 0; i < lista_militares->cont_militares; i++) {
 
-        if ((lista_militares->total_tripulantes[i].estado==estado || lista_militares->total_tripulantes[i].estado== -1)&&
-        (lista_militares->total_tripulantes[i].funcao==funcao|| lista_militares->total_tripulantes[i].funcao==-1)){
+        if ((lista_militares->total_tripulantes[i].estado==estado || estado== -1)&&
+        (lista_militares->total_tripulantes[i].funcao==funcao|| funcao==-1)){
             printf("\n%d\t%s", lista_militares->total_tripulantes[i].nip, lista_militares->total_tripulantes[i].nome);
 
         }
     }
+    printf("\n----FIM DA LISTA----");
+    printf("\n");
 }
 
 int imprimir_militar (Total_militares * lista_militares, int nip){

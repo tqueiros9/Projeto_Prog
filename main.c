@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "estruturas.h"
 #include "funcoes_principais.h"
@@ -98,19 +97,78 @@
 
 int main(){
 
+
+
     int escolha_menu;
     Total_tipos_missao todos_tipos_missoes;
-    Total_missoes todas_as_missoes;
+    //Total_missoes todas_as_missoes;
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
     //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
 
     //char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
-    // adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
+    //adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
 
-    // imprimir_menu();
-    printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair\n");
+
+    //--------------zona teste de dados
+
+    char filename_mil[] = "militares.bin";
+    char filename_mis[] = "missoes.bin";
+
+    FILE * fp, *fp2;
+    fp = fopen(filename_mil, "rb");
+    if(fp == NULL){
+        printf("Abertura de ficheiro incorrecta.\n");
+        //return;
+    }
+    else {
+
+        printf("Ficheiro aberto.");
+        fread(&todos_os_militares.cont_militares, sizeof(int), 1, fp);
+        fread(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
+        fclose(fp);
+    }
+
+    //printf("%s", todos_os_militares.total_tripulantes[0].nome);
+
+
+
+
+
+   /* todos_os_militares.cont_militares=0;
+    todas_func_mil.cont_funcoes=0;
+    todos_tipos_missoes.cont_tipos_missao=0;*/
+
+    Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
+    Tripulante gm_gm = {"guilherme", 141916, 0,1,20230120,2,1,20221112};
+    todos_os_militares.total_tripulantes[0] = at_at;
+    todos_os_militares.total_tripulantes[1] = gm_gm;
+    todos_os_militares.cont_militares=2;
+
+    Mission_type ser_padeiro = {"bater charuto", 2, 0,0};
+    todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
+    todos_tipos_missoes.cont_tipos_missao = 1;
+
+  //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
+
+
+
+
+    tipos_funcoes_mil ab_ab = {"padeiro"};
+    todas_func_mil.todas_funcoes[0] = ab_ab;
+    todas_func_mil.cont_funcoes=1;
+
+
+
+
+    //------------------
+
+
+
+
+
+    imprimir_menu();
     scanf("%d",&escolha_menu);
     while(escolha_menu!=5){
 
@@ -124,22 +182,54 @@ int main(){
                 break;
             case 3:
                 listar_tripulantes(&todos_os_militares, &todas_func_mil);
+
                 break;
             case 4:
                 //atualizar estado militares
                 atualizar_estado(&todos_os_militares);
+
                 break;
             case 5:
                 //adicionar ficheiro à BD
                 break;
             case 6:
-               // guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
+                //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
+
+                fp = fopen(filename_mil, "wb");
+                if(fp == NULL){
+                    printf("Abertura de ficheiro incorrecta.\n");
+                    // return;
+                }
+                else {
+
+                    printf("Ficheiro aberto.");
+                    fwrite(&todos_os_militares.cont_militares, sizeof(int), 1, fp);
+                    fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
+                    fclose(fp);
+                }
+
+                fp = fopen(filename_mis, "wb");
+                if(fp == NULL){
+                    printf("Abertura de ficheiro incorrecta.\n");
+                    //return;
+                }
+
+
+
                 return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");
         }
+
         imprimir_menu();
         scanf("%d",&escolha_menu);
     }
+
+
+
+
+
+
+
 
 }

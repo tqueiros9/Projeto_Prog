@@ -31,9 +31,9 @@ typedef struct tripulante {
 typedef struct voo {
     int n_voo;
     int data; //formato AAAAMMDD
-    Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     int tipo_de_missao;
     int cont_tripulantes;
+    Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 }Missao_unica;
 
 typedef struct funcoes_mil{
