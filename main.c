@@ -130,7 +130,7 @@ int main(){
         fclose(fp);
     }
 
-    //printf("%s", todos_os_militares.total_tripulantes[0].nome);
+    printf("%s", todos_os_militares.total_tripulantes[0].nome);
 
 
 
@@ -140,11 +140,11 @@ int main(){
     todas_func_mil.cont_funcoes=0;
     todos_tipos_missoes.cont_tipos_missao=0;*/
 
-    Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
+   /* Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
     Tripulante gm_gm = {"guilherme", 141916, 0,1,20230120,2,1,20221112};
     todos_os_militares.total_tripulantes[0] = at_at;
     todos_os_militares.total_tripulantes[1] = gm_gm;
-    todos_os_militares.cont_militares=2;
+    todos_os_militares.cont_militares=2;*/
 
     Mission_type ser_padeiro = {"bater charuto", 2, 0,0};
     todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
@@ -207,15 +207,6 @@ int main(){
                     fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
                     fclose(fp);
                 }
-
-                fp = fopen(filename_mis, "wb");
-                if(fp == NULL){
-                    printf("Abertura de ficheiro incorrecta.\n");
-                    //return;
-                }
-
-
-
                 return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");
