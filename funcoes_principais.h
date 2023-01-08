@@ -13,12 +13,11 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares){
+void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares ,Total_funcoes_mil * todas_funcoes){
 
 
-    int escolha,data[3], data_final=0;
+    int escolha,data[3], data_final;
     printf("\n Escolha o tipo de missao: \n");
-    printf("teste");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
     for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {
@@ -36,7 +35,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     total_missoes->conj_missoes[total_missoes->cont_missoes].data = data_final;
 
     //criação da equipa
-
+    criar_equipa(todos_militares, todas_funcoes, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);
 
 }
 
@@ -47,13 +46,15 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         return;
     }
 
-    int temp, data1, data2, data, controlo=0;
+    int temp, data1, data2, data, controlo=0, escolha;
+
     printf("insira a data mais antiga no formato DDMMAAAA");
     scanf("%d", &temp);
     data1 = temp/1000000 + temp%1000000/10000 + temp%10000;
     printf("insira a data mais recente no formato DDMMAAAA");
     scanf("%d", &temp);
     data2 = temp/1000000 + temp%1000000/10000 + temp%10000;
+
     if (data1>data2){
         printf("as datas nao respeitam o que foi pedido");
         return;
@@ -76,10 +77,12 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
             controlo = 1;
         }
     }
-
     if (controlo == 0){
         printf("Não ha missoes nas datas marcadas");
     }
+    printf("deseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair");
+    scanf("%d",&escolha);
+
 }
 
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
@@ -91,7 +94,8 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
         return;
     }
 
-    printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair");
+
+    printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair\n");
     scanf(" %d", &escolha);
 
 
@@ -107,30 +111,35 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
             case 3:
                 imprimir_funcoes(lista_funcoes_mil);
                 printf("escolha a funcao\n");
-                scanf("&d", &escolha2);
+                scanf("%d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
             case 4:
-                imprimir_funcoes(lista_funcoes_mil);
+                imprimir_funcoes(&lista_funcoes_mil);
                 printf("escolha a funcao");
-                scanf("&d", &escolha2);
+                scanf("%d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
 
             case 5:
                 imprimir_lista_militares(lista_de_militares, -1, -1);
+                break;
             case 6:
+                getchar();
+                system("clear");
                 return;
 
             default:
                 printf("numero introduzido não faz parte do menu");
         }
 
-        printf("deseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1");
+        printf("\ndeseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1\n");
         scanf("%d",&nip);
-        if (escolha!=-1){
+        if (nip!=-1){
             imprimir_horas_militar(lista_de_militares, nip);
         }
+        printf("\n\nSelecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair\n");
+        scanf(" %d", &escolha);
 
     }
 
@@ -138,6 +147,11 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
 }
 
 void atualizar_estado(Total_militares * lista_de_militares){
+
+    if (lista_de_militares->cont_militares==0){
+        printf("nao ha militares para imprimir\n");
+        return;
+    }
 
     int nip, escolha, indice, data;
 
@@ -168,7 +182,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
             return;
         }
         printf("insira a data em que o militar ficará operacional de novo no formato AAAAMMDD");
-        scanf("%d", data);
+        scanf("%d", &data);
         lista_de_militares->total_tripulantes[indice].estado=1;
         lista_de_militares->total_tripulantes[indice].oper = data;
     }
@@ -178,5 +192,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
     }
 
 }
+
+
 
 #endif //FUNCOES_PRINCIPAIS_H
