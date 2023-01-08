@@ -20,10 +20,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="update funcoes">
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
@@ -109,7 +112,7 @@
       <workItem from="1672954300954" duration="1000" />
       <workItem from="1672954324381" duration="54000" />
       <workItem from="1672954556005" duration="13848000" />
-      <workItem from="1673129172294" duration="5294000" />
+      <workItem from="1673129172294" duration="8441000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -265,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673024630221</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado">
+      <created>1673134537116</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1673134537116</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +308,7 @@
     <MESSAGE value="teste github" />
     <MESSAGE value="funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares" />
     <MESSAGE value="update funcoes" />
-    <option name="LAST_COMMIT_MESSAGE" value="update funcoes" />
+    <MESSAGE value="atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado" />
+    <option name="LAST_COMMIT_MESSAGE" value="atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado" />
   </component>
 </project>

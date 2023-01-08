@@ -13,10 +13,10 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares){
+void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares ,Total_funcoes_mil * todas_funcoes){
 
 
-    int escolha,data[3], data_final=0;
+    int escolha,data[3], data_final;
     printf("\n Escolha o tipo de missao: \n");
     printf("teste");
 
@@ -36,7 +36,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     total_missoes->conj_missoes[total_missoes->cont_missoes].data = data_final;
 
     //criação da equipa
-
+    criar_equipa(todos_militares, todas_funcoes, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);
 
 }
 
@@ -107,13 +107,13 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
             case 3:
                 imprimir_funcoes(lista_funcoes_mil);
                 printf("escolha a funcao\n");
-                scanf("&d", &escolha2);
+                scanf("%d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
             case 4:
                 imprimir_funcoes(lista_funcoes_mil);
                 printf("escolha a funcao");
-                scanf("&d", &escolha2);
+                scanf("%d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
 
@@ -168,7 +168,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
             return;
         }
         printf("insira a data em que o militar ficará operacional de novo no formato AAAAMMDD");
-        scanf("%d", data);
+        scanf("%d", &data);
         lista_de_militares->total_tripulantes[indice].estado=1;
         lista_de_militares->total_tripulantes[indice].oper = data;
     }
@@ -178,5 +178,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
     }
 
 }
+
+
 
 #endif //FUNCOES_PRINCIPAIS_H

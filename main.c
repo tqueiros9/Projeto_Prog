@@ -12,14 +12,7 @@
 
 
 
-void print_trip(Tripulante * t){
-    printf("\n--Trip--\n");
-    printf("nome: %s\n", t->nome);
-    printf("nip:%d\n", t->nip);
-    printf("--------------\n");
-}
-
-void print_trip_file(FILE * fp){
+/*void print_trip_file(FILE * fp){
     int n, trip_counter;
     Tripulante t;
     // fp é um apontador de FILE já aberto em modo que suporta leitura binária
@@ -47,10 +40,10 @@ void print_trip_file(FILE * fp){
 
     // parar de ler tripulantes quando fread devolver 0
     // comparar se o número de tripulantes total lido é igual ao inteiro lido do inicio do ficheiro
-}
+}*/
 
 
-int print_trip_idx(FILE *fp, int idx){
+/*int print_trip_idx(FILE *fp, int idx){
     Tripulante t;
     rewind(fp);
     // fp é um apontador de FILE já aberto em modo que suporta leitura binária
@@ -59,7 +52,7 @@ int print_trip_idx(FILE *fp, int idx){
 
     fread(&t, sizeof (Tripulante), 1, fp);
     print_trip(&t);
-}
+}*/
 
 
 void trip_file_swap(FILE * fp, int idx1, int idx2){
@@ -69,7 +62,7 @@ void trip_file_swap(FILE * fp, int idx1, int idx2){
 }
 
 
-int main_demo_bin(){
+/*int main_demo_bin(){
     Tripulante t1 = {"Saramago", 136787};
     Tripulante t2 = {"Asimov", 136786};
     Tripulante t3 = {"Hofstader", 136788};
@@ -104,7 +97,8 @@ int main_demo_bin(){
         print_trip_file(fp);
         fclose(fp);
     }
-}
+}*/
+
 
 
 int main(){
@@ -117,13 +111,8 @@ int main(){
 
     iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
 
-
-
-    printf("%d %d %d %d", todas_func_mil.cont_funcoes, todos_tipos_missoes.cont_tipos_missao, todas_as_missoes.cont_missoes,todos_os_militares.cont_militares);
-    //teste dados
-
-
-
+    char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
+    adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
 
     imprimir_menu();
     scanf("%d",&escolha_menu);
@@ -132,7 +121,7 @@ int main(){
         switch (escolha_menu) {
 
             case 1:
-                marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares);
+                marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
                 break;
             case 2:
                 listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
@@ -142,11 +131,13 @@ int main(){
                 break;
             case 4:
                 //atualizar estado militares
+                atualizar_estado(&todos_os_militares);
                 break;
             case 5:
                 //adicionar ficheiro à BD
                 break;
             case 6:
+                guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
                 return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");
