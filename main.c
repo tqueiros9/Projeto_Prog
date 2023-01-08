@@ -95,7 +95,7 @@
 
 
 
-int main(){
+int main() {
 
 
 
@@ -118,7 +118,7 @@ int main(){
 
     FILE * fp, *fp2;
     fp = fopen(filename_mil, "rb");
-    if(fp == NULL){
+    if(fp == NULL) {
         printf("Abertura de ficheiro incorrecta.\n");
         //return;
     }
@@ -136,9 +136,9 @@ int main(){
 
 
 
-   /* todos_os_militares.cont_militares=0;
-    todas_func_mil.cont_funcoes=0;
-    todos_tipos_missoes.cont_tipos_missao=0;*/
+    /* todos_os_militares.cont_militares=0;
+     todas_func_mil.cont_funcoes=0;
+     todos_tipos_missoes.cont_tipos_missao=0;*/
 
     Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
     Tripulante gm_gm = {"guilherme", 141916, 0,1,20230120,2,1,20221112};
@@ -150,7 +150,7 @@ int main(){
     todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
     todos_tipos_missoes.cont_tipos_missao = 1;
 
-  //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
+    //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
 
 
 
@@ -170,55 +170,55 @@ int main(){
 
     imprimir_menu();
     scanf("%d",&escolha_menu);
-    while(escolha_menu!=5){
+    while(escolha_menu!=5) {
 
         switch (escolha_menu) {
 
-            case 1:
-     //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
-                break;
-            case 2:
+        case 1:
+            //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
+            break;
+        case 2:
             //   listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
-                break;
-            case 3:
-                listar_tripulantes(&todos_os_militares, &todas_func_mil);
+            break;
+        case 3:
+            listar_tripulantes(&todos_os_militares, &todas_func_mil);
 
-                break;
-            case 4:
-                //atualizar estado militares
-                atualizar_estado(&todos_os_militares);
+            break;
+        case 4:
+            //atualizar estado militares
+            atualizar_estado(&todos_os_militares);
 
-                break;
-            case 5:
-                //adicionar ficheiro à BD
-                break;
-            case 6:
-                //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
+            break;
+        case 5:
+            //adicionar ficheiro à BD
+            break;
+        case 6:
+            //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
 
-                fp = fopen(filename_mil, "wb");
-                if(fp == NULL){
-                    printf("Abertura de ficheiro incorrecta.\n");
-                    // return;
-                }
-                else {
+            fp = fopen(filename_mil, "wb");
+            if(fp == NULL) {
+                printf("Abertura de ficheiro incorrecta.\n");
+                // return;
+            }
+            else {
 
-                    printf("Ficheiro aberto.");
-                    fwrite(&todos_os_militares.cont_militares, sizeof(int), 1, fp);
-                    fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
-                    fclose(fp);
-                }
+                printf("Ficheiro aberto.");
+                fwrite(&todos_os_militares.cont_militares, sizeof(int), 1, fp);
+                fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
+                fclose(fp);
+            }
 
-                fp = fopen(filename_mis, "wb");
-                if(fp == NULL){
-                    printf("Abertura de ficheiro incorrecta.\n");
-                    //return;
-                }
+            fp = fopen(filename_mis, "wb");
+            if(fp == NULL) {
+                printf("Abertura de ficheiro incorrecta.\n");
+                //return;
+            }
 
 
 
-                return 0;
-            default:
-                printf("escolha invalida, nao existe essa opcao no menu");
+            return 0;
+        default:
+            printf("escolha invalida, nao existe essa opcao no menu");
         }
 
         imprimir_menu();
