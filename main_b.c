@@ -101,7 +101,7 @@ int main(){
 
     int escolha_menu;
     Total_tipos_missao todos_tipos_missoes;
-    //Total_missoes todas_as_missoes;
+    Total_missoes todas_as_missoes;
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
@@ -130,11 +130,6 @@ int main(){
         fclose(fp);
     }
 
-    printf("%s", todos_os_militares.total_tripulantes[0].nome);
-
-
-
-
 
    /* todos_os_militares.cont_militares=0;
     todas_func_mil.cont_funcoes=0;
@@ -162,7 +157,7 @@ int main(){
 
 
 
-    //------------------
+    //-------------------------
 
 
 
