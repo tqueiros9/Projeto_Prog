@@ -5,7 +5,7 @@
 #include "funcoes-secundarias.h"
 
 
-int main(){
+int main() {
 
 
 
@@ -20,33 +20,33 @@ int main(){
 
     imprimir_menu();
     scanf("%d",&escolha_menu);
-    while(escolha_menu!=5){
+    while(escolha_menu!=5) {
 
         switch (escolha_menu) {
 
-            case 1:
-                marcar_missao(&todasAsMissoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
-                break;
-            case 2:
-                listar_missoes(&todasAsMissoes, &todos_tipos_missoes, &todas_func_mil);
-                break;
-            case 3:
-                listar_tripulantes(&todos_os_militares, &todas_func_mil);
-                break;
-            case 4:
-                //atualizar estado militares
-                atualizar_estado(&todos_os_militares);
+        case 1:
+            marcar_missao(&todasAsMissoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
+            break;
+        case 2:
+            listar_missoes(&todasAsMissoes, &todos_tipos_missoes, &todas_func_mil);
+            break;
+        case 3:
+            listar_tripulantes(&todos_os_militares, &todas_func_mil);
+            break;
+        case 4:
+            //atualizar estado militares
+            atualizar_estado(&todos_os_militares);
 
-                break;
-            case 5:
-                //adicionar ficheiro à BD
-                break;
-            case 6:
-                guardar_dados_binario(&todos_os_militares, &todasAsMissoes);
-                return 0;
+            break;
+        case 5:
+            //adicionar ficheiro à BD
+            break;
+        case 6:
+            guardar_dados_binario(&todos_os_militares, &todasAsMissoes);
+            return 0;
 
-            default:
-                printf("escolha invalida, nao existe essa opcao no menu");
+        default:
+            printf("escolha invalida, nao existe essa opcao no menu");
         }
 
         imprimir_menu();
