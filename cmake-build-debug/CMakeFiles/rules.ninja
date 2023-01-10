@@ -61,4 +61,3 @@ rule CLEAN
 rule HELP
   command = C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\ninja\win\ninja.exe -t targets
   description = All primary targets available:
-
