@@ -2,7 +2,7 @@
 #define ESTRUTURAS_TODAS
 
 #define MAX_NOME_FUNCAO 50
-#define MAX_MISSOES 200
+#define MAX_MISSOES 100
 #define MAX_MILITARES 1000
 #define MAX_TIPOS 10
 #define FUNCOES_TRIP 7
@@ -60,7 +60,7 @@ typedef struct militares{
 
 typedef struct total_funcoes_mil{
     tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
-    int cont_funcoes
+    int cont_funcoes;
 }Total_funcoes_mil;
 
 
