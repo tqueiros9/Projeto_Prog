@@ -40,17 +40,18 @@ void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
 
 void criar_equipa (Total_militares * todos_militares, Total_funcoes_mil * todas_funcoes, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
 
-    int controlo=0, controlo_militar_guardado = 0;
+    int controlo=0, controlo_militar_guardado = 0, j, indice = 0;
 
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].data = data;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].cont_tripulantes = tipo_miss_escolhida->cont_tripulantes_missao;
-    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = data+123;
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = 1000+todas_missoes->cont_missoes;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].tipo_de_missao = missao_escolhida;
 
 
     for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
 
-        for (int j = 0; j < todos_militares->cont_militares; j++) {
+        for (j = indice; j < todos_militares->cont_militares; j++) {
+
 
             if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]){
 
@@ -70,6 +71,7 @@ void criar_equipa (Total_militares * todos_militares, Total_funcoes_mil * todas_
 
             }
             if (controlo_militar_guardado == 1){
+                indice = j+1;
                 break;
             }
         }
@@ -140,8 +142,7 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
         cont++;
 
     }
-
-
+    lista_mil_total->cont_militares++;
 }
 
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
@@ -215,6 +216,44 @@ void imprimir_horas_militar (Total_militares * lista_militares, int nip){
         }
     }
     
+}
+
+int encontrar_indice_missao(Total_missoes * lista_missoes, int voo){
+    int i;
+    for (i = 0; i < lista_missoes->cont_missoes; i++) {
+        if(lista_missoes->conj_missoes[i].n_voo == voo)return i;
+    }
+}
+
+void eliminar_missao(Total_missoes * lista_missoes, int voo){
+
+    int i;
+
+    i = encontrar_indice_missao(lista_missoes,voo);
+    for (int j = i; j < lista_missoes->cont_missoes-1; j++) {
+        lista_missoes->conj_missoes[j]=lista_missoes->conj_missoes[j+1];
+    }
+    lista_missoes->cont_missoes--;
+}
+
+void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_missao * lista_tipos, Total_funcoes_mil * funcoes_mil){
+    int i, data;
+    i = encontrar_indice_missao(lista_missoes,voo);
+    data = lista_missoes->conj_missoes[i].data;
+    printf("\n--MISSAO--\n"
+           "Numero de voo:\t%d\n"
+           "Data:\t\t%d/%d/%d\n"
+           "Tipo de missao:\t%s\n"
+           "Numero de tripulantes\t%d\n", lista_missoes->conj_missoes[i].n_voo,
+           data % 100, data % 10000 / 100,data/10000,
+           lista_tipos->conj_tipos_missao[lista_missoes->conj_missoes[i].tipo_de_missao].nome,
+           lista_missoes->conj_missoes[i].cont_tripulantes);
+    printf("--TRIPULANTES--\n");
+    for (int j = 0; j < lista_missoes->conj_missoes[i].cont_tripulantes; j++) {
+        printf("%s\t%s\n", lista_missoes->conj_missoes[i].conj_trip[j].nome,
+               funcoes_mil->todas_funcoes[lista_missoes->conj_missoes[i].conj_trip[j].funcao].mil_funcao);
+    }
+
 }
 
 

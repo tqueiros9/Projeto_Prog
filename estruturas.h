@@ -2,7 +2,7 @@
 #define ESTRUTURAS_TODAS
 
 #define MAX_NOME_FUNCAO 50
-#define MAX_MISSOES 200
+#define MAX_MISSOES 100
 #define MAX_MILITARES 1000
 #define MAX_TIPOS 10
 #define FUNCOES_TRIP 7

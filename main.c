@@ -101,15 +101,11 @@ int main(){
 
     int escolha_menu;
     Total_tipos_missao todos_tipos_missoes;
-    Total_missoes todas_as_missoes;
+    Total_missoes todasAsMissoes;
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
-    //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
-
-    //char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
-    //adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
-
+    iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes);
 
     //--------------zona teste de dados
 
@@ -130,24 +126,30 @@ int main(){
         fclose(fp);
     }
 
+    Tripulante at_at = {"tiago", 141914, 0, 0, -1, 2, 2, 20221112, 20221211};
+    Tripulante gm_gm = {"guilherme", 141916, 0, 1, 20230120, 2, 1, 20221112};
 
-   /* todos_os_militares.cont_militares=0;
-    todas_func_mil.cont_funcoes=0;
-    todos_tipos_missoes.cont_tipos_missao=0;*/
-
-   /* Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
-    Tripulante gm_gm = {"guilherme", 141916, 0,1,20230120,2,1,20221112};
-    todos_os_militares.total_tripulantes[0] = at_at;
-    todos_os_militares.total_tripulantes[1] = gm_gm;
-    todos_os_militares.cont_militares=2;*/
-
-    Mission_type ser_padeiro = {"bater charuto", 2, 0,0};
-    todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
-    todos_tipos_missoes.cont_tipos_missao = 1;
-
-  //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
+    if (todos_os_militares.cont_militares == 0) {
+        todos_os_militares.cont_militares = 0;
+        todas_func_mil.cont_funcoes = 0;
+        todos_tipos_missoes.cont_tipos_missao = 0;
 
 
+        todos_os_militares.total_tripulantes[0] = at_at;
+        todos_os_militares.total_tripulantes[1] = gm_gm;
+        todos_os_militares.cont_militares = 2;
+    }
+
+    if (todos_tipos_missoes.cont_tipos_missao == 0) {
+        Mission_type ser_padeiro = {"bater charuto", 2, 0, 0};
+        todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
+        todos_tipos_missoes.cont_tipos_missao = 1;
+
+
+    }
+    Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
+    todasAsMissoes.conj_missoes[0]=viagem_ao_espaco;
+    todasAsMissoes.cont_missoes++;
 
 
     tipos_funcoes_mil ab_ab = {"padeiro"};
@@ -170,14 +172,13 @@ int main(){
         switch (escolha_menu) {
 
             case 1:
-     //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
+                marcar_missao(&todasAsMissoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
                 break;
             case 2:
-            //   listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
+                listar_missoes(&todasAsMissoes, &todos_tipos_missoes, &todas_func_mil);
                 break;
             case 3:
                 listar_tripulantes(&todos_os_militares, &todas_func_mil);
-
                 break;
             case 4:
                 //atualizar estado militares
@@ -188,21 +189,8 @@ int main(){
                 //adicionar ficheiro à BD
                 break;
             case 6:
-                //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
+                guardar_dados_binario(&todos_os_militares, &todasAsMissoes);
 
-                fp = fopen(filename_mil, "wb");
-                if(fp == NULL){
-                    printf("Abertura de ficheiro incorrecta.\n");
-                    // return;
-                }
-                else {
-
-                    printf("Ficheiro aberto.");
-                    fwrite(&todos_os_militares.cont_militares, sizeof(int), 1, fp);
-                    fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);
-                    fclose(fp);
-                }
-                return 0;
             default:
                 printf("escolha invalida, nao existe essa opcao no menu");
         }
@@ -219,3 +207,5 @@ int main(){
 
 
 }
+
+

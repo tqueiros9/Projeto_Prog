@@ -20,15 +20,13 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     printf("\n Escolha o tipo de missao: \n");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
-    for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {
-        printf("%d - %s\n", i, tipos_missao->conj_tipos_missao[i].nome);
-    }
+    imprimir_funcoes(todas_funcoes);
     scanf("%d",&escolha);
 
     printf("Insira a data, no formato DD/MM/AAAA");
 
     //programa faz a leitura da data no formato comum e transforma no formato esperado pelo programa AAAAMMDD
-    scanf("%d//%d//%d",&data[0], &data[1], &data[2]);
+    scanf("%d/%d/%d",&data[0], &data[1], &data[2]);
     data_final = data[0] + data[1] *100 + data[2]*10000;
 
     //insere-se a data no vetor das missoes no formato do programa AAAAMMDD
@@ -36,24 +34,26 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
     //criação da equipa
     criar_equipa(todos_militares, todas_funcoes, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);
-
+    getchar();
+    return;
 }
 
 void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
 
     if (lista_de_missoes->cont_missoes==0){
-        printf("não há missoes para imprimir\n");
+        printf("nao ha missoes para imprimir\n");
         return;
     }
 
-    int temp, data1, data2, data, controlo=0, escolha;
 
-    printf("insira a data mais antiga no formato DDMMAAAA");
+    int temp, data1, data2, data, controlo=0, escolha, escolha2;
+
+    printf("insira a data mais antiga no formato DDMMAAAA\n");
     scanf("%d", &temp);
-    data1 = temp/1000000 + temp%1000000/10000 + temp%10000;
-    printf("insira a data mais recente no formato DDMMAAAA");
+    data1 = temp/1000000 + temp%1000000/10000*100 + temp%10000*10000;
+    printf("insira a data mais recente no formato DDMMAAAA\n");
     scanf("%d", &temp);
-    data2 = temp/1000000 + temp%1000000/10000 + temp%10000;
+    data2 = temp/1000000 + temp%1000000/10000*100 + temp%10000*10000;
 
     if (data1>data2){
         printf("as datas nao respeitam o que foi pedido");
@@ -66,8 +66,8 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
 
         if (data >= data1 && data<=data2) {
 
-            printf("\n%d\n%d//%d//%d\n%s", lista_de_missoes->conj_missoes[i].n_voo, data / 10000, data % 10000 / 100,
-                   data / 100, lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);
+            printf("\n%d\n%d/%d/%d\n%s", lista_de_missoes->conj_missoes[i].n_voo, data % 100, data % 10000 / 100,
+                   data/10000, lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);
 
             for (int j = 0; j < lista_de_missoes->conj_missoes[i].cont_tripulantes; j++) {
                 printf("\n%s\t%s", lista_de_missoes->conj_missoes[i].conj_trip[j].nome,
@@ -79,9 +79,25 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
     }
     if (controlo == 0){
         printf("Não ha missoes nas datas marcadas");
+        return;
     }
-    printf("deseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair");
+    printf("\nDeseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair\n");
     scanf("%d",&escolha);
+
+    if (escolha == -1)return;
+    else{
+        imprimir_dados_voo(lista_de_missoes, escolha, lista_tipos_missao,lista_funcoes_mil);
+        printf("\nDeseja eliminar a missao? 1-S 2-N");
+        scanf("%d",&escolha2);
+        if(escolha2!=1 && escolha2!=2){
+            printf("opcao invalida");
+            return;
+        }
+        if (escolha==2)return;
+        eliminar_missao(lista_de_missoes, escolha);
+        return;
+    }
+
 
 }
 
