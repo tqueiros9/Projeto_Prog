@@ -60,7 +60,7 @@ typedef struct militares{
 
 typedef struct total_funcoes_mil{
     tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
-    int cont_funcoes
+    int cont_funcoes;
 }Total_funcoes_mil;
 
 

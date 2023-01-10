@@ -49,6 +49,12 @@ cmake_ninja_workdir = C$:/Users/tiago/CLionProjects/Projeto/cmake-build-debug/
 
 build cmake_object_order_depends_target_untitled2: phony || CMakeFiles/untitled2.dir
 
+build CMakeFiles/untitled2.dir/main_b.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main_b.c || cmake_object_order_depends_target_untitled2
+  DEP_FILE = CMakeFiles\untitled2.dir\main_b.c.obj.d
+  FLAGS = -g -std=gnu99
+  OBJECT_DIR = CMakeFiles\untitled2.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled2.dir
+
 build CMakeFiles/untitled2.dir/main.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main.c || cmake_object_order_depends_target_untitled2
   DEP_FILE = CMakeFiles\untitled2.dir\main.c.obj.d
   FLAGS = -g -std=gnu99
@@ -63,7 +69,7 @@ build CMakeFiles/untitled2.dir/main.c.obj: C_COMPILER__untitled2_Debug C$:/Users
 #############################################
 # Link the executable untitled2.exe
 
-build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main.c.obj
+build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main_b.c.obj CMakeFiles/untitled2.dir/main.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\untitled2.dir

@@ -115,7 +115,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
             case 4:
-                imprimir_funcoes(&lista_funcoes_mil);
+                imprimir_funcoes(lista_funcoes_mil);
                 printf("escolha a funcao");
                 scanf("%d", &escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);

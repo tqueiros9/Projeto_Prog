@@ -3,4 +3,4 @@ project(untitled2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(untitled2 main_b.c estruturas.h funcoes-secundarias.h funcoes_principais.h)
+add_executable(untitled2 main.c estruturas.h funcoes-secundarias.h funcoes_principais.h main.c)
