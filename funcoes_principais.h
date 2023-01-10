@@ -17,7 +17,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
 
 
     int escolha,data[3], data_final;
-    printf("\n Escolha o tipo de missao: \n");
+    printf("\nEscolha o tipo de missao: \n");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
     imprimir_funcoes(todas_funcoes);
@@ -33,9 +33,8 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     total_missoes->conj_missoes[total_missoes->cont_missoes].data = data_final;
 
     //criação da equipa
-    criar_equipa(todos_militares, todas_funcoes, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);
+    criar_equipa(todos_militares, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);
     getchar();
-    return;
 }
 
 void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
@@ -78,7 +77,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         }
     }
     if (controlo == 0){
-        printf("Não ha missoes nas datas marcadas");
+        printf("Nao ha missoes nas datas marcadas");
         return;
     }
     printf("\nDeseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair\n");
@@ -176,7 +175,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
 
     indice = imprimir_militar(lista_de_militares, nip);
 
-    printf("para atualizar o estado insira 1 para mudar para OPERACIONAL, 2 para mudar para INOPERACIONAL e 3 para sair");
+    printf("para atualizar o estado insira 1 para mudar para OPERACIONAL, 2 para mudar para INOPERACIONAL e 3 para sair\n");
     scanf("%d", &escolha);
 
     if (escolha == 3)return;

@@ -24,7 +24,7 @@ void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes *
 
 void imprimir_menu(){
 
-    printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-sair\n");
+    printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-Adicionar ficheiro a BD\n6-sair\n");
 }
 
 void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
@@ -38,13 +38,13 @@ void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
 
 }
 
-void criar_equipa (Total_militares * todos_militares, Total_funcoes_mil * todas_funcoes, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
+void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
 
     int controlo=0, controlo_militar_guardado = 0, j, indice = 0;
 
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].data = data;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].cont_tripulantes = tipo_miss_escolhida->cont_tripulantes_missao;
-    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = 1000+todas_missoes->cont_missoes;
+    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = 1000+todas_missoes->cont_missoes+1;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].tipo_de_missao = missao_escolhida;
 
 
@@ -205,17 +205,20 @@ int imprimir_militar (Total_militares * lista_militares, int nip){
 
 void imprimir_horas_militar (Total_militares * lista_militares, int nip){
 
+    int controlo =0;
     for (int i = 0; i < lista_militares->cont_militares; i++) {
 
         if (lista_militares->total_tripulantes[i].nip==nip){
 
             printf("%s \n\thoras de voo: %d\n\tnumero de missoes: %d\n", lista_militares->total_tripulantes[i].nome,
                    lista_militares->total_tripulantes[i].horas_voo, lista_militares->total_tripulantes[i].missoes);
+            controlo = 1;
             break;
 
         }
     }
-    
+    if (controlo == 0)printf("\nO NIP introduzido nao corresponde a nenhum militar");
+
 }
 
 int encontrar_indice_missao(Total_missoes * lista_missoes, int voo){
