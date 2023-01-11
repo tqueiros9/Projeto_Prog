@@ -61,4 +61,3 @@ rule CLEAN
 rule HELP
   command = "C:\Program Files\JetBrains\CLion 2022.2.3\bin\ninja\win\ninja.exe" -t targets
   description = All primary targets available:
-
