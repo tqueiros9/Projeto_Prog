@@ -6,6 +6,8 @@
 #include <time.h>
 #include "estruturas.h"
 
+#define CAMINHO 100
+
 
 
 
@@ -97,11 +99,21 @@ int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
 
 }
 
+int verifica_militar (Total_militares * lista_mil, int nip){
+    int i;
+    for (i = 0; i < lista_mil->cont_militares; i++) {
+        if (lista_mil->total_tripulantes[i].nip ==nip){
+            return i;
+        }
+    }
+    if (i == lista_mil->cont_militares)return -1;
+}
+
 void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, Total_funcoes_mil * lista_func){
 
     char s[2]=";";
     char *temp;
-    int cont=0, help;
+    int cont=0, help, verifica;
 
     /* get the first token */
     temp = strtok(linha, s);
@@ -112,6 +124,8 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
 
         switch (cont) {
             case 0:
+                verifica = verifica_militar(lista_mil_total, atoi(temp));
+                if(verifica == -1)return;
                 lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].nip = atoi(temp);
                 break;
             case 1:
@@ -182,24 +196,20 @@ void imprimir_lista_militares (Total_militares * lista_militares, int estado, in
 int imprimir_militar (Total_militares * lista_militares, int nip){
 
     char estado[20];
+    int i;
+    i = verifica_militar(lista_militares,nip);
 
-    for (int i = 0; i < lista_militares->cont_militares; i++) {
 
-        if (lista_militares->total_tripulantes[i].nip==nip){
-
-            if (lista_militares->total_tripulantes[i].estado == 0){
-                strcpy(estado, "OPERACIONAL");
-            }
-            else {
-                strcpy(estado, "INOPERACIONAL");
-            }
-
-            printf("%s \n\nnip: %d\n\testado: %s\n", lista_militares->total_tripulantes[i].nome,
-                   lista_militares->total_tripulantes[i].nip, estado);
-            return i;
-
+        if (lista_militares->total_tripulantes[i].estado == 0){
+            strcpy(estado, "OPERACIONAL");
         }
-    }
+        else {
+            strcpy(estado, "INOPERACIONAL");
+        }
+
+        printf("\n%s \n\nnip: %d\n\testado: %s\n", lista_militares->total_tripulantes[i].nome,
+               lista_militares->total_tripulantes[i].nip, estado);
+        return i;
 
 }
 
@@ -272,7 +282,7 @@ void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_
     }
     else {
 
-        printf("Ficheiro aberto.");
+
         fread(&lista_militares->cont_militares, sizeof(int), 1, fp);
         fread(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);
         fclose(fp);
@@ -284,7 +294,6 @@ void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_
         return;
     }
     else {
-        printf("Ficheiro aberto.");
         fread(&lista_missoes->cont_missoes, sizeof(int), 1, fp);
         fread(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);
         fclose(fp);
@@ -305,7 +314,6 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
     }
     else {
 
-        printf("Ficheiro aberto.");
         fwrite(&lista_militares->cont_militares, sizeof(int), 1, fp);
         fwrite(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);
         fclose(fp);
@@ -318,13 +326,55 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
     }
     else {
 
-        printf("Ficheiro aberto.");
         fwrite(&lista_missoes->cont_missoes, sizeof(int), 1, fp);
         fwrite(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);
         fclose(fp);
     }
 
 
+}
+
+
+void carregar_militares (Total_militares * lista_mil, Total_funcoes_mil * lista_func){
+    char caminho [CAMINHO];
+    char buffer [CAMINHO];
+    int controlo=0, i, a=0;
+    printf("\n--Carregar Militares--\n");
+    FILE *fp;
+    getchar();
+    while(a==0){
+        printf("Introduza caminho do ficheiro: ");
+        fgets(caminho, CAMINHO, stdin);
+
+        for (i = 0; caminho[i] != '\n'; i++);
+        caminho[i]='\0';
+
+
+        fp=fopen(caminho, "r");
+        if(fp==NULL){
+            printf("ERRO: Ficheiro nao existente!\n\n");
+            a=1;
+        }else
+            a=0;
+        if (a == 1) {
+            printf("deseja sair? 1-S 0-N\n");
+            scanf("%d", &controlo);
+        }
+        if(controlo == 1)return;
+    };
+
+    fgets(buffer, 100, fp);
+    while (fgets(buffer, 100, fp)){
+        if (a == 1){
+            a=2;
+            continue;
+        }
+        fgets(buffer, 100, fp);
+        adicionar_dados_militares(buffer, lista_mil, lista_func);
+    }
+    fclose(fp);
+    printf("BD carregada com sucesso!\n");
+    printf("Novo numero de militares: %d", lista_mil->cont_militares);
 }
 
 #endif //FUNCOES_SECUNDARIAS_H
