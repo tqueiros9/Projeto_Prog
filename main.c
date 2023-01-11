@@ -4,10 +4,7 @@
 #include "funcoes_principais.h"
 #include "funcoes-secundarias.h"
 
-
 int main(){
-
-
 
     int escolha_menu;
     Total_tipos_missao todos_tipos_missoes;
@@ -16,7 +13,7 @@ int main(){
     Total_funcoes_mil todas_func_mil;
 
     iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes);
-    ler_dados_binario(&todos_os_militares,&todasAsMissoes);
+    ler_dados_binario(&todos_os_militares,&todasAsMissoes); //meter contadores a 0
 
     imprimir_menu();
     scanf("%d",&escolha_menu);
@@ -46,20 +43,11 @@ int main(){
                 return 0;
 
             default:
-                printf("escolha invalida, nao existe essa opcao no menu");
+                printf("Escolha invalida, nao existe essa opcao no menu");
         }
 
         imprimir_menu();
         scanf("%d",&escolha_menu);
     }
 
-
-
-
-
-
-
-
 }
-
-

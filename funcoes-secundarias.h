@@ -6,9 +6,6 @@
 #include <time.h>
 #include "estruturas.h"
 
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                    FUNÇÕES AUXILIARES
@@ -76,7 +73,7 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
             }
         }
         if (controlo_militar_guardado == 0){
-            printf("nao ha militares disponiveis para executar a missao");
+            printf("Nao ha militares disponiveis para executar a missao");
             return;
         }
     }
@@ -259,7 +256,6 @@ void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_mis
 
 }
 
-
 void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_missoes){
     char filename_mil[] = "militares.bin";
     char filename_mis[] = "missoes.bin";
@@ -289,7 +285,6 @@ void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_
         fread(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);
         fclose(fp);
     }
-
 
 }
 void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * lista_missoes){
@@ -324,7 +319,5 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
         fclose(fp);
     }
 
-
 }
-
 #endif //FUNCOES_SECUNDARIAS_H
