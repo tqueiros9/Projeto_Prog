@@ -1,0 +1,1463 @@
+Index: estruturas.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#ifndef ESTRUTURAS_TODAS\r\n#define ESTRUTURAS_TODAS\r\n\r\n#define MAX_NOME_FUNCAO 50\r\n#define MAX_MISSOES 200\r\n#define MAX_MILITARES 1000\r\n#define MAX_TIPOS 10\r\n#define FUNCOES_TRIP 7\r\n\r\n//*******************************************************estruturas*****************************************************\r\n\r\ntypedef struct mission_type {\r\n    char nome [MAX_NOME_FUNCAO];\r\n    int cont_tripulantes_missao;\r\n    int tipo_tripulantes[10];//MUDAR ISTO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n}Mission_type;\r\n\r\ntypedef struct tripulante {\r\n    char nome [MAX_NOME_FUNCAO];\r\n    int nip; // numero de identificacao unico no formato XXXXXX\r\n    int funcao; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,\r\n                                                                // 5 recuperador, 6 piloto instrutor, 7 aluno\r\n    int estado; //O = OP, 1 = INOP\r\n    int oper; //data em que estara operacional no formato AAAAMMDD\r\n    int horas_voo;\r\n    int missoes; //numero total de missoes\r\n    int data_missoes[200];\r\n\r\n}Tripulante;\r\n\r\ntypedef struct voo {\r\n    int n_voo;\r\n    int data; //formato AAAAMMDD\r\n    int tipo_de_missao;\r\n    int cont_tripulantes;\r\n    Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n}Missao_unica;\r\n\r\ntypedef struct funcoes_mil{\r\n    char mil_funcao[MAX_NOME_FUNCAO];\r\n\r\n}tipos_funcoes_mil;\r\n\r\n//*************** estruturas que definem conjutos das estruturas anteriores com um vetor e um contador *****************\r\n\r\ntypedef struct total_tipos_missao {\r\n    Mission_type conj_tipos_missao[MAX_TIPOS];\r\n    int cont_tipos_missao;\r\n}Total_tipos_missao;\r\n\r\ntypedef struct missoes{\r\n    Missao_unica conj_missoes [MAX_MISSOES];\r\n    int cont_missoes;\r\n}Total_missoes;\r\n\r\ntypedef struct militares{\r\n    Tripulante total_tripulantes [MAX_MILITARES];\r\n    int cont_militares;\r\n}Total_militares;\r\n\r\ntypedef struct total_funcoes_mil{\r\n    tipos_funcoes_mil todas_funcoes [MAX_TIPOS];\r\n    int cont_funcoes;\r\n}Total_funcoes_mil;\r\n\r\n\r\n\r\n#endif
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/estruturas.h b/estruturas.h
+--- a/estruturas.h	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/estruturas.h	(date 1673316296918)
+@@ -2,7 +2,7 @@
+ #define ESTRUTURAS_TODAS
+ 
+ #define MAX_NOME_FUNCAO 50
+-#define MAX_MISSOES 200
++#define MAX_MISSOES 100
+ #define MAX_MILITARES 1000
+ #define MAX_TIPOS 10
+ #define FUNCOES_TRIP 7
+Index: main.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.c b/mainb.c
+rename from main.c
+rename to mainb.c
+--- a/main.c	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/mainb.c	(date 1673315894413)
+@@ -1,9 +1,9 @@
+ #include <stdio.h>
+-
++/*
+ #include "estruturas.h"
+ #include "funcoes_principais.h"
+ #include "funcoes-secundarias.h"
+-
++*/
+ 
+ #define MAX_TRIP 100
+ /*void print_trip_file(FILE * fp){
+@@ -94,21 +94,21 @@
+ }*/
+ 
+ 
+-
+-int main(){
++/*
++int main_teste(){
+ 
+ 
+ 
+     int escolha_menu;
+     Total_tipos_missao todos_tipos_missoes;
+-    Total_missoes todas_as_missoes;
++    Total_missoes todasAsMissoes;
+     Total_militares todos_os_militares;
+     Total_funcoes_mil todas_func_mil;
+ 
+-    //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
++    iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes);
+ 
+-    //char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
+-    //adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
++    char linha[] ="129888;Ivo Alves;Piloto comandante;OP;-1;100;20";
++    adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);
+ 
+ 
+     //--------------zona teste de dados
+@@ -131,21 +131,21 @@
+     }
+ 
+ 
+-   /* todos_os_militares.cont_militares=0;
++   todos_os_militares.cont_militares=0;
+     todas_func_mil.cont_funcoes=0;
+-    todos_tipos_missoes.cont_tipos_missao=0;*/
++    todos_tipos_missoes.cont_tipos_missao=0;
+ 
+-   /* Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
++   Tripulante at_at = {"tiago", 141914,0,0,-1,2,2,20221112,20221211};
+     Tripulante gm_gm = {"guilherme", 141916, 0,1,20230120,2,1,20221112};
+     todos_os_militares.total_tripulantes[0] = at_at;
+     todos_os_militares.total_tripulantes[1] = gm_gm;
+-    todos_os_militares.cont_militares=2;*/
++    todos_os_militares.cont_militares=2;
+ 
+     Mission_type ser_padeiro = {"bater charuto", 2, 0,0};
+     todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
+     todos_tipos_missoes.cont_tipos_missao = 1;
+ 
+-  //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
++   Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};
+ 
+ 
+ 
+@@ -170,10 +170,11 @@
+         switch (escolha_menu) {
+ 
+             case 1:
+-     //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
++
++     //          marcar_missao(&todasAsMissoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);
+                 break;
+             case 2:
+-            //   listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);
++            //   listar_missoes(&todasAsMissoes, &todos_tipos_missoes, &todas_func_mil);
+                 break;
+             case 3:
+                 listar_tripulantes(&todos_os_militares, &todas_func_mil);
+@@ -188,7 +189,7 @@
+                 //adicionar ficheiro à BD
+                 break;
+             case 6:
+-                //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);
++                //guardar_dados_binario(&todos_os_militares, &todasAsMissoes);
+ 
+                 fp = fopen(filename_mil, "wb");
+                 if(fp == NULL){
+@@ -219,3 +220,6 @@
+ 
+ 
+ }
++
++
++*/
+\ No newline at end of file
+Index: cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json
+===================================================================
+diff --git a/cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json b/cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json
+deleted file mode 100644
+--- a/cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ /dev/null	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
+@@ -1,1131 +0,0 @@
+-{
+-	"entries" : 
+-	[
+-		{
+-			"name" : "CMAKE_ADDR2LINE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/addr2line.exe"
+-		},
+-		{
+-			"name" : "CMAKE_AR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ar.exe"
+-		},
+-		{
+-			"name" : "CMAKE_BUILD_TYPE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ..."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "Debug"
+-		},
+-		{
+-			"name" : "CMAKE_CACHEFILE_DIR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "This is the directory where this CMakeCache.txt was created"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "c:/Users/tiago/CLionProjects/Projeto/cmake-build-debug"
+-		},
+-		{
+-			"name" : "CMAKE_CACHE_MAJOR_VERSION",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Major version of cmake used to create the current loaded cache"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "3"
+-		},
+-		{
+-			"name" : "CMAKE_CACHE_MINOR_VERSION",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Minor version of cmake used to create the current loaded cache"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "23"
+-		},
+-		{
+-			"name" : "CMAKE_CACHE_PATCH_VERSION",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Patch version of cmake used to create the current loaded cache"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "2"
+-		},
+-		{
+-			"name" : "CMAKE_COMMAND",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to CMake executable."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cmake.exe"
+-		},
+-		{
+-			"name" : "CMAKE_CPACK_COMMAND",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to cpack program executable."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cpack.exe"
+-		},
+-		{
+-			"name" : "CMAKE_CTEST_COMMAND",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to ctest program executable."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/ctest.exe"
+-		},
+-		{
+-			"name" : "CMAKE_C_COMPILER",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "C compiler"
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc.exe"
+-		},
+-		{
+-			"name" : "CMAKE_C_COMPILER_AR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc-ar.exe"
+-		},
+-		{
+-			"name" : "CMAKE_C_COMPILER_RANLIB",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc-ranlib.exe"
+-		},
+-		{
+-			"name" : "CMAKE_C_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the C compiler during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_C_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the C compiler during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "-g"
+-		},
+-		{
+-			"name" : "CMAKE_C_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the C compiler during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "-Os -DNDEBUG"
+-		},
+-		{
+-			"name" : "CMAKE_C_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the C compiler during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "-O3 -DNDEBUG"
+-		},
+-		{
+-			"name" : "CMAKE_C_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the C compiler during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "-O2 -g -DNDEBUG"
+-		},
+-		{
+-			"name" : "CMAKE_C_STANDARD_LIBRARIES",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Libraries linked by default with all C applications."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32"
+-		},
+-		{
+-			"name" : "CMAKE_DLLTOOL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/dlltool.exe"
+-		},
+-		{
+-			"name" : "CMAKE_EXECUTABLE_FORMAT",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Executable file format"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "Unknown"
+-		},
+-		{
+-			"name" : "CMAKE_EXE_LINKER_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXE_LINKER_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Enable/Disable output of compile commands during generation."
+-				}
+-			],
+-			"type" : "BOOL",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_EXTRA_GENERATOR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Name of external makefile project generator."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_GENERATOR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Name of generator."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "Ninja"
+-		},
+-		{
+-			"name" : "CMAKE_GENERATOR_INSTANCE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Generator instance identifier."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_GENERATOR_PLATFORM",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Name of generator platform."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_GENERATOR_TOOLSET",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Name of generator toolset."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_GNUtoMS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Convert GNU import libraries to MS format (requires Visual Studio)"
+-				}
+-			],
+-			"type" : "BOOL",
+-			"value" : "OFF"
+-		},
+-		{
+-			"name" : "CMAKE_HOME_DIRECTORY",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Source directory with the top level CMakeLists.txt file for this project"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "C:/Users/tiago/CLionProjects/Projeto"
+-		},
+-		{
+-			"name" : "CMAKE_INSTALL_PREFIX",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Install path prefix, prepended onto install directories."
+-				}
+-			],
+-			"type" : "PATH",
+-			"value" : "C:/Program Files (x86)/untitled2"
+-		},
+-		{
+-			"name" : "CMAKE_LINKER",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ld.exe"
+-		},
+-		{
+-			"name" : "CMAKE_MAKE_PROGRAM",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "make program"
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/ninja/win/ninja.exe"
+-		},
+-		{
+-			"name" : "CMAKE_MODULE_LINKER_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of modules during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of modules during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of modules during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of modules during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of modules during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_NM",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/nm.exe"
+-		},
+-		{
+-			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "number of local generators"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "1"
+-		},
+-		{
+-			"name" : "CMAKE_OBJCOPY",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/objcopy.exe"
+-		},
+-		{
+-			"name" : "CMAKE_OBJDUMP",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/objdump.exe"
+-		},
+-		{
+-			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Platform information initialized"
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "1"
+-		},
+-		{
+-			"name" : "CMAKE_PROJECT_DESCRIPTION",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_PROJECT_HOMEPAGE_URL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_PROJECT_NAME",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : "untitled2"
+-		},
+-		{
+-			"name" : "CMAKE_RANLIB",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ranlib.exe"
+-		},
+-		{
+-			"name" : "CMAKE_RC_COMPILER",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "RC compiler"
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/windres.exe"
+-		},
+-		{
+-			"name" : "CMAKE_RC_COMPILER_WORKS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : ""
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "1"
+-		},
+-		{
+-			"name" : "CMAKE_RC_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags for Windows Resource Compiler during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_RC_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags for Windows Resource Compiler during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_RC_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags for Windows Resource Compiler during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_RC_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags for Windows Resource Compiler during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_RC_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags for Windows Resource Compiler during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_READELF",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/readelf.exe"
+-		},
+-		{
+-			"name" : "CMAKE_ROOT",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to CMake installation."
+-				}
+-			],
+-			"type" : "INTERNAL",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/share/cmake-3.23"
+-		},
+-		{
+-			"name" : "CMAKE_SHARED_LINKER_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of shared libraries during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of shared libraries during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of shared libraries during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of shared libraries during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of shared libraries during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_SKIP_INSTALL_RPATH",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "If set, runtime paths are not added when installing shared libraries, but are added when building."
+-				}
+-			],
+-			"type" : "BOOL",
+-			"value" : "NO"
+-		},
+-		{
+-			"name" : "CMAKE_SKIP_RPATH",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "If set, runtime paths are not added when using shared libraries."
+-				}
+-			],
+-			"type" : "BOOL",
+-			"value" : "NO"
+-		},
+-		{
+-			"name" : "CMAKE_STATIC_LINKER_FLAGS",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of static libraries during all build types."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_STATIC_LINKER_FLAGS_DEBUG",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of static libraries during DEBUG builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of static libraries during MINSIZEREL builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELEASE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of static libraries during RELEASE builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Flags used by the linker during the creation of static libraries during RELWITHDEBINFO builds."
+-				}
+-			],
+-			"type" : "STRING",
+-			"value" : ""
+-		},
+-		{
+-			"name" : "CMAKE_STRIP",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Path to a program."
+-				}
+-			],
+-			"type" : "FILEPATH",
+-			"value" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/strip.exe"
+-		},
+-		{
+-			"name" : "CMAKE_VERBOSE_MAKEFILE",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "ADVANCED",
+-					"value" : "1"
+-				},
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo."
+-				}
+-			],
+-			"type" : "BOOL",
+-			"value" : "FALSE"
+-		},
+-		{
+-			"name" : "untitled2_BINARY_DIR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : "C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug"
+-		},
+-		{
+-			"name" : "untitled2_IS_TOP_LEVEL",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : "ON"
+-		},
+-		{
+-			"name" : "untitled2_SOURCE_DIR",
+-			"properties" : 
+-			[
+-				{
+-					"name" : "HELPSTRING",
+-					"value" : "Value Computed by CMake"
+-				}
+-			],
+-			"type" : "STATIC",
+-			"value" : "C:/Users/tiago/CLionProjects/Projeto"
+-		}
+-	],
+-	"kind" : "cache",
+-	"version" : 
+-	{
+-		"major" : 2,
+-		"minor" : 0
+-	}
+-}
+Index: cmake-build-debug/CMakeCache.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># This is the CMakeCache file.\r\n# For build in directory: c:/Users/tiago/CLionProjects/Projeto/cmake-build-debug\r\n# It was generated by CMake: C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cmake.exe\r\n# You can edit this file to change values found and used by cmake.\r\n# If you do not want to change any of the values, simply exit the editor.\r\n# If you do want to change a value, simply edit, save, and exit the editor.\r\n# The syntax for the file is as follows:\r\n# KEY:TYPE=VALUE\r\n# KEY is the name of a variable in the cache.\r\n# TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.\r\n# VALUE is the current value for the KEY.\r\n\r\n########################\r\n# EXTERNAL cache entries\r\n########################\r\n\r\n//Path to a program.\r\nCMAKE_ADDR2LINE:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/addr2line.exe\r\n\r\n//Path to a program.\r\nCMAKE_AR:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ar.exe\r\n\r\n//Choose the type of build, options are: None Debug Release RelWithDebInfo\r\n// MinSizeRel ...\r\nCMAKE_BUILD_TYPE:STRING=Debug\r\n\r\n//C compiler\r\nCMAKE_C_COMPILER:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc.exe\r\n\r\n//A wrapper around 'ar' adding the appropriate '--plugin' option\r\n// for the GCC compiler\r\nCMAKE_C_COMPILER_AR:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc-ar.exe\r\n\r\n//A wrapper around 'ranlib' adding the appropriate '--plugin' option\r\n// for the GCC compiler\r\nCMAKE_C_COMPILER_RANLIB:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/gcc-ranlib.exe\r\n\r\n//Flags used by the C compiler during all build types.\r\nCMAKE_C_FLAGS:STRING=\r\n\r\n//Flags used by the C compiler during DEBUG builds.\r\nCMAKE_C_FLAGS_DEBUG:STRING=-g\r\n\r\n//Flags used by the C compiler during MINSIZEREL builds.\r\nCMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG\r\n\r\n//Flags used by the C compiler during RELEASE builds.\r\nCMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\r\n\r\n//Flags used by the C compiler during RELWITHDEBINFO builds.\r\nCMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\r\n\r\n//Libraries linked by default with all C applications.\r\nCMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32\r\n\r\n//Path to a program.\r\nCMAKE_DLLTOOL:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/dlltool.exe\r\n\r\n//Flags used by the linker during all build types.\r\nCMAKE_EXE_LINKER_FLAGS:STRING=\r\n\r\n//Flags used by the linker during DEBUG builds.\r\nCMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=\r\n\r\n//Flags used by the linker during MINSIZEREL builds.\r\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=\r\n\r\n//Flags used by the linker during RELEASE builds.\r\nCMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=\r\n\r\n//Flags used by the linker during RELWITHDEBINFO builds.\r\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\r\n\r\n//Enable/Disable output of compile commands during generation.\r\nCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=\r\n\r\n//Convert GNU import libraries to MS format (requires Visual Studio)\r\nCMAKE_GNUtoMS:BOOL=OFF\r\n\r\n//Install path prefix, prepended onto install directories.\r\nCMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/untitled2\r\n\r\n//Path to a program.\r\nCMAKE_LINKER:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ld.exe\r\n\r\n//make program\r\nCMAKE_MAKE_PROGRAM:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/ninja/win/ninja.exe\r\n\r\n//Flags used by the linker during the creation of modules during\r\n// all build types.\r\nCMAKE_MODULE_LINKER_FLAGS:STRING=\r\n\r\n//Flags used by the linker during the creation of modules during\r\n// DEBUG builds.\r\nCMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=\r\n\r\n//Flags used by the linker during the creation of modules during\r\n// MINSIZEREL builds.\r\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=\r\n\r\n//Flags used by the linker during the creation of modules during\r\n// RELEASE builds.\r\nCMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=\r\n\r\n//Flags used by the linker during the creation of modules during\r\n// RELWITHDEBINFO builds.\r\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\r\n\r\n//Path to a program.\r\nCMAKE_NM:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/nm.exe\r\n\r\n//Path to a program.\r\nCMAKE_OBJCOPY:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/objcopy.exe\r\n\r\n//Path to a program.\r\nCMAKE_OBJDUMP:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/objdump.exe\r\n\r\n//Value Computed by CMake\r\nCMAKE_PROJECT_DESCRIPTION:STATIC=\r\n\r\n//Value Computed by CMake\r\nCMAKE_PROJECT_HOMEPAGE_URL:STATIC=\r\n\r\n//Value Computed by CMake\r\nCMAKE_PROJECT_NAME:STATIC=untitled2\r\n\r\n//Path to a program.\r\nCMAKE_RANLIB:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ranlib.exe\r\n\r\n//RC compiler\r\nCMAKE_RC_COMPILER:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/windres.exe\r\n\r\n//Flags for Windows Resource Compiler during all build types.\r\nCMAKE_RC_FLAGS:STRING=\r\n\r\n//Flags for Windows Resource Compiler during DEBUG builds.\r\nCMAKE_RC_FLAGS_DEBUG:STRING=\r\n\r\n//Flags for Windows Resource Compiler during MINSIZEREL builds.\r\nCMAKE_RC_FLAGS_MINSIZEREL:STRING=\r\n\r\n//Flags for Windows Resource Compiler during RELEASE builds.\r\nCMAKE_RC_FLAGS_RELEASE:STRING=\r\n\r\n//Flags for Windows Resource Compiler during RELWITHDEBINFO builds.\r\nCMAKE_RC_FLAGS_RELWITHDEBINFO:STRING=\r\n\r\n//Path to a program.\r\nCMAKE_READELF:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/readelf.exe\r\n\r\n//Flags used by the linker during the creation of shared libraries\r\n// during all build types.\r\nCMAKE_SHARED_LINKER_FLAGS:STRING=\r\n\r\n//Flags used by the linker during the creation of shared libraries\r\n// during DEBUG builds.\r\nCMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=\r\n\r\n//Flags used by the linker during the creation of shared libraries\r\n// during MINSIZEREL builds.\r\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=\r\n\r\n//Flags used by the linker during the creation of shared libraries\r\n// during RELEASE builds.\r\nCMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=\r\n\r\n//Flags used by the linker during the creation of shared libraries\r\n// during RELWITHDEBINFO builds.\r\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=\r\n\r\n//If set, runtime paths are not added when installing shared libraries,\r\n// but are added when building.\r\nCMAKE_SKIP_INSTALL_RPATH:BOOL=NO\r\n\r\n//If set, runtime paths are not added when using shared libraries.\r\nCMAKE_SKIP_RPATH:BOOL=NO\r\n\r\n//Flags used by the linker during the creation of static libraries\r\n// during all build types.\r\nCMAKE_STATIC_LINKER_FLAGS:STRING=\r\n\r\n//Flags used by the linker during the creation of static libraries\r\n// during DEBUG builds.\r\nCMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=\r\n\r\n//Flags used by the linker during the creation of static libraries\r\n// during MINSIZEREL builds.\r\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=\r\n\r\n//Flags used by the linker during the creation of static libraries\r\n// during RELEASE builds.\r\nCMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=\r\n\r\n//Flags used by the linker during the creation of static libraries\r\n// during RELWITHDEBINFO builds.\r\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=\r\n\r\n//Path to a program.\r\nCMAKE_STRIP:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/strip.exe\r\n\r\n//If this value is on, makefiles will be generated without the\r\n// .SILENT directive, and all commands will be echoed to the console\r\n// during the make.  This is useful for debugging only. With Visual\r\n// Studio IDE projects all commands are done without /nologo.\r\nCMAKE_VERBOSE_MAKEFILE:BOOL=FALSE\r\n\r\n//Value Computed by CMake\r\nuntitled2_BINARY_DIR:STATIC=C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug\r\n\r\n//Value Computed by CMake\r\nuntitled2_IS_TOP_LEVEL:STATIC=ON\r\n\r\n//Value Computed by CMake\r\nuntitled2_SOURCE_DIR:STATIC=C:/Users/tiago/CLionProjects/Projeto\r\n\r\n\r\n########################\r\n# INTERNAL cache entries\r\n########################\r\n\r\n//ADVANCED property for variable: CMAKE_ADDR2LINE\r\nCMAKE_ADDR2LINE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_AR\r\nCMAKE_AR-ADVANCED:INTERNAL=1\r\n//This is the directory where this CMakeCache.txt was created\r\nCMAKE_CACHEFILE_DIR:INTERNAL=c:/Users/tiago/CLionProjects/Projeto/cmake-build-debug\r\n//Major version of cmake used to create the current loaded cache\r\nCMAKE_CACHE_MAJOR_VERSION:INTERNAL=3\r\n//Minor version of cmake used to create the current loaded cache\r\nCMAKE_CACHE_MINOR_VERSION:INTERNAL=23\r\n//Patch version of cmake used to create the current loaded cache\r\nCMAKE_CACHE_PATCH_VERSION:INTERNAL=2\r\n//Path to CMake executable.\r\nCMAKE_COMMAND:INTERNAL=C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cmake.exe\r\n//Path to cpack program executable.\r\nCMAKE_CPACK_COMMAND:INTERNAL=C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cpack.exe\r\n//Path to ctest program executable.\r\nCMAKE_CTEST_COMMAND:INTERNAL=C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/ctest.exe\r\n//ADVANCED property for variable: CMAKE_C_COMPILER\r\nCMAKE_C_COMPILER-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_COMPILER_AR\r\nCMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB\r\nCMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_FLAGS\r\nCMAKE_C_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG\r\nCMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL\r\nCMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE\r\nCMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO\r\nCMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_C_STANDARD_LIBRARIES\r\nCMAKE_C_STANDARD_LIBRARIES-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_DLLTOOL\r\nCMAKE_DLLTOOL-ADVANCED:INTERNAL=1\r\n//Executable file format\r\nCMAKE_EXECUTABLE_FORMAT:INTERNAL=Unknown\r\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS\r\nCMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG\r\nCMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL\r\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE\r\nCMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO\r\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS\r\nCMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1\r\n//Name of external makefile project generator.\r\nCMAKE_EXTRA_GENERATOR:INTERNAL=\r\n//Name of generator.\r\nCMAKE_GENERATOR:INTERNAL=Ninja\r\n//Generator instance identifier.\r\nCMAKE_GENERATOR_INSTANCE:INTERNAL=\r\n//Name of generator platform.\r\nCMAKE_GENERATOR_PLATFORM:INTERNAL=\r\n//Name of generator toolset.\r\nCMAKE_GENERATOR_TOOLSET:INTERNAL=\r\n//Source directory with the top level CMakeLists.txt file for this\r\n// project\r\nCMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/tiago/CLionProjects/Projeto\r\n//ADVANCED property for variable: CMAKE_LINKER\r\nCMAKE_LINKER-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS\r\nCMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG\r\nCMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL\r\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE\r\nCMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO\r\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_NM\r\nCMAKE_NM-ADVANCED:INTERNAL=1\r\n//number of local generators\r\nCMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_OBJCOPY\r\nCMAKE_OBJCOPY-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_OBJDUMP\r\nCMAKE_OBJDUMP-ADVANCED:INTERNAL=1\r\n//Platform information initialized\r\nCMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RANLIB\r\nCMAKE_RANLIB-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_COMPILER\r\nCMAKE_RC_COMPILER-ADVANCED:INTERNAL=1\r\nCMAKE_RC_COMPILER_WORKS:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_FLAGS\r\nCMAKE_RC_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_FLAGS_DEBUG\r\nCMAKE_RC_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_FLAGS_MINSIZEREL\r\nCMAKE_RC_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_FLAGS_RELEASE\r\nCMAKE_RC_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_RC_FLAGS_RELWITHDEBINFO\r\nCMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_READELF\r\nCMAKE_READELF-ADVANCED:INTERNAL=1\r\n//Path to CMake installation.\r\nCMAKE_ROOT:INTERNAL=C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/share/cmake-3.23\r\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS\r\nCMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG\r\nCMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL\r\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE\r\nCMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO\r\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH\r\nCMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_SKIP_RPATH\r\nCMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS\r\nCMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG\r\nCMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL\r\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE\r\nCMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO\r\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_STRIP\r\nCMAKE_STRIP-ADVANCED:INTERNAL=1\r\n//ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE\r\nCMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeCache.txt b/cmake-build-debug/CMakeCache.txt
+--- a/cmake-build-debug/CMakeCache.txt	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/cmake-build-debug/CMakeCache.txt	(date 1673315876911)
+@@ -84,7 +84,7 @@
+ CMAKE_LINKER:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/mingw/bin/ld.exe
+ 
+ //make program
+-CMAKE_MAKE_PROGRAM:FILEPATH=C:/Program Files/JetBrains/CLion 2022.2.3/bin/ninja/win/ninja.exe
++CMAKE_MAKE_PROGRAM:FILEPATH=C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe
+ 
+ //Flags used by the linker during the creation of modules during
+ // all build types.
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"CMakePresetLoader\">{\r\n  &quot;useNewFormat&quot;: true\r\n}</component>\r\n  <component name=\"CMakeReloadState\">\r\n    <option name=\"reloaded\" value=\"true\" />\r\n  </component>\r\n  <component name=\"CMakeRunConfigurationManager\">\r\n    <generated>\r\n      <config projectName=\"untitled2\" targetName=\"untitled2\" />\r\n    </generated>\r\n  </component>\r\n  <component name=\"CMakeSettings\">\r\n    <configurations>\r\n      <configuration PROFILE_NAME=\"Debug\" ENABLED=\"true\" CONFIG_NAME=\"Debug\" />\r\n    </configurations>\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13\" name=\"Changes\" comment=\"testes de dados\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/CMakeLists.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/CMakeLists.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_deps\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_deps\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_log\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_log\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/build.ninja\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/build.ninja\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/untitled2.exe\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/estruturas.h\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/estruturas.h\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/funcoes-secundarias.h\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/funcoes-secundarias.h\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/funcoes_principais.h\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/funcoes_principais.h\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/main_b.c\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/main.c\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ClangdSettings\">\r\n    <option name=\"formatViaClangd\" value=\"false\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"CMakeBuildProfile:Debug\" />\r\n  <component name=\"Git.Rebase.Settings\">\r\n    <option name=\"NEW_BASE\" value=\"master\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"teste-funcoes\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GithubProjectSettings\">\r\n    <option name=\"branchProtectionPatterns\">\r\n      <list>\r\n        <option value=\"master\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectApplicationVersion\">\r\n    <option name=\"ide\" value=\"CLion\" />\r\n    <option name=\"majorVersion\" value=\"2022\" />\r\n    <option name=\"minorVersion\" value=\"2.3\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2IqyGiuHTvYk06IvsfSFxJP9XR0\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,\r\n    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/tiago/CLionProjects/Projeto&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"CLionExternalRunConfiguration\" factoryName=\"Application\" REDIRECT_INPUT=\"false\" ELEVATE=\"false\" USE_EXTERNAL_CONSOLE=\"false\" PASS_PARENT_ENVS_2=\"true\">\r\n      <method v=\"2\">\r\n        <option name=\"CLION.EXTERNAL.BUILD\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"untitled2\" type=\"CMakeRunConfiguration\" factoryName=\"Application\" REDIRECT_INPUT=\"false\" ELEVATE=\"false\" USE_EXTERNAL_CONSOLE=\"false\" PASS_PARENT_ENVS_2=\"true\" PROJECT_NAME=\"untitled2\" TARGET_NAME=\"untitled2\" CONFIG_NAME=\"Debug\" RUN_TARGET_PROJECT_NAME=\"untitled2\" RUN_TARGET_NAME=\"untitled2\">\r\n      <method v=\"2\">\r\n        <option name=\"com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13\" name=\"Changes\" comment=\"\" />\r\n      <created>1670923314185</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670923314185</updated>\r\n      <workItem from=\"1670923315937\" duration=\"3926000\" />\r\n      <workItem from=\"1670928228985\" duration=\"662000\" />\r\n      <workItem from=\"1671325942640\" duration=\"5672000\" />\r\n      <workItem from=\"1671374162810\" duration=\"13207000\" />\r\n      <workItem from=\"1671476961455\" duration=\"68000\" />\r\n      <workItem from=\"1671527897400\" duration=\"2375000\" />\r\n      <workItem from=\"1671637956607\" duration=\"2384000\" />\r\n      <workItem from=\"1672418023410\" duration=\"2218000\" />\r\n      <workItem from=\"1672695514154\" duration=\"3773000\" />\r\n      <workItem from=\"1672913862962\" duration=\"10342000\" />\r\n      <workItem from=\"1672926997128\" duration=\"12030000\" />\r\n      <workItem from=\"1672954300954\" duration=\"1000\" />\r\n      <workItem from=\"1672954324381\" duration=\"54000\" />\r\n      <workItem from=\"1672954556005\" duration=\"13848000\" />\r\n      <workItem from=\"1673129172294\" duration=\"8464000\" />\r\n      <workItem from=\"1673193411186\" duration=\"14203000\" />\r\n      <workItem from=\"1673212359646\" duration=\"637000\" />\r\n      <workItem from=\"1673308517059\" duration=\"2631000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"git test\">\r\n      <created>1670928289313</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670928289313</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"estruturas\">\r\n      <created>1671327309009</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671327309009</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"estruturas - update em todas as estruturas\">\r\n      <created>1671331289603</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671331289603</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão\">\r\n      <created>1671410614252</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671410614252</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido\">\r\n      <created>1671412457799</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671412457799</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\">\r\n      <created>1671419600240</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671419600240</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\">\r\n      <created>1671419845108</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671419845108</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"pequenas correções\">\r\n      <created>1671422123972</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422123972</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"teste\">\r\n      <created>1671422289935</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422289935</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"teste 2\">\r\n      <created>1671422326197</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422326197</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"teste 3\">\r\n      <created>1671422678779</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422678779</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"final\">\r\n      <created>1671423248989</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671423248989</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica\">\r\n      <created>1671423517987</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671423517987</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"teste github\">\r\n      <created>1672696252157</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696252157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"teste github\">\r\n      <created>1672696280223</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696280223</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"teste github\">\r\n      <created>1672696341466</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696341466</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"teste github\">\r\n      <created>1672918839353</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918839353</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672918894315</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918894315</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672918905535</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918905535</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672921049834</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672921049834</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672937925344</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672937925344</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"update funcoes\">\r\n      <created>1673024630221</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673024630221</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado\">\r\n      <created>1673134537116</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673134537116</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"ler e guardar ficheiros .bin\">\r\n      <created>1673138973892</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673138973892</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"mudanças varias funçoes\">\r\n      <created>1673199940346</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673199940346</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"testes de dados\">\r\n      <created>1673209300550</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673209300550</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"testes de dados\">\r\n      <created>1673209847185</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673209847185</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00028\" summary=\"testes de dados\">\r\n      <created>1673308570670</created>\r\n      <option name=\"number\" value=\"00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673308570670</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"29\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"git test\" />\r\n    <MESSAGE value=\"estruturas\" />\r\n    <MESSAGE value=\"estruturas - update em todas as estruturas\" />\r\n    <MESSAGE value=\"estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão\" />\r\n    <MESSAGE value=\"foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido\" />\r\n    <MESSAGE value=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\" />\r\n    <MESSAGE value=\"pequenas correções\" />\r\n    <MESSAGE value=\"teste\" />\r\n    <MESSAGE value=\"teste 2\" />\r\n    <MESSAGE value=\"teste 3\" />\r\n    <MESSAGE value=\"final\" />\r\n    <MESSAGE value=\"implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica\" />\r\n    <MESSAGE value=\"teste github\" />\r\n    <MESSAGE value=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\" />\r\n    <MESSAGE value=\"update funcoes\" />\r\n    <MESSAGE value=\"atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado\" />\r\n    <MESSAGE value=\"ler e guardar ficheiros .bin\" />\r\n    <MESSAGE value=\"mudanças varias funçoes\" />\r\n    <MESSAGE value=\"testes de dados\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"testes de dados\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/.idea/workspace.xml	(date 1673316086177)
+@@ -23,19 +23,16 @@
+     <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="testes de dados">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-3ebcb66648e19b7cf271.json" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/main_b.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/mainb.c" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -129,7 +126,7 @@
+       <workItem from="1673129172294" duration="8464000" />
+       <workItem from="1673193411186" duration="14203000" />
+       <workItem from="1673212359646" duration="637000" />
+-      <workItem from="1673308517059" duration="2631000" />
++      <workItem from="1673308517059" duration="4992000" />
+     </task>
+     <task id="LOCAL-00001" summary="git test">
+       <created>1670928289313</created>
+@@ -327,7 +324,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1673308570670</updated>
+     </task>
+-    <option name="localTasksCounter" value="29" />
++    <task id="LOCAL-00029" summary="testes de dados">
++      <created>1673311266208</created>
++      <option name="number" value="00029" />
++      <option name="presentableId" value="LOCAL-00029" />
++      <option name="project" value="LOCAL" />
++      <updated>1673311266208</updated>
++    </task>
++    <option name="localTasksCounter" value="30" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: cmake-build-debug/build.ninja
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\r\n# Generated by \"Ninja\" Generator, CMake Version 3.23\r\n\r\n# This file contains all the build statements describing the\r\n# compilation DAG.\r\n\r\n# =============================================================================\r\n# Write statements declared in CMakeLists.txt:\r\n# \r\n# Which is the root file.\r\n# =============================================================================\r\n\r\n# =============================================================================\r\n# Project: untitled2\r\n# Configurations: Debug\r\n# =============================================================================\r\n\r\n#############################################\r\n# Minimal version of Ninja required by this file\r\n\r\nninja_required_version = 1.5\r\n\r\n\r\n#############################################\r\n# Set configuration variable for custom commands.\r\n\r\nCONFIGURATION = Debug\r\n# =============================================================================\r\n# Include auxiliary files.\r\n\r\n\r\n#############################################\r\n# Include rules file.\r\n\r\ninclude CMakeFiles/rules.ninja\r\n\r\n# =============================================================================\r\n\r\n#############################################\r\n# Logical path to working directory; prefix for absolute paths.\r\n\r\ncmake_ninja_workdir = C$:/Users/tiago/CLionProjects/Projeto/cmake-build-debug/\r\n# =============================================================================\r\n# Object build statements for EXECUTABLE target untitled2\r\n\r\n\r\n#############################################\r\n# Order-only phony target for untitled2\r\n\r\nbuild cmake_object_order_depends_target_untitled2: phony || CMakeFiles/untitled2.dir\r\n\r\nbuild CMakeFiles/untitled2.dir/main_b.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main_b.c || cmake_object_order_depends_target_untitled2\r\n  DEP_FILE = CMakeFiles\\untitled2.dir\\main_b.c.obj.d\r\n  FLAGS = -g -std=gnu99\r\n  OBJECT_DIR = CMakeFiles\\untitled2.dir\r\n  OBJECT_FILE_DIR = CMakeFiles\\untitled2.dir\r\n\r\nbuild CMakeFiles/untitled2.dir/main.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main.c || cmake_object_order_depends_target_untitled2\r\n  DEP_FILE = CMakeFiles\\untitled2.dir\\main.c.obj.d\r\n  FLAGS = -g -std=gnu99\r\n  OBJECT_DIR = CMakeFiles\\untitled2.dir\r\n  OBJECT_FILE_DIR = CMakeFiles\\untitled2.dir\r\n\r\n\r\n# =============================================================================\r\n# Link build statements for EXECUTABLE target untitled2\r\n\r\n\r\n#############################################\r\n# Link the executable untitled2.exe\r\n\r\nbuild untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main_b.c.obj CMakeFiles/untitled2.dir/main.c.obj\r\n  FLAGS = -g\r\n  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32\r\n  OBJECT_DIR = CMakeFiles\\untitled2.dir\r\n  POST_BUILD = cd .\r\n  PRE_LINK = cd .\r\n  TARGET_FILE = untitled2.exe\r\n  TARGET_IMPLIB = libuntitled2.dll.a\r\n  TARGET_PDB = untitled2.exe.dbg\r\n\r\n\r\n#############################################\r\n# Utility command for edit_cache\r\n\r\nbuild CMakeFiles/edit_cache.util: CUSTOM_COMMAND\r\n  COMMAND = cmd.exe /C \"cd /D C:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug && \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\cmake\\win\\bin\\cmake.exe\" -E echo \"No interactive CMake dialog available.\"\"\r\n  DESC = No interactive CMake dialog available...\r\n  restat = 1\r\n\r\nbuild edit_cache: phony CMakeFiles/edit_cache.util\r\n\r\n\r\n#############################################\r\n# Utility command for rebuild_cache\r\n\r\nbuild CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND\r\n  COMMAND = cmd.exe /C \"cd /D C:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug && \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\cmake\\win\\bin\\cmake.exe\" --regenerate-during-build -SC:\\Users\\tiago\\CLionProjects\\Projeto -BC:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug\"\r\n  DESC = Running CMake to regenerate build system...\r\n  pool = console\r\n  restat = 1\r\n\r\nbuild rebuild_cache: phony CMakeFiles/rebuild_cache.util\r\n\r\n# =============================================================================\r\n# Target aliases.\r\n\r\nbuild untitled2: phony untitled2.exe\r\n\r\n# =============================================================================\r\n# Folder targets.\r\n\r\n# =============================================================================\r\n\r\n#############################################\r\n# Folder: C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug\r\n\r\nbuild all: phony untitled2.exe\r\n\r\n# =============================================================================\r\n# Built-in targets\r\n\r\n\r\n#############################################\r\n# Re-run CMake if any of its inputs changed.\r\n\r\nbuild build.ninja: RERUN_CMAKE | ../CMakeLists.txt C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeRCCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake\r\n  pool = console\r\n\r\n\r\n#############################################\r\n# A missing CMake input file is not an error.\r\n\r\nbuild ../CMakeLists.txt C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeRCCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony\r\n\r\n\r\n#############################################\r\n# Clean all the built files.\r\n\r\nbuild clean: CLEAN\r\n\r\n\r\n#############################################\r\n# Print all primary targets available.\r\n\r\nbuild help: HELP\r\n\r\n\r\n#############################################\r\n# Make the all target the default.\r\n\r\ndefault all\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/build.ninja b/cmake-build-debug/build.ninja
+--- a/cmake-build-debug/build.ninja	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/cmake-build-debug/build.ninja	(date 1673315876923)
+@@ -49,8 +49,8 @@
+ 
+ build cmake_object_order_depends_target_untitled2: phony || CMakeFiles/untitled2.dir
+ 
+-build CMakeFiles/untitled2.dir/main_b.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main_b.c || cmake_object_order_depends_target_untitled2
+-  DEP_FILE = CMakeFiles\untitled2.dir\main_b.c.obj.d
++build CMakeFiles/untitled2.dir/mainb.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/mainb.c || cmake_object_order_depends_target_untitled2
++  DEP_FILE = CMakeFiles\untitled2.dir\mainb.c.obj.d
+   FLAGS = -g -std=gnu99
+   OBJECT_DIR = CMakeFiles\untitled2.dir
+   OBJECT_FILE_DIR = CMakeFiles\untitled2.dir
+@@ -69,7 +69,7 @@
+ #############################################
+ # Link the executable untitled2.exe
+ 
+-build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main_b.c.obj CMakeFiles/untitled2.dir/main.c.obj
++build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/mainb.c.obj CMakeFiles/untitled2.dir/main.c.obj
+   FLAGS = -g
+   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+   OBJECT_DIR = CMakeFiles\untitled2.dir
+Index: cmake-build-debug/CMakeFiles/rules.ninja
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\r\n# Generated by \"Ninja\" Generator, CMake Version 3.23\r\n\r\n# This file contains all the rules used to get the outputs files\r\n# built from the input files.\r\n# It is included in the main 'build.ninja'.\r\n\r\n# =============================================================================\r\n# Project: untitled2\r\n# Configurations: Debug\r\n# =============================================================================\r\n# =============================================================================\r\n\r\n#############################################\r\n# Rule for compiling C files.\r\n\r\nrule C_COMPILER__untitled2_Debug\r\n  depfile = $DEP_FILE\r\n  deps = gcc\r\n  command = C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in\r\n  description = Building C object $out\r\n\r\n\r\n#############################################\r\n# Rule for linking C executable.\r\n\r\nrule C_EXECUTABLE_LINKER__untitled2_Debug\r\n  command = cmd.exe /C \"$PRE_LINK && C:\\PROGRA~1\\JETBRA~1\\CLION2~1.3\\bin\\mingw\\bin\\gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD\"\r\n  description = Linking C executable $TARGET_FILE\r\n  restat = $RESTAT\r\n\r\n\r\n#############################################\r\n# Rule for running custom commands.\r\n\r\nrule CUSTOM_COMMAND\r\n  command = $COMMAND\r\n  description = $DESC\r\n\r\n\r\n#############################################\r\n# Rule for re-running cmake.\r\n\r\nrule RERUN_CMAKE\r\n  command = \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\cmake\\win\\bin\\cmake.exe\" --regenerate-during-build -SC:\\Users\\tiago\\CLionProjects\\Projeto -BC:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug\r\n  description = Re-running CMake...\r\n  generator = 1\r\n\r\n\r\n#############################################\r\n# Rule for cleaning all built files.\r\n\r\nrule CLEAN\r\n  command = \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\ninja\\win\\ninja.exe\" $FILE_ARG -t clean $TARGETS\r\n  description = Cleaning all built files...\r\n\r\n\r\n#############################################\r\n# Rule for printing all primary targets available.\r\n\r\nrule HELP\r\n  command = \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\ninja\\win\\ninja.exe\" -t targets\r\n  description = All primary targets available:\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/rules.ninja b/cmake-build-debug/CMakeFiles/rules.ninja
+--- a/cmake-build-debug/CMakeFiles/rules.ninja	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/cmake-build-debug/CMakeFiles/rules.ninja	(date 1673315876922)
+@@ -51,7 +51,7 @@
+ # Rule for cleaning all built files.
+ 
+ rule CLEAN
+-  command = "C:\Program Files\JetBrains\CLion 2022.2.3\bin\ninja\win\ninja.exe" $FILE_ARG -t clean $TARGETS
++  command = C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\ninja\win\ninja.exe $FILE_ARG -t clean $TARGETS
+   description = Cleaning all built files...
+ 
+ 
+@@ -59,6 +59,6 @@
+ # Rule for printing all primary targets available.
+ 
+ rule HELP
+-  command = "C:\Program Files\JetBrains\CLion 2022.2.3\bin\ninja\win\ninja.exe" -t targets
++  command = C:\PROGRA~1\JETBRA~1\CLION2~1.3\bin\ninja\win\ninja.exe -t targets
+   description = All primary targets available:
+ 
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>cmake_minimum_required(VERSION 3.23)\r\nproject(untitled2 C)\r\n\r\nset(CMAKE_C_STANDARD 99)\r\n\r\nadd_executable(untitled2 main.c estruturas.h funcoes-secundarias.h funcoes_principais.h main.c)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/CMakeLists.txt	(date 1673315876745)
+@@ -3,4 +3,4 @@
+ 
+ set(CMAKE_C_STANDARD 99)
+ 
+-add_executable(untitled2 main.c estruturas.h funcoes-secundarias.h funcoes_principais.h main.c)
++add_executable(untitled2 mainb.c estruturas.h funcoes-secundarias.h funcoes_principais.h mainb.c mainb.c main.c)
+Index: cmake-build-debug/.ninja_log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># ninja log v5\r\n3\t131\t6950131240338658\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n131\t228\t6950119561447299\tuntitled2.exe\t3f34dfc76fd98972\r\n2\t357\t6950134777027409\tbuild.ninja\tb80808bb45694968\r\n3\t113\t6950127893397950\tCMakeFiles/untitled2.dir/main_b.c.obj\tddc46211d7f09790\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/.ninja_log b/cmake-build-debug/.ninja_log
+--- a/cmake-build-debug/.ninja_log	(revision dd56535aa62bb5b3ce8c6c31304fa314f192bb65)
++++ b/cmake-build-debug/.ninja_log	(date 1673316141722)
+@@ -1,5 +1,32 @@
+ # ninja log v5
+-3	131	6950131240338658	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-131	228	6950119561447299	untitled2.exe	3f34dfc76fd98972
+-2	357	6950134777027409	build.ninja	b80808bb45694968
+-3	113	6950127893397950	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++4	113	6950190099607556	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++105	195	6950189710329691	untitled2.exe	33316ef23867ecb2
++1	142	6950190769231277	build.ninja	b80808bb45694968
++2	67	6950188280289881	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++1	157	6950190769231277	build.ninja	b80808bb45694968
++2	121	6950190771221847	CMakeFiles/untitled2.dir/mainb.c.obj	4b3f0654af21cfc0
++6	122	6950190771221847	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++3	69	6950190945357663	CMakeFiles/untitled2.dir/mainb.c.obj	4b3f0654af21cfc0
++69	176	6950190946403128	untitled2.exe	1a511d202af93480
++3	134	6950191583389787	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++134	231	6950191584330119	untitled2.exe	1a511d202af93480
++3	121	6950191927843203	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++121	228	6950191928872042	untitled2.exe	1a511d202af93480
++2	109	6950192375849594	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++110	218	6950192376889824	untitled2.exe	1a511d202af93480
++3	121	6950192512182623	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++122	225	6950192513192927	untitled2.exe	1a511d202af93480
++3	131	6950192960973364	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++132	230	6950192961926763	untitled2.exe	1a511d202af93480
++2	112	6950193050151385	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++112	203	6950193051031496	untitled2.exe	1a511d202af93480
++3	128	6950193168254878	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++129	225	6950193169195061	untitled2.exe	1a511d202af93480
++2	101	6950193221262222	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++101	204	6950193222252449	untitled2.exe	1a511d202af93480
++3	119	6950193293650747	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++120	230	6950193294720993	untitled2.exe	1a511d202af93480
++2	121	6950193366536140	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++121	233	6950193367616504	untitled2.exe	1a511d202af93480
++2	101	6950193416263659	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++102	193	6950193417123748	untitled2.exe	1a511d202af93480

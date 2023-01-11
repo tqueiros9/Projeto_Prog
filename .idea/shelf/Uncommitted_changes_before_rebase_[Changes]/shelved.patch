@@ -1,0 +1,629 @@
+Index: estruturas.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#ifndef ESTRUTURAS_TODAS\r\n#define ESTRUTURAS_TODAS\r\n\r\n#define MAX_NOME_FUNCAO 50\r\n#define MAX_MISSOES 200\r\n#define MAX_MILITARES 1000\r\n#define MAX_TIPOS 10\r\n#define FUNCOES_TRIP 7\r\n\r\n//*******************************************************estruturas*****************************************************\r\n\r\ntypedef struct mission_type {\r\n    char nome [MAX_NOME_FUNCAO];\r\n    int cont_tripulantes_missao;\r\n    int tipo_tripulantes[10];//MUDAR ISTO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n}Mission_type;\r\n\r\ntypedef struct tripulante {\r\n    char nome [MAX_NOME_FUNCAO];\r\n    int nip; // numero de identificacao unico no formato XXXXXX\r\n    int funcao; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,\r\n                                                                // 5 recuperador, 6 piloto instrutor, 7 aluno\r\n    int estado; //O = OP, 1 = INOP\r\n    int oper; //data em que estara operacional no formato AAAAMMDD\r\n    int horas_voo;\r\n    int missoes; //numero total de missoes\r\n    int data_missoes[200];\r\n\r\n}Tripulante;\r\n\r\ntypedef struct voo {\r\n    int n_voo;\r\n    int data; //formato AAAAMMDD\r\n    int tipo_de_missao;\r\n    int cont_tripulantes;\r\n    Tripulante conj_trip [10]; //MUDAR ESTE VALOR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n}Missao_unica;\r\n\r\ntypedef struct funcoes_mil{\r\n    char mil_funcao[MAX_NOME_FUNCAO];\r\n\r\n}tipos_funcoes_mil;\r\n\r\n//*************** estruturas que definem conjutos das estruturas anteriores com um vetor e um contador *****************\r\n\r\ntypedef struct total_tipos_missao {\r\n    Mission_type conj_tipos_missao[MAX_TIPOS];\r\n    int cont_tipos_missao;\r\n}Total_tipos_missao;\r\n\r\ntypedef struct missoes{\r\n    Missao_unica conj_missoes [MAX_MISSOES];\r\n    int cont_missoes;\r\n}Total_missoes;\r\n\r\ntypedef struct militares{\r\n    Tripulante total_tripulantes [MAX_MILITARES];\r\n    int cont_militares;\r\n}Total_militares;\r\n\r\ntypedef struct total_funcoes_mil{\r\n    tipos_funcoes_mil todas_funcoes [MAX_TIPOS];\r\n    int cont_funcoes\r\n}Total_funcoes_mil;\r\n\r\n\r\n\r\n#endif
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/estruturas.h b/estruturas.h
+--- a/estruturas.h	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/estruturas.h	(date 1673308654750)
+@@ -60,7 +60,7 @@
+ 
+ typedef struct total_funcoes_mil{
+     tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
+-    int cont_funcoes
++    int cont_funcoes;
+ }Total_funcoes_mil;
+ 
+ 
+Index: main_b.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#include <stdio.h>\r\n\r\n#include \"estruturas.h\"\r\n#include \"funcoes_principais.h\"\r\n#include \"funcoes-secundarias.h\"\r\n\r\n\r\n#define MAX_TRIP 100\r\n/*void print_trip_file(FILE * fp){\r\n    int n, trip_counter;\r\n    Tripulante t;\r\n    // fp é um apontador de FILE já aberto em modo que suporta leitura binária\r\n\r\n\r\n    //rewind inicio do ficheiro\r\n    rewind(fp);\r\n    // o primeiro dado do ficheiro é um número inteiro com o número de tripulantes\r\n    fread(&n, sizeof(int), 1, fp);\r\n\r\n\r\n    // posteriormente, seguem-se todos os tripulantes\r\n    // verificar que o número de tripulantes lidos é efetivamente o indicado\r\n    //     no número inteiro inicial\r\n    // rewind do ficheiro, para voltar ao inicio\r\n    // ler um inteiro do ficheiro\r\n    // ler todos os tripulantes, um a um\r\n    for (trip_counter = 0; fread(&t, sizeof (Tripulante), 1, fp) != 0 ; trip_counter++) {\r\n        print_trip(&t);\r\n\r\n    }\r\n    if (n != trip_counter){\r\n        printf(\"ERRO\");\r\n    }\r\n\r\n    // parar de ler tripulantes quando fread devolver 0\r\n    // comparar se o número de tripulantes total lido é igual ao inteiro lido do inicio do ficheiro\r\n}*/\r\n\r\n\r\n/*int print_trip_idx(FILE *fp, int idx){\r\n    Tripulante t;\r\n    rewind(fp);\r\n    // fp é um apontador de FILE já aberto em modo que suporta leitura binária\r\n    // idx é o índice do Tripulante que queremos ler\r\n    fseek(fp, sizeof (int) + sizeof (Tripulante) * idx, SEEK_SET);\r\n\r\n    fread(&t, sizeof (Tripulante), 1, fp);\r\n    print_trip(&t);\r\n}*/\r\n\r\n\r\n/*void trip_file_swap(FILE * fp, int idx1, int idx2){\r\n    // fp é um apontador de FILE já aberto em modo que suporta leitura e escrita binária\r\n    // idx1 e idx2 são índices de Tripulantes no ficheiro\r\n    // esta função troca os dois tripulantes\r\n}*/\r\n\r\n\r\n/*int main_demo_bin(){\r\n    Tripulante t1 = {\"Saramago\", 136787};\r\n    Tripulante t2 = {\"Asimov\", 136786};\r\n    Tripulante t3 = {\"Hofstader\", 136788};\r\n    char filename[] = \"tripulantes.bd\";\r\n    Tripulante tripulacao[MAX_TRIP];\r\n    tripulacao[0] = t1;\r\n    tripulacao[1] = t2;\r\n    tripulacao[2] = t3;\r\n    FILE * fp, *fp2;\r\n    // vamos escrever um tripulante no ficheiro binário\r\n    fp = fopen(\"tripulantes.db\", \"wb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return 1;\r\n    }\r\n    else {\r\n        int n=3;\r\n        printf(\"Ficheiro aberto.\");\r\n        fwrite(&n, sizeof(int), 1, fp);\r\n        fwrite(tripulacao, sizeof(Tripulante), n, fp);\r\n        fclose(fp);\r\n    }\r\n    // vamos ler esse tripulante do ficheiro binário\r\n    fp = fopen(\"tripulantes.db\", \"rb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return 1;\r\n    }\r\n    else {\r\n        printf(\"Ficheiro aberto.\");\r\n        print_trip_idx(fp, 2);\r\n        print_trip_file(fp);\r\n        fclose(fp);\r\n    }\r\n}*/\r\n\r\n\r\n\r\nint main(){\r\n\r\n\r\n\r\n    int escolha_menu;\r\n    Total_tipos_missao todos_tipos_missoes;\r\n    Total_missoes todas_as_missoes;\r\n    Total_militares todos_os_militares;\r\n    Total_funcoes_mil todas_func_mil;\r\n\r\n    //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);\r\n\r\n    //char linha[] =\"129888;Ivo Alves;Piloto comandante;OP;-1;100;20\";\r\n    //adicionar_dados_militares(linha, &todos_os_militares, &todas_func_mil);\r\n\r\n\r\n    //--------------zona teste de dados\r\n\r\n    char filename_mil[] = \"militares.bin\";\r\n    char filename_mis[] = \"missoes.bin\";\r\n\r\n    FILE * fp, *fp2;\r\n    fp = fopen(filename_mil, \"rb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        //return;\r\n    }\r\n    else {\r\n\r\n        printf(\"Ficheiro aberto.\");\r\n        fread(&todos_os_militares.cont_militares, sizeof(int), 1, fp);\r\n        fread(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);\r\n        fclose(fp);\r\n    }\r\n\r\n\r\n   /* todos_os_militares.cont_militares=0;\r\n    todas_func_mil.cont_funcoes=0;\r\n    todos_tipos_missoes.cont_tipos_missao=0;*/\r\n\r\n   /* Tripulante at_at = {\"tiago\", 141914,0,0,-1,2,2,20221112,20221211};\r\n    Tripulante gm_gm = {\"guilherme\", 141916, 0,1,20230120,2,1,20221112};\r\n    todos_os_militares.total_tripulantes[0] = at_at;\r\n    todos_os_militares.total_tripulantes[1] = gm_gm;\r\n    todos_os_militares.cont_militares=2;*/\r\n\r\n    Mission_type ser_padeiro = {\"bater charuto\", 2, 0,0};\r\n    todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;\r\n    todos_tipos_missoes.cont_tipos_missao = 1;\r\n\r\n  //  Missao_unica viagem_ao_espaco = {1001, 20221112, 0, 2, at_at, gm_gm};\r\n\r\n\r\n\r\n\r\n    tipos_funcoes_mil ab_ab = {\"padeiro\"};\r\n    todas_func_mil.todas_funcoes[0] = ab_ab;\r\n    todas_func_mil.cont_funcoes=1;\r\n\r\n\r\n\r\n\r\n    //-------------------------\r\n\r\n\r\n\r\n\r\n\r\n    imprimir_menu();\r\n    scanf(\"%d\",&escolha_menu);\r\n    while(escolha_menu!=5){\r\n\r\n        switch (escolha_menu) {\r\n\r\n            case 1:\r\n     //          marcar_missao(&todas_as_missoes, &todos_tipos_missoes, &todos_os_militares, &todas_func_mil);\r\n                break;\r\n            case 2:\r\n            //   listar_missoes(&todas_as_missoes, &todos_tipos_missoes, &todas_func_mil);\r\n                break;\r\n            case 3:\r\n                listar_tripulantes(&todos_os_militares, &todas_func_mil);\r\n\r\n                break;\r\n            case 4:\r\n                //atualizar estado militares\r\n                atualizar_estado(&todos_os_militares);\r\n\r\n                break;\r\n            case 5:\r\n                //adicionar ficheiro à BD\r\n                break;\r\n            case 6:\r\n                //guardar_dados_binario(&todos_os_militares, &todas_as_missoes);\r\n\r\n                fp = fopen(filename_mil, \"wb\");\r\n                if(fp == NULL){\r\n                    printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n                    // return;\r\n                }\r\n                else {\r\n\r\n                    printf(\"Ficheiro aberto.\");\r\n                    fwrite(&todos_os_militares.cont_militares, sizeof(int), 1, fp);\r\n                    fwrite(todos_os_militares.total_tripulantes, sizeof(todos_os_militares.total_tripulantes[0]), todos_os_militares.cont_militares, fp);\r\n                    fclose(fp);\r\n                }\r\n                return 0;\r\n            default:\r\n                printf(\"escolha invalida, nao existe essa opcao no menu\");\r\n        }\r\n\r\n        imprimir_menu();\r\n        scanf(\"%d\",&escolha_menu);\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main_b.c b/main_b.c
+--- a/main_b.c	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/main_b.c	(date 1673309021063)
+@@ -95,7 +95,7 @@
+ 
+ 
+ 
+-int main(){
++/*int main_ex(){
+ 
+ 
+ 
+@@ -104,6 +104,7 @@
+     Total_missoes todas_as_missoes;
+     Total_militares todos_os_militares;
+     Total_funcoes_mil todas_func_mil;
++*/
+ 
+     //iniciar_valores(&todas_func_mil, &todos_os_militares, &todas_as_missoes, &todos_tipos_missoes);
+ 
+@@ -112,7 +113,7 @@
+ 
+ 
+     //--------------zona teste de dados
+-
++/*
+     char filename_mil[] = "militares.bin";
+     char filename_mis[] = "missoes.bin";
+ 
+@@ -140,7 +141,7 @@
+     todos_os_militares.total_tripulantes[0] = at_at;
+     todos_os_militares.total_tripulantes[1] = gm_gm;
+     todos_os_militares.cont_militares=2;*/
+-
++/*
+     Mission_type ser_padeiro = {"bater charuto", 2, 0,0};
+     todos_tipos_missoes.conj_tipos_missao[0] = ser_padeiro;
+     todos_tipos_missoes.cont_tipos_missao = 1;
+@@ -163,6 +164,7 @@
+ 
+ 
+ 
++
+     imprimir_menu();
+     scanf("%d",&escolha_menu);
+     while(escolha_menu!=5){
+@@ -218,4 +220,5 @@
+ 
+ 
+ 
+-}
++
++}*/
+Index: funcoes-secundarias.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#ifndef FUNCOES_SECUNDARIAS_H\r\n#define FUNCOES_SECUNDARIAS_H\r\n\r\n#include <stdio.h>\r\n#include <stdlib.h>\r\n#include <time.h>\r\n#include <conio.h>\r\n#include \"estruturas.h\"\r\n\r\n\r\n\r\n\r\n/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n                   FUNÇÕES AUXILIARES\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */\r\n\r\nvoid iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes * c, Total_tipos_missao * d){\r\n    a->cont_funcoes=0;\r\n    b->cont_militares=0;\r\n    c->cont_missoes=0;\r\n    d->cont_tipos_missao=0;\r\n}\r\n\r\nvoid imprimir_menu(){\r\n\r\n    printf(\"\\n1-marcar missao\\n2-listar missoes\\n3-listar tripulantes\\n4-atualizar estado de tripulantes\\n5-sair\\n\");\r\n}\r\n\r\nvoid adicionar_horas_missoes (Total_militares * todos_militares, int nip){\r\n\r\n    for (int i = 0; i < todos_militares->cont_militares; i++) {\r\n        if (todos_militares->total_tripulantes[i].nip == nip){\r\n            todos_militares->total_tripulantes[i].missoes++;\r\n            todos_militares->total_tripulantes[i].horas_voo+=2;\r\n        }\r\n    }\r\n\r\n}\r\n\r\nvoid criar_equipa (Total_militares * todos_militares, Total_funcoes_mil * todas_funcoes, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){\r\n\r\n    int controlo=0, controlo_militar_guardado = 0;\r\n\r\n    todas_missoes->conj_missoes[todas_missoes->cont_missoes].data = data;\r\n    todas_missoes->conj_missoes[todas_missoes->cont_missoes].cont_tripulantes = tipo_miss_escolhida->cont_tripulantes_missao;\r\n    todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = data+123;\r\n    todas_missoes->conj_missoes[todas_missoes->cont_missoes].tipo_de_missao = missao_escolhida;\r\n\r\n\r\n    for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {\r\n\r\n        for (int j = 0; j < todos_militares->cont_militares; j++) {\r\n\r\n            if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]){\r\n\r\n                for (int k = 0; k < todos_militares->total_tripulantes[j].missoes; k++) {\r\n                    if(todos_militares->total_tripulantes[j].data_missoes[k] == data){\r\n                        controlo = 1;\r\n                        break;\r\n                    }\r\n                }\r\n                if (controlo == 0){\r\n                    todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i] = todos_militares->total_tripulantes[j];\r\n                    controlo_militar_guardado = 1;\r\n                }\r\n                else{\r\n                    controlo = 0;\r\n                }\r\n\r\n            }\r\n            if (controlo_militar_guardado == 1){\r\n                break;\r\n            }\r\n        }\r\n        if (controlo_militar_guardado == 0){\r\n            printf(\"nao ha militares disponiveis para executar a missao\");\r\n            return;\r\n        }\r\n    }\r\n    for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {\r\n        adicionar_horas_missoes(todos_militares,todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i].nip);\r\n    }\r\n    todas_missoes->cont_missoes++;\r\n\r\n}\r\n\r\nint verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){\r\n\r\n    for (int i = 0; i < todas_funcoes->cont_funcoes; ++i) {\r\n        if (strcmp(tipos_funcoes,todas_funcoes->todas_funcoes[i].mil_funcao)==0){\r\n            return i;\r\n        }\r\n    }\r\n\r\n}\r\n\r\nvoid adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, Total_funcoes_mil * lista_func){\r\n\r\n    char s[2]=\";\";\r\n    char *temp;\r\n    int cont=0, help;\r\n\r\n    /* get the first token */\r\n    temp = strtok(linha, s);\r\n\r\n    /* walk through other tokens */\r\n    while( temp != NULL ) {\r\n        printf( \" %s\\n\", temp );\r\n\r\n        switch (cont) {\r\n            case 0:\r\n                lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].nip = atoi(temp);\r\n                break;\r\n            case 1:\r\n                strcpy(lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].nome, temp);\r\n                break;\r\n            case 2:\r\n                    lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].funcao= verifica_funcao(temp, lista_func);\r\n                    break;\r\n            case 3:\r\n                    help = strcmp(temp,\"OP\");\r\n                    if(help==0)lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].estado = 0;\r\n                    else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].estado = 1;\r\n                    break;\r\n            case 4:\r\n                    if (help!=0)lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper = atoi(temp);\r\n                    else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper=-1;\r\n                    break;\r\n            case 5:\r\n                lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].horas_voo = atoi(temp);\r\n                break;\r\n            case 6:\r\n                lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].missoes = atoi(temp);\r\n                break;\r\n            default:\r\n                return;\r\n        }\r\n        temp = strtok(NULL,s);\r\n        cont++;\r\n\r\n    }\r\n\r\n\r\n}\r\n\r\nvoid imprimir_funcoes(Total_funcoes_mil * lista_funcoes){\r\n\r\n    for (int i = 0; i < lista_funcoes->cont_funcoes; i++) {\r\n        printf(\"%d - %s\\n\",i,lista_funcoes->todas_funcoes[i].mil_funcao);\r\n    }\r\n}\r\n\r\n//recebe lista de militares, o seu estado 0 = OP e 1 = INOP\r\nvoid imprimir_lista_militares (Total_militares * lista_militares, int estado, int funcao){\r\n\r\n    //testes---------------\r\n\r\n    //-----------\r\n\r\n    if (lista_militares->cont_militares==0){\r\n        printf(\"nao ha militares na base de dados\\n\");\r\n        return;\r\n    }\r\n\r\n    printf(\"\\n----LISTA DE MILITARES----\\n\");\r\n    printf(\"NIP\\tNOME\");\r\n\r\n    for (int i = 0; i < lista_militares->cont_militares; i++) {\r\n\r\n        if ((lista_militares->total_tripulantes[i].estado==estado || estado== -1)&&\r\n        (lista_militares->total_tripulantes[i].funcao==funcao|| funcao==-1)){\r\n            printf(\"\\n%d\\t%s\", lista_militares->total_tripulantes[i].nip, lista_militares->total_tripulantes[i].nome);\r\n\r\n        }\r\n    }\r\n    printf(\"\\n----FIM DA LISTA----\");\r\n    printf(\"\\n\");\r\n}\r\n\r\nint imprimir_militar (Total_militares * lista_militares, int nip){\r\n\r\n    char estado[20];\r\n\r\n    for (int i = 0; i < lista_militares->cont_militares; i++) {\r\n\r\n        if (lista_militares->total_tripulantes[i].nip==nip){\r\n\r\n            if (lista_militares->total_tripulantes[i].estado == 0){\r\n                strcpy(estado, \"OPERACIONAL\");\r\n            }\r\n            else {\r\n                strcpy(estado, \"INOPERACIONAL\");\r\n            }\r\n\r\n            printf(\"%s \\n\\nnip: %d\\n\\testado: %s\\n\", lista_militares->total_tripulantes[i].nome,\r\n                   lista_militares->total_tripulantes[i].nip, estado);\r\n            return i;\r\n\r\n        }\r\n    }\r\n\r\n}\r\n\r\nvoid imprimir_horas_militar (Total_militares * lista_militares, int nip){\r\n\r\n    for (int i = 0; i < lista_militares->cont_militares; i++) {\r\n\r\n        if (lista_militares->total_tripulantes[i].nip==nip){\r\n\r\n            printf(\"%s \\n\\thoras de voo: %d\\n\\tnumero de missoes: %d\\n\", lista_militares->total_tripulantes[i].nome,\r\n                   lista_militares->total_tripulantes[i].horas_voo, lista_militares->total_tripulantes[i].missoes);\r\n            break;\r\n\r\n        }\r\n    }\r\n    \r\n}\r\n\r\n\r\nvoid ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_missoes){\r\n    char filename_mil[] = \"militares.bin\";\r\n    char filename_mis[] = \"missoes.bin\";\r\n\r\n    FILE * fp, *fp2;\r\n    fp = fopen(filename_mil, \"rb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return;\r\n    }\r\n    else {\r\n\r\n        printf(\"Ficheiro aberto.\");\r\n        fread(&lista_militares->cont_militares, sizeof(int), 1, fp);\r\n        fread(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);\r\n        fclose(fp);\r\n    }\r\n\r\n    fp = fopen(filename_mis, \"wb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return;\r\n    }\r\n    else {\r\n        printf(\"Ficheiro aberto.\");\r\n        fread(&lista_missoes->cont_missoes, sizeof(int), 1, fp);\r\n        fread(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);\r\n        fclose(fp);\r\n    }\r\n\r\n\r\n}\r\nvoid guardar_dados_binario (Total_militares * lista_militares, Total_missoes * lista_missoes){\r\n\r\n    char filename_mil[] = \"militares.bd\";\r\n    char filename_mis[] = \"missoes.bd\";\r\n\r\n    FILE * fp, *fp2;\r\n    fp = fopen(filename_mil, \"wb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return;\r\n    }\r\n    else {\r\n\r\n        printf(\"Ficheiro aberto.\");\r\n        fwrite(&lista_militares->cont_militares, sizeof(int), 1, fp);\r\n        fwrite(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);\r\n        fclose(fp);\r\n    }\r\n\r\n    fp = fopen(filename_mis, \"wb\");\r\n    if(fp == NULL){\r\n        printf(\"Abertura de ficheiro incorrecta.\\n\");\r\n        return;\r\n    }\r\n    else {\r\n\r\n        printf(\"Ficheiro aberto.\");\r\n        fwrite(&lista_missoes->cont_missoes, sizeof(int), 1, fp);\r\n        fwrite(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);\r\n        fclose(fp);\r\n    }\r\n\r\n\r\n}\r\n\r\n#endif //FUNCOES_SECUNDARIAS_H\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/funcoes-secundarias.h b/funcoes-secundarias.h
+--- a/funcoes-secundarias.h	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/funcoes-secundarias.h	(date 1673308617855)
+@@ -4,7 +4,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <time.h>
+-#include <conio.h>
+ #include "estruturas.h"
+ 
+ 
+Index: funcoes_principais.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#ifndef FUNCOES_PRINCIPAIS_H\r\n#define FUNCOES_PRINCIPAIS_H\r\n\r\n#include <stdio.h>\r\n#include <time.h>\r\n#include <string.h>\r\n#include \"estruturas.h\"\r\n#include \"funcoes-secundarias.h\"\r\n\r\n/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n                   FUNÇÕES PRINCIPAIS\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\r\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */\r\n\r\nvoid marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares ,Total_funcoes_mil * todas_funcoes){\r\n\r\n\r\n    int escolha,data[3], data_final;\r\n    printf(\"\\n Escolha o tipo de missao: \\n\");\r\n\r\n    //ciclo que imprime todos os tipos de missao carregados no SIGIT\r\n    for (int i = 1; i <= tipos_missao->cont_tipos_missao ; i++) {\r\n        printf(\"%d - %s\\n\", i, tipos_missao->conj_tipos_missao[i].nome);\r\n    }\r\n    scanf(\"%d\",&escolha);\r\n\r\n    printf(\"Insira a data, no formato DD/MM/AAAA\");\r\n\r\n    //programa faz a leitura da data no formato comum e transforma no formato esperado pelo programa AAAAMMDD\r\n    scanf(\"%d//%d//%d\",&data[0], &data[1], &data[2]);\r\n    data_final = data[0] + data[1] *100 + data[2]*10000;\r\n\r\n    //insere-se a data no vetor das missoes no formato do programa AAAAMMDD\r\n    total_missoes->conj_missoes[total_missoes->cont_missoes].data = data_final;\r\n\r\n    //criação da equipa\r\n    criar_equipa(todos_militares, todas_funcoes, &tipos_missao->conj_tipos_missao[escolha],data_final, total_missoes, escolha);\r\n\r\n}\r\n\r\nvoid listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){\r\n\r\n    if (lista_de_missoes->cont_missoes==0){\r\n        printf(\"não há missoes para imprimir\\n\");\r\n        return;\r\n    }\r\n\r\n    int temp, data1, data2, data, controlo=0, escolha;\r\n\r\n    printf(\"insira a data mais antiga no formato DDMMAAAA\");\r\n    scanf(\"%d\", &temp);\r\n    data1 = temp/1000000 + temp%1000000/10000 + temp%10000;\r\n    printf(\"insira a data mais recente no formato DDMMAAAA\");\r\n    scanf(\"%d\", &temp);\r\n    data2 = temp/1000000 + temp%1000000/10000 + temp%10000;\r\n\r\n    if (data1>data2){\r\n        printf(\"as datas nao respeitam o que foi pedido\");\r\n        return;\r\n    }\r\n\r\n    for (int i = 0; i < lista_de_missoes->cont_missoes; i++) {\r\n\r\n        data = lista_de_missoes->conj_missoes[i].data;\r\n\r\n        if (data >= data1 && data<=data2) {\r\n\r\n            printf(\"\\n%d\\n%d//%d//%d\\n%s\", lista_de_missoes->conj_missoes[i].n_voo, data / 10000, data % 10000 / 100,\r\n                   data / 100, lista_tipos_missao->conj_tipos_missao[lista_de_missoes->conj_missoes[i].tipo_de_missao].nome);\r\n\r\n            for (int j = 0; j < lista_de_missoes->conj_missoes[i].cont_tripulantes; j++) {\r\n                printf(\"\\n%s\\t%s\", lista_de_missoes->conj_missoes[i].conj_trip[j].nome,\r\n                       lista_funcoes_mil->todas_funcoes[lista_de_missoes->conj_missoes[i].conj_trip[j].funcao].mil_funcao);\r\n            }\r\n            printf(\"\\n\");\r\n            controlo = 1;\r\n        }\r\n    }\r\n    if (controlo == 0){\r\n        printf(\"Não ha missoes nas datas marcadas\");\r\n    }\r\n    printf(\"deseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair\");\r\n    scanf(\"%d\",&escolha);\r\n\r\n}\r\n\r\nvoid listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){\r\n\r\n    int escolha, escolha2,nip;\r\n\r\n    if (lista_de_militares->cont_militares==0){\r\n        printf(\"nao ha militares para imprimir\\n\");\r\n        return;\r\n    }\r\n\r\n\r\n    printf(\"Selecione a opcao:\\n1 - lista total de militares OP\\n2 - lista total de militares INOP\\n3 - lista por funcao OP\\n4 - lista por funcao INOP\\n5 - lista global\\n6 - sair\\n\");\r\n    scanf(\" %d\", &escolha);\r\n\r\n\r\n    while (escolha!=6) {\r\n        switch (escolha) {\r\n\r\n            case 1:\r\n                imprimir_lista_militares(lista_de_militares, 0, -1);\r\n                break;\r\n            case 2:\r\n                imprimir_lista_militares(lista_de_militares, 1, -1);\r\n                break;\r\n            case 3:\r\n                imprimir_funcoes(lista_funcoes_mil);\r\n                printf(\"escolha a funcao\\n\");\r\n                scanf(\"%d\", &escolha2);\r\n                imprimir_lista_militares(lista_de_militares, 0, escolha2);\r\n                break;\r\n            case 4:\r\n                imprimir_funcoes(&lista_funcoes_mil);\r\n                printf(\"escolha a funcao\");\r\n                scanf(\"%d\", &escolha2);\r\n                imprimir_lista_militares(lista_de_militares, 0, escolha2);\r\n                break;\r\n\r\n            case 5:\r\n                imprimir_lista_militares(lista_de_militares, -1, -1);\r\n                break;\r\n            case 6:\r\n                getchar();\r\n                system(\"clear\");\r\n                return;\r\n\r\n            default:\r\n                printf(\"numero introduzido não faz parte do menu\");\r\n        }\r\n\r\n        printf(\"\\ndeseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1\\n\");\r\n        scanf(\"%d\",&nip);\r\n        if (nip!=-1){\r\n            imprimir_horas_militar(lista_de_militares, nip);\r\n        }\r\n        printf(\"\\n\\nSelecione a opcao:\\n1 - lista total de militares OP\\n2 - lista total de militares INOP\\n3 - lista por funcao OP\\n4 - lista por funcao INOP\\n5 - lista global\\n6 - sair\\n\");\r\n        scanf(\" %d\", &escolha);\r\n\r\n    }\r\n\r\n\r\n}\r\n\r\nvoid atualizar_estado(Total_militares * lista_de_militares){\r\n\r\n    if (lista_de_militares->cont_militares==0){\r\n        printf(\"nao ha militares para imprimir\\n\");\r\n        return;\r\n    }\r\n\r\n    int nip, escolha, indice, data;\r\n\r\n    printf(\"introduza o nip do militar que pretende modificar o estado\\n\");\r\n    scanf(\"%d\", &nip);\r\n\r\n    indice = imprimir_militar(lista_de_militares, nip);\r\n\r\n    printf(\"para atualizar o estado insira 1 para mudar para OPERACIONAL, 2 para mudar para INOPERACIONAL e 3 para sair\");\r\n    scanf(\"%d\", &escolha);\r\n\r\n    if (escolha == 3)return;\r\n\r\n    else if (escolha == 1){\r\n\r\n        if (lista_de_militares->total_tripulantes[indice].estado == 0){\r\n            printf(\"militar ja se encontra operacional\\n\");\r\n            return;\r\n        }\r\n\r\n        lista_de_militares->total_tripulantes[indice].estado = 0;\r\n        lista_de_militares->total_tripulantes[indice].oper = -1;\r\n    }\r\n\r\n    else if (escolha == 2){\r\n        if (lista_de_militares->total_tripulantes[indice].estado == 1){\r\n            printf(\"militar ja se encontra inoperacional\\n\");\r\n            return;\r\n        }\r\n        printf(\"insira a data em que o militar ficará operacional de novo no formato AAAAMMDD\");\r\n        scanf(\"%d\", &data);\r\n        lista_de_militares->total_tripulantes[indice].estado=1;\r\n        lista_de_militares->total_tripulantes[indice].oper = data;\r\n    }\r\n\r\n    else {\r\n        printf(\"operacao invalida\");\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n#endif //FUNCOES_PRINCIPAIS_H\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/funcoes_principais.h b/funcoes_principais.h
+--- a/funcoes_principais.h	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/funcoes_principais.h	(date 1673308754574)
+@@ -115,7 +115,7 @@
+                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
+                 break;
+             case 4:
+-                imprimir_funcoes(&lista_funcoes_mil);
++                imprimir_funcoes(lista_funcoes_mil);
+                 printf("escolha a funcao");
+                 scanf("%d", &escolha2);
+                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
+Index: cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json
+===================================================================
+diff --git a/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json b/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json
+deleted file mode 100644
+--- a/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ /dev/null	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
+@@ -1,108 +0,0 @@
+-{
+-	"cmake" : 
+-	{
+-		"generator" : 
+-		{
+-			"multiConfig" : false,
+-			"name" : "Ninja"
+-		},
+-		"paths" : 
+-		{
+-			"cmake" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cmake.exe",
+-			"cpack" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/cpack.exe",
+-			"ctest" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/bin/ctest.exe",
+-			"root" : "C:/Program Files/JetBrains/CLion 2022.2.3/bin/cmake/win/share/cmake-3.23"
+-		},
+-		"version" : 
+-		{
+-			"isDirty" : false,
+-			"major" : 3,
+-			"minor" : 23,
+-			"patch" : 2,
+-			"string" : "3.23.2",
+-			"suffix" : ""
+-		}
+-	},
+-	"objects" : 
+-	[
+-		{
+-			"jsonFile" : "codemodel-v2-aed44fb7d2d28d3c12b8.json",
+-			"kind" : "codemodel",
+-			"version" : 
+-			{
+-				"major" : 2,
+-				"minor" : 4
+-			}
+-		},
+-		{
+-			"jsonFile" : "cache-v2-3ebcb66648e19b7cf271.json",
+-			"kind" : "cache",
+-			"version" : 
+-			{
+-				"major" : 2,
+-				"minor" : 0
+-			}
+-		},
+-		{
+-			"jsonFile" : "cmakeFiles-v1-3574f87d85bb5eb04423.json",
+-			"kind" : "cmakeFiles",
+-			"version" : 
+-			{
+-				"major" : 1,
+-				"minor" : 0
+-			}
+-		},
+-		{
+-			"jsonFile" : "toolchains-v1-4466d0e0b5c70530b31c.json",
+-			"kind" : "toolchains",
+-			"version" : 
+-			{
+-				"major" : 1,
+-				"minor" : 0
+-			}
+-		}
+-	],
+-	"reply" : 
+-	{
+-		"cache-v2" : 
+-		{
+-			"jsonFile" : "cache-v2-3ebcb66648e19b7cf271.json",
+-			"kind" : "cache",
+-			"version" : 
+-			{
+-				"major" : 2,
+-				"minor" : 0
+-			}
+-		},
+-		"cmakeFiles-v1" : 
+-		{
+-			"jsonFile" : "cmakeFiles-v1-3574f87d85bb5eb04423.json",
+-			"kind" : "cmakeFiles",
+-			"version" : 
+-			{
+-				"major" : 1,
+-				"minor" : 0
+-			}
+-		},
+-		"codemodel-v2" : 
+-		{
+-			"jsonFile" : "codemodel-v2-aed44fb7d2d28d3c12b8.json",
+-			"kind" : "codemodel",
+-			"version" : 
+-			{
+-				"major" : 2,
+-				"minor" : 4
+-			}
+-		},
+-		"toolchains-v1" : 
+-		{
+-			"jsonFile" : "toolchains-v1-4466d0e0b5c70530b31c.json",
+-			"kind" : "toolchains",
+-			"version" : 
+-			{
+-				"major" : 1,
+-				"minor" : 0
+-			}
+-		}
+-	}
+-}
+Index: cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json
+===================================================================
+diff --git a/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json b/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json
+deleted file mode 100644
+--- a/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ /dev/null	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
+@@ -1,133 +0,0 @@
+-{
+-	"artifacts" : 
+-	[
+-		{
+-			"path" : "untitled2.exe"
+-		},
+-		{
+-			"path" : "untitled2.pdb"
+-		}
+-	],
+-	"backtrace" : 1,
+-	"backtraceGraph" : 
+-	{
+-		"commands" : 
+-		[
+-			"add_executable"
+-		],
+-		"files" : 
+-		[
+-			"CMakeLists.txt"
+-		],
+-		"nodes" : 
+-		[
+-			{
+-				"file" : 0
+-			},
+-			{
+-				"command" : 0,
+-				"file" : 0,
+-				"line" : 6,
+-				"parent" : 0
+-			}
+-		]
+-	},
+-	"compileGroups" : 
+-	[
+-		{
+-			"compileCommandFragments" : 
+-			[
+-				{
+-					"fragment" : "-g"
+-				},
+-				{
+-					"fragment" : "-std=gnu99"
+-				}
+-			],
+-			"language" : "C",
+-			"languageStandard" : 
+-			{
+-				"backtraces" : 
+-				[
+-					1
+-				],
+-				"standard" : "99"
+-			},
+-			"sourceIndexes" : 
+-			[
+-				0
+-			]
+-		}
+-	],
+-	"id" : "untitled2::@6890427a1f51a3e7e1df",
+-	"link" : 
+-	{
+-		"commandFragments" : 
+-		[
+-			{
+-				"fragment" : "-g",
+-				"role" : "flags"
+-			},
+-			{
+-				"fragment" : "",
+-				"role" : "flags"
+-			},
+-			{
+-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+-				"role" : "libraries"
+-			}
+-		],
+-		"language" : "C"
+-	},
+-	"name" : "untitled2",
+-	"nameOnDisk" : "untitled2.exe",
+-	"paths" : 
+-	{
+-		"build" : ".",
+-		"source" : "."
+-	},
+-	"sourceGroups" : 
+-	[
+-		{
+-			"name" : "Source Files",
+-			"sourceIndexes" : 
+-			[
+-				0
+-			]
+-		},
+-		{
+-			"name" : "Header Files",
+-			"sourceIndexes" : 
+-			[
+-				1,
+-				2,
+-				3
+-			]
+-		}
+-	],
+-	"sources" : 
+-	[
+-		{
+-			"backtrace" : 1,
+-			"compileGroupIndex" : 0,
+-			"path" : "main.c",
+-			"sourceGroupIndex" : 0
+-		},
+-		{
+-			"backtrace" : 1,
+-			"path" : "estruturas.h",
+-			"sourceGroupIndex" : 1
+-		},
+-		{
+-			"backtrace" : 1,
+-			"path" : "funcoes-secundarias.h",
+-			"sourceGroupIndex" : 1
+-		},
+-		{
+-			"backtrace" : 1,
+-			"path" : "funcoes_principais.h",
+-			"sourceGroupIndex" : 1
+-		}
+-	],
+-	"type" : "EXECUTABLE"
+-}
+Index: cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json
+===================================================================
+diff --git a/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json b/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json
+deleted file mode 100644
+--- a/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ /dev/null	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
+@@ -1,60 +0,0 @@
+-{
+-	"configurations" : 
+-	[
+-		{
+-			"directories" : 
+-			[
+-				{
+-					"build" : ".",
+-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+-					"minimumCMakeVersion" : 
+-					{
+-						"string" : "3.23"
+-					},
+-					"projectIndex" : 0,
+-					"source" : ".",
+-					"targetIndexes" : 
+-					[
+-						0
+-					]
+-				}
+-			],
+-			"name" : "Debug",
+-			"projects" : 
+-			[
+-				{
+-					"directoryIndexes" : 
+-					[
+-						0
+-					],
+-					"name" : "untitled2",
+-					"targetIndexes" : 
+-					[
+-						0
+-					]
+-				}
+-			],
+-			"targets" : 
+-			[
+-				{
+-					"directoryIndex" : 0,
+-					"id" : "untitled2::@6890427a1f51a3e7e1df",
+-					"jsonFile" : "target-untitled2-Debug-6f2cc249ba312d8f89e8.json",
+-					"name" : "untitled2",
+-					"projectIndex" : 0
+-				}
+-			]
+-		}
+-	],
+-	"kind" : "codemodel",
+-	"paths" : 
+-	{
+-		"build" : "C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug",
+-		"source" : "C:/Users/tiago/CLionProjects/Projeto"
+-	},
+-	"version" : 
+-	{
+-		"major" : 2,
+-		"minor" : 4
+-	}
+-}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"CMakePresetLoader\">{\r\n  &quot;useNewFormat&quot;: true\r\n}</component>\r\n  <component name=\"CMakeReloadState\">\r\n    <option name=\"reloaded\" value=\"true\" />\r\n  </component>\r\n  <component name=\"CMakeRunConfigurationManager\">\r\n    <generated>\r\n      <config projectName=\"untitled2\" targetName=\"untitled2\" />\r\n    </generated>\r\n  </component>\r\n  <component name=\"CMakeSettings\">\r\n    <configurations>\r\n      <configuration PROFILE_NAME=\"Debug\" ENABLED=\"true\" CONFIG_NAME=\"Debug\" />\r\n    </configurations>\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13\" name=\"Changes\" comment=\"testes de dados\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_deps\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_deps\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_log\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/.ninja_log\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cmake-build-debug/untitled2.exe\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cmake-build-debug/untitled2.exe\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/main.c\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/main.c\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ClangdSettings\">\r\n    <option name=\"formatViaClangd\" value=\"false\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"CMakeBuildProfile:Debug\" />\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"teste-funcoes\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GithubProjectSettings\">\r\n    <option name=\"branchProtectionPatterns\">\r\n      <list>\r\n        <option value=\"master\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectApplicationVersion\">\r\n    <option name=\"ide\" value=\"CLion\" />\r\n    <option name=\"majorVersion\" value=\"2022\" />\r\n    <option name=\"minorVersion\" value=\"2.3\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2IqyGiuHTvYk06IvsfSFxJP9XR0\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,\r\n    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/tiago/CLionProjects/Projeto&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"untitled2\" type=\"CMakeRunConfiguration\" factoryName=\"Application\" REDIRECT_INPUT=\"false\" ELEVATE=\"false\" USE_EXTERNAL_CONSOLE=\"false\" PASS_PARENT_ENVS_2=\"true\" PROJECT_NAME=\"untitled2\" TARGET_NAME=\"untitled2\" CONFIG_NAME=\"Debug\" RUN_TARGET_PROJECT_NAME=\"untitled2\" RUN_TARGET_NAME=\"untitled2\">\r\n      <method v=\"2\">\r\n        <option name=\"com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13\" name=\"Changes\" comment=\"\" />\r\n      <created>1670923314185</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670923314185</updated>\r\n      <workItem from=\"1670923315937\" duration=\"3926000\" />\r\n      <workItem from=\"1670928228985\" duration=\"662000\" />\r\n      <workItem from=\"1671325942640\" duration=\"5672000\" />\r\n      <workItem from=\"1671374162810\" duration=\"13207000\" />\r\n      <workItem from=\"1671476961455\" duration=\"68000\" />\r\n      <workItem from=\"1671527897400\" duration=\"2375000\" />\r\n      <workItem from=\"1671637956607\" duration=\"2384000\" />\r\n      <workItem from=\"1672418023410\" duration=\"2218000\" />\r\n      <workItem from=\"1672695514154\" duration=\"3773000\" />\r\n      <workItem from=\"1672913862962\" duration=\"10342000\" />\r\n      <workItem from=\"1672926997128\" duration=\"12030000\" />\r\n      <workItem from=\"1672954300954\" duration=\"1000\" />\r\n      <workItem from=\"1672954324381\" duration=\"54000\" />\r\n      <workItem from=\"1672954556005\" duration=\"13848000\" />\r\n      <workItem from=\"1673129172294\" duration=\"8464000\" />\r\n      <workItem from=\"1673193411186\" duration=\"14203000\" />\r\n      <workItem from=\"1673212359646\" duration=\"637000\" />\r\n      <workItem from=\"1673308517059\" duration=\"2000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"git test\">\r\n      <created>1670928289313</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1670928289313</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"estruturas\">\r\n      <created>1671327309009</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671327309009</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"estruturas - update em todas as estruturas\">\r\n      <created>1671331289603</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671331289603</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão\">\r\n      <created>1671410614252</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671410614252</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido\">\r\n      <created>1671412457799</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671412457799</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\">\r\n      <created>1671419600240</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671419600240</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\">\r\n      <created>1671419845108</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671419845108</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"pequenas correções\">\r\n      <created>1671422123972</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422123972</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"teste\">\r\n      <created>1671422289935</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422289935</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"teste 2\">\r\n      <created>1671422326197</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422326197</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"teste 3\">\r\n      <created>1671422678779</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671422678779</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"final\">\r\n      <created>1671423248989</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671423248989</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica\">\r\n      <created>1671423517987</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671423517987</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"teste github\">\r\n      <created>1672696252157</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696252157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"teste github\">\r\n      <created>1672696280223</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696280223</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"teste github\">\r\n      <created>1672696341466</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672696341466</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"teste github\">\r\n      <created>1672918839353</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918839353</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672918894315</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918894315</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672918905535</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672918905535</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672921049834</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672921049834</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\">\r\n      <created>1672937925344</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1672937925344</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"update funcoes\">\r\n      <created>1673024630221</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673024630221</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado\">\r\n      <created>1673134537116</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673134537116</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"ler e guardar ficheiros .bin\">\r\n      <created>1673138973892</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673138973892</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"mudanças varias funçoes\">\r\n      <created>1673199940346</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673199940346</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"testes de dados\">\r\n      <created>1673209300550</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673209300550</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"testes de dados\">\r\n      <created>1673209847185</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1673209847185</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"28\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"git test\" />\r\n    <MESSAGE value=\"estruturas\" />\r\n    <MESSAGE value=\"estruturas - update em todas as estruturas\" />\r\n    <MESSAGE value=\"estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão\" />\r\n    <MESSAGE value=\"foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido\" />\r\n    <MESSAGE value=\"ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar\" />\r\n    <MESSAGE value=\"pequenas correções\" />\r\n    <MESSAGE value=\"teste\" />\r\n    <MESSAGE value=\"teste 2\" />\r\n    <MESSAGE value=\"teste 3\" />\r\n    <MESSAGE value=\"final\" />\r\n    <MESSAGE value=\"implementar a funcao de quicksort no futuro para facilitar a impressao da lista de voos por ordem cronologica\" />\r\n    <MESSAGE value=\"teste github\" />\r\n    <MESSAGE value=\"funcao listar militares e funcoes auxiliares necessarias, foram adicionadas estruturas de tipos de funcao de militares\" />\r\n    <MESSAGE value=\"update funcoes\" />\r\n    <MESSAGE value=\"atualizaçoes a quase todos os ficheiros, funçao de marcar missao terminada e terminada a de atualizar estado\" />\r\n    <MESSAGE value=\"ler e guardar ficheiros .bin\" />\r\n    <MESSAGE value=\"mudanças varias funçoes\" />\r\n    <MESSAGE value=\"testes de dados\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"testes de dados\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/.idea/workspace.xml	(date 1673309948479)
+@@ -21,13 +21,22 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="testes de dados">
++      <change afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-aed44fb7d2d28d3c12b8.json" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2022-12-19T03-05-54-0508.json" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-untitled2-Debug-6f2cc249ba312d8f89e8.json" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled2.dir/main.c.obj" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled2.exe" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/main_b.c" beforeDir="false" afterPath="$PROJECT_DIR$/main_b.c" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -82,6 +91,11 @@
+   }
+ }</component>
+   <component name="RunManager">
++    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
++      <method v="2">
++        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="untitled2" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="untitled2" TARGET_NAME="untitled2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="untitled2" RUN_TARGET_NAME="untitled2">
+       <method v="2">
+         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+@@ -113,7 +127,7 @@
+       <workItem from="1673129172294" duration="8464000" />
+       <workItem from="1673193411186" duration="14203000" />
+       <workItem from="1673212359646" duration="637000" />
+-      <workItem from="1673308517059" duration="2000" />
++      <workItem from="1673308517059" duration="1421000" />
+     </task>
+     <task id="LOCAL-00001" summary="git test">
+       <created>1670928289313</created>
+@@ -304,7 +318,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1673209847185</updated>
+     </task>
+-    <option name="localTasksCounter" value="28" />
++    <task id="LOCAL-00028" summary="testes de dados">
++      <created>1673308570670</created>
++      <option name="number" value="00028" />
++      <option name="presentableId" value="LOCAL-00028" />
++      <option name="project" value="LOCAL" />
++      <updated>1673308570670</updated>
++    </task>
++    <option name="localTasksCounter" value="29" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: main.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.c b/main.c
+new file mode 100644
+--- /dev/null	(date 1673309923843)
++++ b/main.c	(date 1673309923843)
+@@ -0,0 +1,10 @@
++#include <stdio.h>
++
++#include "estruturas.h"
++#include "funcoes_principais.h"
++#include "funcoes-secundarias.h"
++
++int main (){
++
++    printf("aaaaa");
++}
+\ No newline at end of file
+Index: cmake-build-debug/build.ninja
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\r\n# Generated by \"Ninja\" Generator, CMake Version 3.23\r\n\r\n# This file contains all the build statements describing the\r\n# compilation DAG.\r\n\r\n# =============================================================================\r\n# Write statements declared in CMakeLists.txt:\r\n# \r\n# Which is the root file.\r\n# =============================================================================\r\n\r\n# =============================================================================\r\n# Project: untitled2\r\n# Configurations: Debug\r\n# =============================================================================\r\n\r\n#############################################\r\n# Minimal version of Ninja required by this file\r\n\r\nninja_required_version = 1.5\r\n\r\n\r\n#############################################\r\n# Set configuration variable for custom commands.\r\n\r\nCONFIGURATION = Debug\r\n# =============================================================================\r\n# Include auxiliary files.\r\n\r\n\r\n#############################################\r\n# Include rules file.\r\n\r\ninclude CMakeFiles/rules.ninja\r\n\r\n# =============================================================================\r\n\r\n#############################################\r\n# Logical path to working directory; prefix for absolute paths.\r\n\r\ncmake_ninja_workdir = C$:/Users/tiago/CLionProjects/Projeto/cmake-build-debug/\r\n# =============================================================================\r\n# Object build statements for EXECUTABLE target untitled2\r\n\r\n\r\n#############################################\r\n# Order-only phony target for untitled2\r\n\r\nbuild cmake_object_order_depends_target_untitled2: phony || CMakeFiles/untitled2.dir\r\n\r\nbuild CMakeFiles/untitled2.dir/main.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main.c || cmake_object_order_depends_target_untitled2\r\n  DEP_FILE = CMakeFiles\\untitled2.dir\\main.c.obj.d\r\n  FLAGS = -g -std=gnu99\r\n  OBJECT_DIR = CMakeFiles\\untitled2.dir\r\n  OBJECT_FILE_DIR = CMakeFiles\\untitled2.dir\r\n\r\n\r\n# =============================================================================\r\n# Link build statements for EXECUTABLE target untitled2\r\n\r\n\r\n#############################################\r\n# Link the executable untitled2.exe\r\n\r\nbuild untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main.c.obj\r\n  FLAGS = -g\r\n  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32\r\n  OBJECT_DIR = CMakeFiles\\untitled2.dir\r\n  POST_BUILD = cd .\r\n  PRE_LINK = cd .\r\n  TARGET_FILE = untitled2.exe\r\n  TARGET_IMPLIB = libuntitled2.dll.a\r\n  TARGET_PDB = untitled2.exe.dbg\r\n\r\n\r\n#############################################\r\n# Utility command for edit_cache\r\n\r\nbuild CMakeFiles/edit_cache.util: CUSTOM_COMMAND\r\n  COMMAND = cmd.exe /C \"cd /D C:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug && \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\cmake\\win\\bin\\cmake.exe\" -E echo \"No interactive CMake dialog available.\"\"\r\n  DESC = No interactive CMake dialog available...\r\n  restat = 1\r\n\r\nbuild edit_cache: phony CMakeFiles/edit_cache.util\r\n\r\n\r\n#############################################\r\n# Utility command for rebuild_cache\r\n\r\nbuild CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND\r\n  COMMAND = cmd.exe /C \"cd /D C:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug && \"C:\\Program Files\\JetBrains\\CLion 2022.2.3\\bin\\cmake\\win\\bin\\cmake.exe\" --regenerate-during-build -SC:\\Users\\tiago\\CLionProjects\\Projeto -BC:\\Users\\tiago\\CLionProjects\\Projeto\\cmake-build-debug\"\r\n  DESC = Running CMake to regenerate build system...\r\n  pool = console\r\n  restat = 1\r\n\r\nbuild rebuild_cache: phony CMakeFiles/rebuild_cache.util\r\n\r\n# =============================================================================\r\n# Target aliases.\r\n\r\nbuild untitled2: phony untitled2.exe\r\n\r\n# =============================================================================\r\n# Folder targets.\r\n\r\n# =============================================================================\r\n\r\n#############################################\r\n# Folder: C:/Users/tiago/CLionProjects/Projeto/cmake-build-debug\r\n\r\nbuild all: phony untitled2.exe\r\n\r\n# =============================================================================\r\n# Built-in targets\r\n\r\n\r\n#############################################\r\n# Re-run CMake if any of its inputs changed.\r\n\r\nbuild build.ninja: RERUN_CMAKE | ../CMakeLists.txt C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeRCCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake\r\n  pool = console\r\n\r\n\r\n#############################################\r\n# A missing CMake input file is not an error.\r\n\r\nbuild ../CMakeLists.txt C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.2.3/bin/cmake/win/share/cmake-3.23/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeRCCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony\r\n\r\n\r\n#############################################\r\n# Clean all the built files.\r\n\r\nbuild clean: CLEAN\r\n\r\n\r\n#############################################\r\n# Print all primary targets available.\r\n\r\nbuild help: HELP\r\n\r\n\r\n#############################################\r\n# Make the all target the default.\r\n\r\ndefault all\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/build.ninja b/cmake-build-debug/build.ninja
+--- a/cmake-build-debug/build.ninja	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/cmake-build-debug/build.ninja	(date 1673308594149)
+@@ -49,6 +49,12 @@
+ 
+ build cmake_object_order_depends_target_untitled2: phony || CMakeFiles/untitled2.dir
+ 
++build CMakeFiles/untitled2.dir/main_b.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main_b.c || cmake_object_order_depends_target_untitled2
++  DEP_FILE = CMakeFiles\untitled2.dir\main_b.c.obj.d
++  FLAGS = -g -std=gnu99
++  OBJECT_DIR = CMakeFiles\untitled2.dir
++  OBJECT_FILE_DIR = CMakeFiles\untitled2.dir
++
+ build CMakeFiles/untitled2.dir/main.c.obj: C_COMPILER__untitled2_Debug C$:/Users/tiago/CLionProjects/Projeto/main.c || cmake_object_order_depends_target_untitled2
+   DEP_FILE = CMakeFiles\untitled2.dir\main.c.obj.d
+   FLAGS = -g -std=gnu99
+@@ -63,7 +69,7 @@
+ #############################################
+ # Link the executable untitled2.exe
+ 
+-build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main.c.obj
++build untitled2.exe: C_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2.dir/main_b.c.obj CMakeFiles/untitled2.dir/main.c.obj
+   FLAGS = -g
+   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+   OBJECT_DIR = CMakeFiles\untitled2.dir
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>cmake_minimum_required(VERSION 3.23)\r\nproject(untitled2 C)\r\n\r\nset(CMAKE_C_STANDARD 99)\r\n\r\nadd_executable(untitled2 main_b.c estruturas.h funcoes-secundarias.h funcoes_principais.h)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/CMakeLists.txt	(date 1673308593555)
+@@ -3,4 +3,4 @@
+ 
+ set(CMAKE_C_STANDARD 99)
+ 
+-add_executable(untitled2 main_b.c estruturas.h funcoes-secundarias.h funcoes_principais.h)
++add_executable(untitled2 main_b.c estruturas.h funcoes-secundarias.h funcoes_principais.h main.c)
+Index: cmake-build-debug/.ninja_log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># ninja log v5\r\n2\t103\t6949108339945788\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n103\t185\t6949108340737058\tuntitled2.exe\t33316ef23867ecb2\r\n2\t357\t6931223544460589\tbuild.ninja\tb80808bb45694968\r\n3\t101\t6949110060223550\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n101\t182\t6949110061005690\tuntitled2.exe\t33316ef23867ecb2\r\n3\t100\t6949111003952315\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n101\t185\t6949111004773900\tuntitled2.exe\t33316ef23867ecb2\r\n2\t97\t6949113759096428\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n98\t179\t6949113759878785\tuntitled2.exe\t33316ef23867ecb2\r\n2\t96\t6949114245684016\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n96\t178\t6949114246453953\tuntitled2.exe\t33316ef23867ecb2\r\n2\t96\t6949114821254900\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n97\t177\t6949114822026124\tuntitled2.exe\t33316ef23867ecb2\r\n2\t104\t6949115315186156\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n105\t189\t6949115316007757\tuntitled2.exe\t33316ef23867ecb2\r\n6\t208\t6949129430889092\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n209\t412\t6949129432853063\tuntitled2.exe\t33316ef23867ecb2\r\n4\t183\t6949129693771321\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n184\t336\t6949129695236977\tuntitled2.exe\t33316ef23867ecb2\r\n3\t223\t6949134740400936\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n224\t426\t6949134742345080\tuntitled2.exe\t33316ef23867ecb2\r\n4\t193\t6949155706624457\tCMakeFiles/untitled2.dir/main.c.obj\t23505686a1767943\r\n194\t343\t6949155708094791\tuntitled2.exe\t33316ef23867ecb2\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/.ninja_log b/cmake-build-debug/.ninja_log
+--- a/cmake-build-debug/.ninja_log	(revision f7d25c66290dd85a4df397ef5050105eeadcefb3)
++++ b/cmake-build-debug/.ninja_log	(date 1673309924038)
+@@ -1,24 +1,18 @@
+ # ninja log v5
+-2	103	6949108339945788	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-103	185	6949108340737058	untitled2.exe	33316ef23867ecb2
+-2	357	6931223544460589	build.ninja	b80808bb45694968
+-3	101	6949110060223550	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-101	182	6949110061005690	untitled2.exe	33316ef23867ecb2
+-3	100	6949111003952315	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-101	185	6949111004773900	untitled2.exe	33316ef23867ecb2
+-2	97	6949113759096428	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-98	179	6949113759878785	untitled2.exe	33316ef23867ecb2
+-2	96	6949114245684016	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-96	178	6949114246453953	untitled2.exe	33316ef23867ecb2
+-2	96	6949114821254900	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-97	177	6949114822026124	untitled2.exe	33316ef23867ecb2
+-2	104	6949115315186156	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-105	189	6949115316007757	untitled2.exe	33316ef23867ecb2
+-6	208	6949129430889092	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-209	412	6949129432853063	untitled2.exe	33316ef23867ecb2
+-4	183	6949129693771321	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-184	336	6949129695236977	untitled2.exe	33316ef23867ecb2
+-3	223	6949134740400936	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+-224	426	6949134742345080	untitled2.exe	33316ef23867ecb2
+ 4	193	6949155706624457	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
+ 194	343	6949155708094791	untitled2.exe	33316ef23867ecb2
++2	357	6950117941498640	build.ninja	b80808bb45694968
++8	72	6950118210804039	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++2	141	6950118211484196	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++142	361	6950118213654682	untitled2.exe	3f34dfc76fd98972
++2	115	6950118549250019	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++115	225	6950118550300418	untitled2.exe	3f34dfc76fd98972
++2	128	6950119560477048	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++131	228	6950119561447299	untitled2.exe	3f34dfc76fd98972
++7	125	6950121594861322	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++2	129	6950121594901319	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++3	113	6950127893397950	CMakeFiles/untitled2.dir/main_b.c.obj	ddc46211d7f09790
++3	138	6950128082618326	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++3	136	6950128194198141	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++2	133	6950128290125707	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
++3	131	6950131240338658	CMakeFiles/untitled2.dir/main.c.obj	23505686a1767943
