@@ -20,14 +20,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="comentarios marinho + update nos ficheiros binarios da base de dados">
-      <change afterPath="$PROJECT_DIR$/militares.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tipos_militares.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tipos_missoes.txt" afterDir="false" />
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="bases de dados e atualizacao de ficheiros de dados">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/estruturas.h" beforeDir="false" afterPath="$PROJECT_DIR$/estruturas.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/militares.bin.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ficheiros.h" beforeDir="false" afterPath="$PROJECT_DIR$/ficheiros.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +124,7 @@
       <workItem from="1673320962235" duration="3325000" />
       <workItem from="1673474130608" duration="657000" />
       <workItem from="1673481406845" duration="1426000" />
-      <workItem from="1673490013066" duration="679000" />
+      <workItem from="1673490013066" duration="2417000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -351,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673482510572</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="bases de dados e atualizacao de ficheiros de dados">
+      <created>1673490741745</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1673490741745</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -390,6 +396,18 @@
     <MESSAGE value="testes de dados" />
     <MESSAGE value="teste e correção de erros" />
     <MESSAGE value="queirozzz continuo a não ter acesso ao ficheiro trambolhoooo" />
-    <option name="LAST_COMMIT_MESSAGE" value="queirozzz continuo a não ter acesso ao ficheiro trambolhoooo" />
+    <MESSAGE value="bases de dados e atualizacao de ficheiros de dados" />
+    <option name="LAST_COMMIT_MESSAGE" value="bases de dados e atualizacao de ficheiros de dados" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/funcoes_principais.h</url>
+          <line>251</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

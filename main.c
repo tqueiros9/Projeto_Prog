@@ -61,7 +61,7 @@ int main(){
                 break;
             case 5:
                 //adicionar ficheiro à BD
-                carregar_militares(&todos_os_militares, &todas_func_mil);
+                ficheiro_mil(&todos_os_militares, &todas_func_mil);
                 break;
             case 6:
                 guardar_dados_binario(&todos_os_militares, &todasAsMissoes);

@@ -6,6 +6,7 @@
 #include <time.h>
 #include "estruturas.h"
 
+
 #define CAMINHO 100
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -122,12 +123,11 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
 
     /* walk through other tokens */
     while( temp != NULL ) {
-        printf( " %s\n", temp );
 
         switch (cont) {
             case 0:
                 verifica = verifica_militar(lista_mil_total, atoi(temp));
-                if(verifica == -1)return;
+                if(verifica != -1)return;
                 lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].nip = atoi(temp);
                 break;
             case 1:
