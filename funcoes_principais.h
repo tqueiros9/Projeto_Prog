@@ -247,6 +247,11 @@ void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_fun
         adicionar_dados_militares(buffer, lista_mil, lista_func);
     }
     fclose(fp);
+
+    for (int j = 0; j < lista_mil->cont_militares; j++) {
+        lista_mil->total_tripulantes[j].n_missoes=0;
+    }
+
     printf("BD carregada com sucesso!\n");
     printf("Militares novos: %d", lista_mil->cont_militares-a);
 }

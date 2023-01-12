@@ -20,6 +20,8 @@ void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes *
     b->cont_militares=0;           //meter os contadores a zero
     c->cont_missoes=0;
     d->cont_tipos_missao=0;
+
+
 }
 
 // Imprime o menu
@@ -64,9 +66,9 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
         for (j = indice; j < todos_militares->cont_militares; j++) {
 
 
-            if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]){
+            if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]-1){
 
-                for (int k = 0; k < todos_militares->total_tripulantes[j].missoes; k++) {
+                for (int k = 0; k < todos_militares->total_tripulantes[j].n_missoes; k++) {
                     if(todos_militares->total_tripulantes[j].data_missoes[k] == data){
                         controlo = 1;
                         break;
@@ -90,6 +92,7 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
             printf("Nao ha militares disponiveis para executar a missao");
             return;
         }
+        controlo_militar_guardado = 0;
     }
     for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
         adicionar_horas_missoes(todos_militares,todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i].nip);
@@ -314,21 +317,19 @@ void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_
         return;
     }
     else {
-
-
         fread(&lista_militares->cont_militares, sizeof(int), 1, fp);
         fread(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);
         fclose(fp);
     }
 
-    fp = fopen(filename_mis, "wb");
+    fp2 = fopen(filename_mis, "wb");
     if(fp == NULL){
         printf("Abertura de ficheiro incorrecta.\n");
         return;
     }
     else {
-        fread(&lista_missoes->cont_missoes, sizeof(int), 1, fp);
-        fread(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp);
+        fread(&lista_missoes->cont_missoes, sizeof(int), 1, fp2);
+        fread(lista_missoes->conj_missoes, sizeof(lista_missoes->conj_missoes[0]), lista_missoes->cont_missoes, fp2);
         fclose(fp);
     }
 
@@ -402,6 +403,7 @@ void carregar_funcoes (Total_funcoes_mil * lista_func) {
                     lista_func->cont_funcoes++;
                     break;
                 default:
+                    lista_func->cont_funcoes--;
                     return;
             }
             temp = strtok(NULL,s);
@@ -458,6 +460,7 @@ void carregar_tipos_missao(Total_tipos_missao * lista_missoes){
             case 3:
                 cont3++;
                 cont = 0;
+                cont2 = 0;
                 break;
 
             default:

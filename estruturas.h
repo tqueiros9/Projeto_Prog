@@ -24,6 +24,7 @@ typedef struct tripulante {
     int horas_voo;
     int missoes; //numero total de missoes
     int data_missoes[MAX_MISSOES];
+    int n_missoes;
 }Tripulante;
 
 typedef struct voo {
