@@ -7,16 +7,18 @@
 
 int main(){
 
-
-
     int escolha_menu;
-    Total_tipos_missao todos_tipos_missoes;
+
+    Total_tipos_missao todos_tipos_missoes;//vigilancia, instrucao, etc
     Total_missoes todasAsMissoes;
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
+
     iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes); //ir à secundária l17
     ler_dados_binario(&todos_os_militares,&todasAsMissoes);
+
+
 
     carregar_funcoes(&todas_func_mil);
     carregar_tipos_missao(&todos_tipos_missoes);
