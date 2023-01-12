@@ -14,7 +14,7 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares ,Total_funcoes_mil * todas_funcoes){
+void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares,Total_funcoes_mil * todas_funcoes) {
 
 
     int escolha,data[3], data_final;
@@ -38,9 +38,9 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     getchar();
 }
 
-void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
+void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil) {
 
-    if (lista_de_missoes->cont_missoes==0){
+    if (lista_de_missoes->cont_missoes==0) {
         printf("nao ha missoes para imprimir\n");
         return;
     }
@@ -55,7 +55,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
     scanf("%d", &temp);
     data2 = temp/1000000 + temp%1000000/10000*100 + temp%10000*10000;
 
-    if (data1>data2){
+    if (data1>data2) {
         printf("as datas nao respeitam o que foi pedido");
         return;
     }
@@ -77,7 +77,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
             controlo = 1;
         }
     }
-    if (controlo == 0){
+    if (controlo == 0) {
         printf("Nao ha missoes nas datas marcadas");
         return;
     }
@@ -85,11 +85,11 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
     scanf("%d",&escolha);
 
     if (escolha == -1)return;
-    else{
+    else {
         imprimir_dados_voo(lista_de_missoes, escolha, lista_tipos_missao,lista_funcoes_mil);
         printf("\nDeseja eliminar a missao? 1-S 2-N");
         scanf("%d",&escolha2);
-        if(escolha2!=1 && escolha2!=2){
+        if(escolha2!=1 && escolha2!=2) {
             printf("opcao invalida");
             return;
         }
@@ -101,11 +101,11 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
 
 }
 
-void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
+void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil) {
 
     int escolha, escolha2,nip;
 
-    if (lista_de_militares->cont_militares==0){
+    if (lista_de_militares->cont_militares==0) {
         printf("nao ha militares para imprimir\n");
         return;
     }
@@ -118,41 +118,41 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
     while (escolha!=6) {
         switch (escolha) {
 
-            case 1:
-                imprimir_lista_militares(lista_de_militares, 0, -1);
-                break;
-            case 2:
-                imprimir_lista_militares(lista_de_militares, 1, -1);
-                break;
-            case 3:
-                printf("escolha a funcao\n");
-                imprimir_funcoes(lista_funcoes_mil);
-                scanf("%d", &escolha2);
-                printf("%d", escolha2);
-                imprimir_lista_militares(lista_de_militares, 0, escolha2);
-                break;
-            case 4:
-                printf("escolha a funcao");
-                imprimir_funcoes(lista_funcoes_mil);
-                scanf("%d", &escolha2);
-                imprimir_lista_militares(lista_de_militares, 1, escolha2);
-                break;
+        case 1:
+            imprimir_lista_militares(lista_de_militares, 0, -1);
+            break;
+        case 2:
+            imprimir_lista_militares(lista_de_militares, 1, -1);
+            break;
+        case 3:
+            printf("escolha a funcao\n");
+            imprimir_funcoes(lista_funcoes_mil);
+            scanf("%d", &escolha2);
+            printf("%d", escolha2);
+            imprimir_lista_militares(lista_de_militares, 0, escolha2);
+            break;
+        case 4:
+            printf("escolha a funcao");
+            imprimir_funcoes(lista_funcoes_mil);
+            scanf("%d", &escolha2);
+            imprimir_lista_militares(lista_de_militares, 1, escolha2);
+            break;
 
-            case 5:
-                imprimir_lista_militares(lista_de_militares, -1, -1);
-                break;
-            case 6:
-                getchar();
-                system("clear");
-                return;
+        case 5:
+            imprimir_lista_militares(lista_de_militares, -1, -1);
+            break;
+        case 6:
+            getchar();
+            system("clear");
+            return;
 
-            default:
-                printf("numero introduzido não faz parte do menu");
+        default:
+            printf("numero introduzido não faz parte do menu");
         }
 
         printf("\ndeseja ver detalhes de um tripulante, se desejar introduza o nip ou introduza -1\n");
         scanf("%d",&nip);
-        if (nip!=-1){
+        if (nip!=-1) {
             imprimir_horas_militar(lista_de_militares, nip);
         }
         printf("\n\nSelecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair\n");
@@ -163,9 +163,9 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
 
 }
 
-void atualizar_estado(Total_militares * lista_de_militares){
+void atualizar_estado(Total_militares * lista_de_militares) {
 
-    if (lista_de_militares->cont_militares==0){
+    if (lista_de_militares->cont_militares==0) {
         printf("nao ha militares para imprimir\n");
         return;
     }
@@ -176,7 +176,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
     scanf("%d", &nip);
 
     indice = imprimir_militar(lista_de_militares, nip);
-    if (indice == -1){
+    if (indice == -1) {
         printf("esse nip nao esta na base de dados");
         return;
     }
@@ -188,9 +188,9 @@ void atualizar_estado(Total_militares * lista_de_militares){
 
 
 
-    else if (escolha == 1){
+    else if (escolha == 1) {
 
-        if (lista_de_militares->total_tripulantes[indice].estado == 0){
+        if (lista_de_militares->total_tripulantes[indice].estado == 0) {
             printf("militar ja se encontra operacional\n");
             return;
         }
@@ -199,8 +199,8 @@ void atualizar_estado(Total_militares * lista_de_militares){
         lista_de_militares->total_tripulantes[indice].oper = -1;
     }
 
-    else if (escolha == 2){
-        if (lista_de_militares->total_tripulantes[indice].estado == 1){
+    else if (escolha == 2) {
+        if (lista_de_militares->total_tripulantes[indice].estado == 1) {
             printf("militar ja se encontra inoperacional\n");
             return;
         }
@@ -216,7 +216,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
 
 }
 
-void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_func){
+void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_func) {
 
     char file_location [CAMINHO];
     char buffer [CAMINHO];
@@ -235,15 +235,15 @@ void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_fun
     file_location[i]='\0';
 
     fp=fopen(file_location, "r");
-    if(fp==NULL){
-         printf("ERRO: Ficheiro nao existente!\n\n");
-         return;
+    if(fp==NULL) {
+        printf("ERRO: Ficheiro nao existente!\n\n");
+        return;
     }
 
 
 
     fgets(buffer, sizeof (buffer), fp);
-    while (fgets(buffer, sizeof (buffer), fp)){
+    while (fgets(buffer, sizeof (buffer), fp)) {
         /*if (controlo==0){
             controlo=1;
             fgets(buffer, sizeof (buffer), fp);
