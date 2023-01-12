@@ -8,9 +8,6 @@
 
 #define CAMINHO 100
 
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                    FUNÇÕES AUXILIARES
@@ -18,12 +15,11 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes * c, Total_tipos_missao * d){
-    a->cont_funcoes=0;
-    b->cont_militares=0;
+    a->cont_funcoes=0;             //a,b,c,d sao variaveis a apontar para os tipos das estruturas
+    b->cont_militares=0;           //meter os contadores a zero
     c->cont_missoes=0;
     d->cont_tipos_missao=0;
 }
-
 void imprimir_menu(){
 
     printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-Adicionar ficheiro a BD\n6-sair\n");
@@ -39,7 +35,6 @@ void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
     }
 
 }
-
 void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
 
     int controlo=0, controlo_militar_guardado = 0, j, indice = 0;
@@ -78,7 +73,7 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
             }
         }
         if (controlo_militar_guardado == 0){
-            printf("nao ha militares disponiveis para executar a missao");
+            printf("Nao ha militares disponiveis para executar a missao");
             return;
         }
     }
@@ -88,7 +83,6 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
     todas_missoes->cont_missoes++;
 
 }
-
 int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
 
     for (int i = 0; i < todas_funcoes->cont_funcoes; ++i) {
@@ -98,7 +92,6 @@ int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
     }
 
 }
-
 int verifica_militar (Total_militares * lista_mil, int nip){
     int i;
     for (i = 0; i < lista_mil->cont_militares; i++) {
@@ -108,7 +101,6 @@ int verifica_militar (Total_militares * lista_mil, int nip){
     }
     if (i == lista_mil->cont_militares)return -1;
 }
-
 void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, Total_funcoes_mil * lista_func){
 
     char s[2]=";";
@@ -158,7 +150,6 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
     }
     lista_mil_total->cont_militares++;
 }
-
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 
     for (int i = 0; i < lista_funcoes->cont_funcoes; i++) {
