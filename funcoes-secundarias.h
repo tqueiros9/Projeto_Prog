@@ -212,7 +212,7 @@ int imprimir_militar (Total_militares * lista_militares, int nip){
     //Encontra o militar com o nip escolhido
 
     i = verifica_militar(lista_militares,nip);
-
+    if (i == -1)return -1;
     // Se o estado estiver em 0, imprimir "Operacional", se diferente de 0, imprime "Inoperacional"
         if (lista_militares->total_tripulantes[i].estado == 0){
             strcpy(estado, "OPERACIONAL");
@@ -372,10 +372,11 @@ void carregar_funcoes (Total_funcoes_mil * lista_func) {
 
 
     //-----------------------
+    //-----------------------
     // APENAS ALTERAR A LOCALIZACAO DO FICHEIRO
     char location []= "C:\\Users\\tiago\\CLionProjects\\Projeto\\tipos_militares.txt";
     //-----------------------
-
+    //-----------------------
 
 
     char buffer [CAMINHO];
@@ -424,7 +425,17 @@ void carregar_funcoes (Total_funcoes_mil * lista_func) {
 
 void carregar_tipos_missao(Total_tipos_missao * lista_missoes){
 
+
+    //-----------------------
+    //-----------------------
+    // APENAS ALTERAR A LOCALIZACAO DO FICHEIRO
     char location []= "C:\\Users\\tiago\\CLionProjects\\Projeto\\tipos_missoes.txt";
+    //-----------------------
+    //-----------------------
+
+
+
+
     char buffer [CAMINHO];
     char s[2]=",";
     char *temp;

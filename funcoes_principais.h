@@ -135,7 +135,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
                 printf("escolha a funcao");
                 imprimir_funcoes(lista_funcoes_mil);
                 scanf("%d", &escolha2);
-                imprimir_lista_militares(lista_de_militares, 0, escolha2);
+                imprimir_lista_militares(lista_de_militares, 1, escolha2);
                 break;
 
             case 5:
@@ -176,11 +176,17 @@ void atualizar_estado(Total_militares * lista_de_militares){
     scanf("%d", &nip);
 
     indice = imprimir_militar(lista_de_militares, nip);
+    if (indice == -1){
+        printf("esse nip nao esta na base de dados");
+        return;
+    }
 
     printf("para atualizar o estado insira 1 para mudar para OPERACIONAL, 2 para mudar para INOPERACIONAL e 3 para sair\n");
     scanf("%d", &escolha);
 
     if (escolha == 3)return;
+
+
 
     else if (escolha == 1){
 
