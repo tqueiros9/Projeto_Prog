@@ -18,7 +18,7 @@ typedef struct mission_type {           //a estrutura mission_type tem 3 variáv
 typedef struct tripulante {
     char nome [MAX_NOME_FUNCAO];
     int nip; //numero de identificacao unico no formato XXXXXX
-    int funcao; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,5 recuperador, 6 piloto instrutor, 7 aluno
+    int funcao; //funcao de cada tripulante, por exemplo 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,5 recuperador, 6 piloto instrutor, 7 aluno
     int estado; //O = OP, 1 = INOP
     int oper;  //data em que estara operacional no formato AAAAMMDD
     int horas_voo;
