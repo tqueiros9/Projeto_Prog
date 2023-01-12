@@ -1,0 +1,95 @@
+NIP;Nome;Funcao;Estado;Data;horas_voo;missoes
+129888;Ivo Alves;Piloto comandante;OP;-1;100;20
+123681;Luis Pereira;Piloto;OP;-1;100;20
+125844;Luis Silva;Navegador;OP;-1;100;20
+134614;Catarina Carlos;Load master;OP;-1;100;20
+130805;Pedro Santos;Recuperador;OP;-1;100;20
+130810;Marcos Cabral;Piloto instrutor;OP;-1;1000;200
+128644;Pedro Rocha;Aluno;OP;-1;100;20
+134621;Osvaldo Oliveira;Piloto comandante;OP;-1;1000;200
+130802;Antonio Farinha;Piloto;OP;-1;1000;200
+128156;Frederico Sousa;Navegador;OP;-1;100;20
+130756;Ariel Abreu;Load master;OP;-1;100;20
+130757;Joao Ines;Recuperador;OP;-1;100;20
+132280;Nelson Almeida;Piloto instrutor;OP;-1;1000;200
+132309;Fernando Lopes;Aluno;OP;-1;100;20
+131925;Paulo Silva;Aluno;OP;-1;100;20
+132274;Tiago Oliveira;Recuperador;OP;-1;100;20
+132278;Bruno Serrano;Piloto;OP;-1;1000;200
+132123;Romeu Rocha;Piloto comandante;OP;-1;1000;200
+132311;Sofia Milharadas;Piloto comandante;OP;-1;1050;200
+132312;Nuno Lopes;Navegador;OP;-1;100;20
+132327;Luis Torres;Load master;OP;-1;100;20
+132322;Marta Nico;Piloto instrutor;OP;-1;1000;300
+128220;Bruno Coimbra;Piloto comandante;OP;-1;1500;300
+132295;Jose Ferreira;Piloto comandante;OP;-1;1500;300
+131941;Rodrigo Silva;Piloto comandante;OP;-1;1500;300
+132299;Nuno Garcez;Load master;OP;-1;100;20
+132323;Gonçalo Almeida;Piloto comandante;OP;-1;1500;300
+112232;Artur Guerreiro;Piloto comandante;OP;-1;1500;300
+132142;Augusto Figueiredo;Load master;OP;-1;200;20
+130804;Bruno Martins;Piloto comandante;OP;-1;2500;550
+131907;Pedro Reis;Piloto comandante;OP;-1;2500;550
+132302;Maria Pinto;Piloto comandante;OP;-1;2500;550
+131601;Joao Gouveia;Piloto instrutor;OP;-1;2500;550
+131605;Sara Cordeiro;Piloto comandante;OP;-1;2700;550
+132126;Joao Matos;Piloto comandante;OP;-1;2700;550
+132328;Paulo Marques;Piloto comandante;OP;-1;2700;550
+128153;Helder Ferreira;Piloto comandante;OP;-1;2700;550
+141861;Rita Neves;Piloto comandante;OP;-1;2700;550
+141900;Francisco Agostinho;Piloto instrutor;OP;-1;2000;450
+141924;Miguel Lima;Piloto comandante;OP;-1;2000;450
+141866;Joao Santos;Piloto comandante;OP;-1;2000;450
+141858;Francisco Felix;Piloto comandante;OP;-1;2000;450
+141873;Maria Branco;Piloto comandante;OP;-1;2000;450
+141872;Andre Pires;Piloto comandante;OP;-1;2000;450
+141937;Jorge Alves;Load master;OP;-1;200;120
+141876;Antonio Barroso;Recuperador;OP;-1;300;120
+141919;Martim Fernandes;Recuperador;OP;-1;300;120
+141882;Diogo Costa;Recuperador;OP;-1;300;120
+141922;Miguel Carrasqueira;Recuperador;OP;-1;300;120
+141891;Jose Sanches;Recuperador;OP;-1;300;120
+141591;Bohdan Tkachenko;Recuperador;OP;-1;300;120
+141889;Tiago Cruz;Recuperador;OP;-1;300;120
+141879;Pedro Margalho;Recuperador;OP;-1;300;120
+141918;Diogo Anjos;Recuperador;OP;-1;300;120
+141871;Ana Climaco;Recuperador;OP;-1;300;120
+141914;Tiago Silva;Recuperador;OP;-1;300;120
+141896;Guilherme Pacheco;Recuperador;OP;-1;300;120
+141576;Ana Caetano;Load master;OP;-1;600;110
+141602;Joao Ildefonso;Load master;OP;-1;600;110
+141598;Vasco Capelo;Load master;OP;-1;600;110
+141575;Alexandre Fernandes;Load master;OP;-1;600;110
+141585;Goncalo Duarte;Load master;OP;-1;600;110
+140715;Miguel Sebastiao;Load master;OP;-1;600;110
+141593;Tiago Barreira;Load master;OP;-1;600;110
+141592;Miguel Seita;Load master;OP;-1;600;110
+141583;Paulo Silva;Load master;OP;-1;600;110
+141590;Beatriz Marinho;Load master;OP;-1;600;110
+141587;Miguel Mendes;Load master;OP;-1;600;110
+141588;Ricardo Baptista;Load master;OP;-1;600;110
+141600;Catarina Luis;Load master;OP;-1;600;110
+141599;Francisco Rodrigues;Load master;OP;-1;600;110
+141595;Joana Vaz;Load master;OP;-1;600;110
+141597;Jorge Silva;Load master;OP;-1;600;110
+141589;Pedro Pereira;Load master;OP;-1;600;110
+141594;Goncalo Rego;Load master;OP;-1;600;110
+141579;Francisco Sardinha;Load master;OP;-1;600;110
+139921;Carolina Baptista;Aluno;OP;-1;100;20
+139933;Claudio Gomes;Aluno;OP;-1;100;20
+139923;Tiago Nunes;Aluno;OP;-1;100;100;20
+139927;Tiago Marto;Aluno;OP;-1;100;20
+139912;Francisco Goncalves;Aluno;OP;-1;100;20
+139916;Miguel Freitas;Aluno;OP;-1;100;20
+139920;Francisco Sousa;Aluno;OP;-1;100;20
+139919;Rafael De Sousa;Aluno;OP;-1;100;20
+139932;Luis Oliveira;Aluno;OP;-1;100;20
+139925;Antonio Oliveira;Aluno;OP;-1;100;20
+139917;Jorge Soares;Aluno;OP;-1;100;20
+139926;Ricardo Morgado;Aluno;OP;-1;100;20
+139922;Tirsa Arriscado;Aluno;OP;-1;100;20
+139931;Antonio Montez;Aluno;OP;-1;100;20
+139930;Pedro Martins;Aluno;OP;-1;100;20
+139424;Vasco Coelho;Aluno;OP;-1;100;20
+139425;Bernardo Alves;Aluno;OP;-1;100;20
+139426;Pedro Silva;Aluno;OP;-1;100;20

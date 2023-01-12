@@ -1,0 +1,7 @@
+id,funcao
+1,Piloto comandante
+2,Piloto
+3,Navegador
+4,Load master
+5,Recuperador
+6,Piloto instrutor

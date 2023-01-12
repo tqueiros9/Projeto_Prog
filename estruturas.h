@@ -1,7 +1,7 @@
 #ifndef ESTRUTURAS_TODAS
 #define ESTRUTURAS_TODAS
 
-#define MAX_NOME_FUNCAO 50
+#define MAX_NOME_FUNCAO 25
 #define MAX_MISSOES 100
 #define MAX_MILITARES 1000
 #define MAX_TIPOS 10
@@ -18,12 +18,13 @@ typedef struct mission_type {           //a estrutura mission_type tem 3 variáv
 typedef struct tripulante {
     char nome [MAX_NOME_FUNCAO];
     int nip; //numero de identificacao unico no formato XXXXXX
-    int funcao; //funcao de cada tripulante, 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,5 recuperador, 6 piloto instrutor, 7 aluno
+    int funcao; //funcao de cada tripulante, por exemplo 1 piloto cmdt, 2 piloto, 3 nav, 4 load master,5 recuperador, 6 piloto instrutor, 7 aluno
     int estado; //O = OP, 1 = INOP
     int oper;  //data em que estara operacional no formato AAAAMMDD
     int horas_voo;
     int missoes; //numero total de missoes
     int data_missoes[MAX_MISSOES];
+    int n_missoes;
 }Tripulante;
 
 typedef struct voo {
@@ -56,7 +57,7 @@ typedef struct militares{
 }Total_militares;
 
 typedef struct total_funcoes_mil{
-    tipos_funcoes_mil todas_funcoes [MAX_TIPOS];
+    tipos_funcoes_mil todas_funcoes [FUNCOES_TRIP];
     int cont_funcoes;
 }Total_funcoes_mil;
 
