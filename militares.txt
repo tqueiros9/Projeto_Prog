@@ -67,7 +67,7 @@ NIP;Nome;Funcao;Estado;Data;horas_voo;missoes
 141583;Paulo Silva;Load master;OP;-1;600;110
 141590;Beatriz Marinho;Load master;OP;-1;600;110
 141587;Miguel Mendes;Load master;OP;-1;600;110
-141588;Ricardo  Baptista;Load master;OP;-1;600;110
+141588;Ricardo Baptista;Load master;OP;-1;600;110
 141600;Catarina Luis;Load master;OP;-1;600;110
 141599;Francisco Rodrigues;Load master;OP;-1;600;110
 141595;Joana Vaz;Load master;OP;-1;600;110

@@ -7,7 +7,7 @@
 #include "estruturas.h"
 
 
-#define CAMINHO 100
+#define CAMINHO 400
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -41,6 +41,12 @@ void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
         }
     }
 
+}
+
+void imprimir_tipos_missao(Total_tipos_missao * total_tipos){
+    for (int i = 0; i < total_tipos->cont_tipos_missao; i++) {
+        printf("%d - %s\n", i, total_tipos->conj_tipos_missao[i].nome);
+    }
 }
 
 void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
@@ -92,9 +98,9 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
 
 }
 
-int verifica_funcao(char * tipos_funcoes, Total_funcoes_mil * todas_funcoes){
+int verifica_funcao(char tipos_funcoes[], Total_funcoes_mil * todas_funcoes){
 
-    for (int i = 0; i < todas_funcoes->cont_funcoes; ++i) {
+    for (int i = 0; i < todas_funcoes->cont_funcoes; i++) {
         if (strcmp(tipos_funcoes,todas_funcoes->todas_funcoes[i].mil_funcao)==0){
             return i;
         }
@@ -361,46 +367,106 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
 }
 
 
-void carregar_militares (Total_militares * lista_mil, Total_funcoes_mil * lista_func){
-    char caminho [CAMINHO];
+void carregar_funcoes (Total_funcoes_mil * lista_func) {
+
+    char location []= "C:\\Users\\tiago\\CLionProjects\\Projeto\\tipos_militares.txt";
     char buffer [CAMINHO];
-    int controlo=0, i, a=0;
-    printf("\n--Carregar Militares--\n");
+    char s[2]=",";
+    char *temp;
+    int cont=0, help, verifica, i;
     FILE *fp;
-    getchar();
-    while(a==0){
-        printf("Introduza caminho do ficheiro: ");
-        fgets(caminho, CAMINHO, stdin);
-
-        for (i = 0; caminho[i] != '\n'; i++);
-        caminho[i]='\0';
 
 
-        fp=fopen(caminho, "r");
-        if(fp==NULL){
-            printf("ERRO: Ficheiro nao existente!\n\n");
-            a=1;
-        }else
-            a=0;
-        if (a == 1) {
-            printf("deseja sair? 1-S 0-N\n");
-            scanf("%d", &controlo);
-        }
-        if(controlo == 1)return;
-    };
-
-    fgets(buffer, 100, fp);
-    while (fgets(buffer, 100, fp)){
-        if (a == 1){
-            a=2;
-            continue;
-        }
-        fgets(buffer, 100, fp);
-        adicionar_dados_militares(buffer, lista_mil, lista_func);
+    fp=fopen(location, "r");
+    if(fp==NULL){
+        printf("ERRO: Ficheiro nao existente!\n\n");
+        return;
     }
-    fclose(fp);
-    printf("BD carregada com sucesso!\n");
-    printf("Novo numero de militares: %d", lista_mil->cont_militares);
+
+    fgets(buffer, sizeof (buffer), fp);
+
+    while (fgets(buffer, sizeof (buffer), fp)) {
+         cont=0;
+        temp = strtok(buffer, s);
+
+        /* walk through other tokens */
+        while( temp != NULL ) {
+
+            switch (cont) {
+                case 0:
+                    break;
+                case 1:
+                    for (i = 0; temp[i] != '\n'; i++);
+                    temp[i]='\0';
+                    strcpy(lista_func->todas_funcoes[lista_func->cont_funcoes].mil_funcao, temp);
+                    lista_func->cont_funcoes++;
+                    break;
+                default:
+                    return;
+            }
+            temp = strtok(NULL,s);
+            cont++;
+
+        }
+
+
+    }
+}
+
+void carregar_tipos_missao(Total_tipos_missao * lista_missoes){
+
+    char location []= "C:\\Users\\tiago\\CLionProjects\\Projeto\\tipos_missoes.txt";
+    char buffer [CAMINHO];
+    char s[2]=",";
+    char *temp;
+    int cont = 0, help, verifica, i, cont2 = 0, cont3 = 0;
+    FILE *fp;
+
+
+    fp=fopen(location, "r");
+    if(fp==NULL){
+        printf("ERRO: Ficheiro nao existente!\n\n");
+        return;
+    }
+
+    fgets(buffer, sizeof (buffer), fp);
+    lista_missoes->cont_tipos_missao= atoi(buffer);
+    cont =0;
+    while (fgets(buffer, sizeof (buffer), fp)) {
+
+        switch (cont) {
+            case 0:
+                for (i = 0; buffer[i] != '\n'; i++);
+                buffer[i] = '\0';
+                strcpy(lista_missoes->conj_tipos_missao[cont3].nome, buffer);
+                cont++;
+                break;
+            case 1:
+                lista_missoes->conj_tipos_missao[cont3].cont_tripulantes_missao = atoi(
+                        buffer);
+                cont++;
+                break;
+            case 2:
+                temp = strtok(buffer, s);
+                while (temp != NULL) {
+                    lista_missoes->conj_tipos_missao[cont3].tipo_tripulantes[cont2] = atoi(temp);
+                    cont2++;
+                    temp = strtok(NULL, s);
+                }
+                cont++;
+                break;
+            case 3:
+                cont3++;
+                cont = 0;
+                break;
+
+            default:
+                return;
+
+
+        }
+    }
+
 }
 
 #endif //FUNCOES_SECUNDARIAS_H

@@ -21,7 +21,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     printf("\nEscolha o tipo de missao: \n");
 
     //ciclo que imprime todos os tipos de missao carregados no SIGIT
-    imprimir_funcoes(todas_funcoes);
+    imprimir_tipos_missao(tipos_missao);
     scanf("%d",&escolha);
 
     printf("Insira a data, no formato DD/MM/AAAA");
@@ -128,6 +128,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
                 printf("escolha a funcao\n");
                 imprimir_funcoes(lista_funcoes_mil);
                 scanf("%d", &escolha2);
+                printf("%d", escolha2);
                 imprimir_lista_militares(lista_de_militares, 0, escolha2);
                 break;
             case 4:
@@ -209,51 +210,45 @@ void atualizar_estado(Total_militares * lista_de_militares){
 
 }
 
-void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_func, char nome_ficheiro[]){
+void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_func){
 
-    char caminho [CAMINHO];
+    char file_location [CAMINHO];
     char buffer [CAMINHO];
-    int controlo=0, i, a=1;
+    int controlo=0, i, a=lista_mil->cont_militares;
     FILE *fp;
 
     printf("\n--Carregar Militares--\n");
     getchar();
 
-    while(a==1){
-        /*
-        printf("Introduza caminho do ficheiro: ");
-        fgets(caminho, CAMINHO, stdin);
 
-        for (i = 0; caminho[i] != '\n'; i++);
-        caminho[i]='\0';
-        */
-        fp=fopen(nome_ficheiro, "r");
-        if(fp==NULL){
-            printf("ERRO: Ficheiro nao existente!\n\n");
-            a=1;
-        }else
-            a=0;
-        if (a == 1) {
-            printf("deseja sair? 1-S 0-N\n");
-            scanf("%d", &controlo);
-        }
-        if(controlo == 1)return;
-    };
 
-    controlo=0;
-    fgets(buffer, 100, fp);
-    while (fgets(buffer, 100, fp)){
-        if (controlo=0){
+    printf("Introduza caminho do ficheiro: ");
+    fgets(file_location, CAMINHO, stdin);
+
+    for (i = 0; file_location[i] != '\n'; i++);
+    file_location[i]='\0';
+
+    fp=fopen(file_location, "r");
+    if(fp==NULL){
+         printf("ERRO: Ficheiro nao existente!\n\n");
+         return;
+    }
+
+
+
+    fgets(buffer, sizeof (buffer), fp);
+    while (fgets(buffer, sizeof (buffer), fp)){
+        /*if (controlo==0){
             controlo=1;
-            a=2;
-            continue;
+            fgets(buffer, sizeof (buffer), fp);
+            adicionar_dados_militares(buffer, lista_mil, lista_func);
         }
-        fgets(buffer, 100, fp);
+        fgets(buffer, sizeof (buffer), fp);*/
         adicionar_dados_militares(buffer, lista_mil, lista_func);
     }
     fclose(fp);
     printf("BD carregada com sucesso!\n");
-    printf("Novo numero de militares: %d", lista_mil->cont_militares);
+    printf("Militares novos: %d", lista_mil->cont_militares-a);
 }
 
 
