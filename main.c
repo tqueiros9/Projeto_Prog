@@ -15,8 +15,7 @@ int main(){
     Total_militares todos_os_militares;
     Total_funcoes_mil todas_func_mil;
 
-
-    iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes);
+    iniciar_valores(&todas_func_mil, &todos_os_militares, &todasAsMissoes, &todos_tipos_missoes); //ir à secundária l17
     ler_dados_binario(&todos_os_militares,&todasAsMissoes);
 
 /*
@@ -69,7 +68,7 @@ int main(){
                 return 0;
 
             default:
-                printf("escolha invalida, nao existe essa opcao no menu");
+                printf("Escolha invalida, nao existe essa opcao no menu");
         }
 
         imprimir_menu();

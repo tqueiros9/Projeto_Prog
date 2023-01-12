@@ -8,9 +8,6 @@
 
 #define CAMINHO 100
 
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                    FUNÇÕES AUXILIARES
@@ -18,8 +15,8 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Inicia as variaveis do programa a 0
 void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes * c, Total_tipos_missao * d){
-    a->cont_funcoes=0;
-    b->cont_militares=0;
+    a->cont_funcoes=0;             //a,b,c,d sao variaveis a apontar para os tipos das estruturas
+    b->cont_militares=0;           //meter os contadores a zero
     c->cont_missoes=0;
     d->cont_tipos_missao=0;
 }
@@ -83,7 +80,7 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
             }
         }
         if (controlo_militar_guardado == 0){
-            printf("nao ha militares disponiveis para executar a missao");
+            printf("Nao ha militares disponiveis para executar a missao");
             return;
         }
     }
