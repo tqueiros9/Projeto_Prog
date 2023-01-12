@@ -16,7 +16,7 @@
                    FUNÇÕES AUXILIARES
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+// Inicia as variaveis do programa a 0
 void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes * c, Total_tipos_missao * d){
     a->cont_funcoes=0;
     b->cont_militares=0;
@@ -24,12 +24,17 @@ void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes *
     d->cont_tipos_missao=0;
 }
 
+// Imprime o menu
 void imprimir_menu(){
 
     printf("\n1-marcar missao\n2-listar missoes\n3-listar tripulantes\n4-atualizar estado de tripulantes\n5-Adicionar ficheiro a BD\n6-sair\n");
 }
 
+// Importa a estrutura das informacoes dos militares e o nip escolhido no menu
 void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
+
+    //Ciclo que percorre a estrutura dos militares ate encontrar um militar com o nip importado na funcao
+    //Quando encontrado adiciona uma missao e horas de voo
 
     for (int i = 0; i < todos_militares->cont_militares; i++) {
         if (todos_militares->total_tripulantes[i].nip == nip){
@@ -193,13 +198,18 @@ void imprimir_lista_militares (Total_militares * lista_militares, int estado, in
     printf("\n");
 }
 
+// Importa a lista dos militares e o nip escolhido
 int imprimir_militar (Total_militares * lista_militares, int nip){
 
     char estado[20];
     int i;
+
+    //Percorre a estrutura lista de militares
+    //Encontra o militar com o nip escolhido
+
     i = verifica_militar(lista_militares,nip);
 
-
+    // Se o estado estiver em 0, imprimir "Operacional", se diferente de 0, imprime "Inoperacional"
         if (lista_militares->total_tripulantes[i].estado == 0){
             strcpy(estado, "OPERACIONAL");
         }
@@ -213,46 +223,63 @@ int imprimir_militar (Total_militares * lista_militares, int nip){
 
 }
 
+// Importa a lista dos militares e o nip escolhido
 void imprimir_horas_militar (Total_militares * lista_militares, int nip){
 
-    int controlo =0;
-    for (int i = 0; i < lista_militares->cont_militares; i++) {
+    int controlo =0, i;
 
-        if (lista_militares->total_tripulantes[i].nip==nip){
+    //Percorre a estrutura lista de militares
+    //Encontra o militar com o nip escolhido
+    i = verifica_militar(lista_militares,nip);
 
-            printf("%s \n\thoras de voo: %d\n\tnumero de missoes: %d\n", lista_militares->total_tripulantes[i].nome,
+    //Imprime o nome, horas de voo e o numero de missoes
+    if (lista_militares->total_tripulantes[i].nip==nip){
+
+       printf("%s \n\thoras de voo: %d\n\tnumero de missoes: %d\n", lista_militares->total_tripulantes[i].nome,
                    lista_militares->total_tripulantes[i].horas_voo, lista_militares->total_tripulantes[i].missoes);
-            controlo = 1;
-            break;
 
-        }
     }
-    if (controlo == 0)printf("\nO NIP introduzido nao corresponde a nenhum militar");
+
+    // se apos percorrer a lista dos militares e nao encontrar nenhum o i esta a -1 e imprime o printf em baixo
+    if (i == -1)printf("\nO NIP introduzido nao corresponde a nenhum militar");
 
 }
 
+//importa a lista de missões e o numero de voo indicado
 int encontrar_indice_missao(Total_missoes * lista_missoes, int voo){
     int i;
+
+    //percorre a lista de missões até encontrar o voo
     for (i = 0; i < lista_missoes->cont_missoes; i++) {
         if(lista_missoes->conj_missoes[i].n_voo == voo)return i;
     }
+
+    //retoma o indice da missão desse voo
+
 }
 
+//importa a lista de missões e o voo indicado no menu
 void eliminar_missao(Total_missoes * lista_missoes, int voo){
 
     int i;
 
-    i = encontrar_indice_missao(lista_missoes,voo);
+    i = encontrar_indice_missao(lista_missoes,voo); //i= indice do voo ( vem da função anterior)
     for (int j = i; j < lista_missoes->cont_missoes-1; j++) {
-        lista_missoes->conj_missoes[j]=lista_missoes->conj_missoes[j+1];
+        lista_missoes->conj_missoes[j]=lista_missoes->conj_missoes[j+1]; // Passa cada missão a seguir ao voo para o indice anterior do vetor
     }
-    lista_missoes->cont_missoes--;
+    lista_missoes->cont_missoes--; // tira uma missão da contagem de missões
 }
 
+//Importa todas as listas com informações relativas ao voo e o numero do voo
 void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_missao * lista_tipos, Total_funcoes_mil * funcoes_mil){
+
+
     int i, data;
-    i = encontrar_indice_missao(lista_missoes,voo);
+    i = encontrar_indice_missao(lista_missoes,voo); //usa a função encontrar_indice_missao para usar nos indicadores do printf
     data = lista_missoes->conj_missoes[i].data;
+
+    //imprime todos os dados do voo
+
     printf("\n--MISSAO--\n"
            "Numero de voo:\t%d\n"
            "Data:\t\t%d/%d/%d\n"
@@ -261,18 +288,21 @@ void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_mis
            data % 100, data % 10000 / 100,data/10000,
            lista_tipos->conj_tipos_missao[lista_missoes->conj_missoes[i].tipo_de_missao].nome,
            lista_missoes->conj_missoes[i].cont_tripulantes);
+
     printf("--TRIPULANTES--\n");
+
+    //Percorre a lista de tripulantes e imprime o nome e função de cada tripulantes no voo
+
     for (int j = 0; j < lista_missoes->conj_missoes[i].cont_tripulantes; j++) {
         printf("%s\t%s\n", lista_missoes->conj_missoes[i].conj_trip[j].nome,
                funcoes_mil->todas_funcoes[lista_missoes->conj_missoes[i].conj_trip[j].funcao].mil_funcao);
     }
-
 }
 
 
 void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_missoes){
-    char filename_mil[] = "militares.bin";
-    char filename_mis[] = "missoes.bin";
+    char filename_mil[] = "militares.bd";
+    char filename_mis[] = "missoes.bd";
 
     FILE * fp, *fp2;
     fp = fopen(filename_mil, "rb");
@@ -313,7 +343,6 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
         return;
     }
     else {
-
         fwrite(&lista_militares->cont_militares, sizeof(int), 1, fp);
         fwrite(lista_militares->total_tripulantes, sizeof(lista_militares->total_tripulantes[0]), lista_militares->cont_militares, fp);
         fclose(fp);
