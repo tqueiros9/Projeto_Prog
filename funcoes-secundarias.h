@@ -20,8 +20,6 @@ void iniciar_valores(Total_funcoes_mil * a, Total_militares * b, Total_missoes *
     b->cont_militares=0;           //meter os contadores a zero
     c->cont_missoes=0;
     d->cont_tipos_missao=0;
-
-
 }
 
 // Imprime o menu
@@ -307,10 +305,12 @@ void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_mis
 
 
 void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_missoes){
+
     char filename_mil[] = "militares.bd";
     char filename_mis[] = "missoes.bd";
 
     FILE * fp, *fp2;
+
     fp = fopen(filename_mil, "rb");
     if(fp == NULL){
         printf("Abertura de ficheiro incorrecta.\n");
@@ -370,7 +370,14 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
 
 void carregar_funcoes (Total_funcoes_mil * lista_func) {
 
+
+    //-----------------------
+    // APENAS ALTERAR A LOCALIZACAO DO FICHEIRO
     char location []= "C:\\Users\\tiago\\CLionProjects\\Projeto\\tipos_militares.txt";
+    //-----------------------
+
+
+
     char buffer [CAMINHO];
     char s[2]=",";
     char *temp;
