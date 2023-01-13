@@ -20,10 +20,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="bases de dados e atualizacao de ficheiros de dados">
+    <list default="true" id="6f0ed5b4-bf4c-4246-99a4-e69a6aa74f13" name="Changes" comment="base de dados e correcoes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ficheiros.h" beforeDir="false" afterPath="$PROJECT_DIR$/ficheiros.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/militares.bd" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/militares.bd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/missoes.bd" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/missoes.bd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes-secundarias.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes-secundarias.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcoes_principais.h" beforeDir="false" afterPath="$PROJECT_DIR$/funcoes_principais.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
@@ -124,7 +124,9 @@
       <workItem from="1673320962235" duration="3325000" />
       <workItem from="1673474130608" duration="657000" />
       <workItem from="1673481406845" duration="1426000" />
-      <workItem from="1673490013066" duration="2417000" />
+      <workItem from="1673490013066" duration="6841000" />
+      <workItem from="1673496916824" duration="12381000" />
+      <workItem from="1673552692396" duration="13758000" />
     </task>
     <task id="LOCAL-00001" summary="git test">
       <created>1670928289313</created>
@@ -357,7 +359,49 @@
       <option name="project" value="LOCAL" />
       <updated>1673490741745</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="leitura de ficheiros csv de militares a funcionar">
+      <created>1673492523193</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1673492523193</updated>
+    </task>
+    <task id="LOCAL-00035" summary="leitura de ficheiros csv a funcionar">
+      <created>1673497942066</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1673497942066</updated>
+    </task>
+    <task id="LOCAL-00036" summary="esta acabado, nao mexo mais nisto">
+      <created>1673534248324</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1673534248324</updated>
+    </task>
+    <task id="LOCAL-00037" summary="comentarios">
+      <created>1673537528584</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1673537528584</updated>
+    </task>
+    <task id="LOCAL-00038" summary="base de dados">
+      <created>1673539939593</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1673539939593</updated>
+    </task>
+    <task id="LOCAL-00039" summary="base de dados e correcoes">
+      <created>1673564780901</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1673564780901</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,9 +419,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="git test" />
-    <MESSAGE value="estruturas" />
-    <MESSAGE value="estruturas - update em todas as estruturas" />
     <MESSAGE value="estruturas - update em todas as estruturas&#10;função de marcar missoes vai ser alterada para utilizar um for para listar as funções, esperando que haja um número quase ilimitado de funções para eliminar a necessidade de switch e diminuir as linhas de código&#10;é preciso comentar o codigo já feito para ser de mais fácil compreensão" />
     <MESSAGE value="foi adicionado um ficheiro só de estruturas para não ter as estruturas misturadas com o resto do código&#10;modificada a funcao de marcar missao para poder usar um numero quase infinito de tipos de missao sem necessidade de switch ou muito código repetido" />
     <MESSAGE value="ficheiro de funcoes principais e secundarias para separar aquilo que foi pedido daquilo que adicionamos para poder correr o programa de forma mais eficiente &#10;correcao no formato de data das estruturas, em vez de um vetor data[DD,MM,AAAA] passa a ser um valor inteiro com o formato AAAAMMDD, para obter dias, meses ou anos basta fazer restos de divisao (%) ou divisoes inteiras (/)&#10;há duvidas a tirar na proxima aula, portanto há coisas no codigo das estruturas, principalmente no tamanho de vetores que pode mudar" />
@@ -397,17 +438,12 @@
     <MESSAGE value="teste e correção de erros" />
     <MESSAGE value="queirozzz continuo a não ter acesso ao ficheiro trambolhoooo" />
     <MESSAGE value="bases de dados e atualizacao de ficheiros de dados" />
-    <option name="LAST_COMMIT_MESSAGE" value="bases de dados e atualizacao de ficheiros de dados" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/funcoes_principais.h</url>
-          <line>251</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="leitura de ficheiros csv de militares a funcionar" />
+    <MESSAGE value="leitura de ficheiros csv a funcionar" />
+    <MESSAGE value="esta acabado, nao mexo mais nisto" />
+    <MESSAGE value="comentarios" />
+    <MESSAGE value="base de dados" />
+    <MESSAGE value="base de dados e correcoes" />
+    <option name="LAST_COMMIT_MESSAGE" value="base de dados e correcoes" />
   </component>
 </project>

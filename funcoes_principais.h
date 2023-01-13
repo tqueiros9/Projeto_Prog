@@ -14,6 +14,7 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+//funcao recebe tudo para marcar as missoes
 void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_missao, Total_militares * todos_militares ,Total_funcoes_mil * todas_funcoes){
 
 
@@ -38,6 +39,7 @@ void marcar_missao(Total_missoes * total_missoes, Total_tipos_missao * tipos_mis
     getchar();
 }
 
+//recebe missoes e dados necessarios para as listar
 void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * lista_tipos_missao, Total_funcoes_mil * lista_funcoes_mil){
 
     if (lista_de_missoes->cont_missoes==0){
@@ -60,6 +62,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         return;
     }
 
+    //percorre as missoes e imprime as que estao no intervalo indicado pelo utilizador
     for (int i = 0; i < lista_de_missoes->cont_missoes; i++) {
 
         data = lista_de_missoes->conj_missoes[i].data;
@@ -81,6 +84,8 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
         printf("Nao ha missoes nas datas marcadas");
         return;
     }
+
+    //informacoes para interagir com o programa para ver mais detalhes
     printf("\nDeseja ver detalhes de uma missao, se desejar introduza o numero de voo ou introduza -1 para sair\n");
     scanf("%d",&escolha);
 
@@ -101,6 +106,7 @@ void listar_missoes (Total_missoes * lista_de_missoes, Total_tipos_missao * list
 
 }
 
+//funcionalidade base identica a anterior, apenas tem em consideracao o estado de OP e INOP e a funcao do tripulante especifico
 void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil * lista_funcoes_mil){
 
     int escolha, escolha2,nip;
@@ -114,6 +120,7 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
     printf("Selecione a opcao:\n1 - lista total de militares OP\n2 - lista total de militares INOP\n3 - lista por funcao OP\n4 - lista por funcao INOP\n5 - lista global\n6 - sair\n");
     scanf(" %d", &escolha);
 
+    //dependendo das escolhas do user a funcao imprimir_lista e chamada com diferentes parametos
 
     while (escolha!=6) {
         switch (escolha) {
@@ -163,8 +170,10 @@ void listar_tripulantes(Total_militares * lista_de_militares, Total_funcoes_mil 
 
 }
 
+//atualiza o estado do tripulante
 void atualizar_estado(Total_militares * lista_de_militares){
 
+    //verifica a existencia de militares
     if (lista_de_militares->cont_militares==0){
         printf("nao ha militares para imprimir\n");
         return;
@@ -175,7 +184,10 @@ void atualizar_estado(Total_militares * lista_de_militares){
     printf("introduza o nip do militar que pretende modificar o estado\n");
     scanf("%d", &nip);
 
+    //chama a funcao que devolve o indice do tripulante
     indice = imprimir_militar(lista_de_militares, nip);
+
+
     if (indice == -1){
         printf("esse nip nao esta na base de dados");
         return;
@@ -187,7 +199,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
     if (escolha == 3)return;
 
 
-
+    //verifica se o militar ja se encontra nesse estado e muda caso nao esteja
     else if (escolha == 1){
 
         if (lista_de_militares->total_tripulantes[indice].estado == 0){
@@ -216,6 +228,7 @@ void atualizar_estado(Total_militares * lista_de_militares){
 
 }
 
+//funcao que serve para ler a base de dados, verifica se o nip ja existe antes de importar
 void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_func){
 
     char file_location [CAMINHO];
@@ -234,6 +247,8 @@ void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_fun
     for (i = 0; file_location[i] != '\n'; i++);
     file_location[i]='\0';
 
+
+    //abre o ficheiro na localizacao introduzida pelo user
     fp=fopen(file_location, "r");
     if(fp==NULL){
          printf("ERRO: Ficheiro nao existente!\n\n");
@@ -244,12 +259,7 @@ void ler_ficheiro_mil(Total_militares * lista_mil, Total_funcoes_mil * lista_fun
 
     fgets(buffer, sizeof (buffer), fp);
     while (fgets(buffer, sizeof (buffer), fp)){
-        /*if (controlo==0){
-            controlo=1;
-            fgets(buffer, sizeof (buffer), fp);
-            adicionar_dados_militares(buffer, lista_mil, lista_func);
-        }
-        fgets(buffer, sizeof (buffer), fp);*/
+
         adicionar_dados_militares(buffer, lista_mil, lista_func);
     }
     fclose(fp);

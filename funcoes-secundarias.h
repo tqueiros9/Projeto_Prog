@@ -42,36 +42,42 @@ void adicionar_horas_missoes (Total_militares * todos_militares, int nip){
     }
 
 }
-
+//imprime para a consola todos os tipos de missao
 void imprimir_tipos_missao(Total_tipos_missao * total_tipos){
     for (int i = 0; i < total_tipos->cont_tipos_missao; i++) {
         printf("%d - %s\n", i, total_tipos->conj_tipos_missao[i].nome);
     }
 }
-
+//funcao auxiliar para criar equipas para a marcacao de missoes
 void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_escolhida, int data, Total_missoes * todas_missoes, int missao_escolhida){
 
     int controlo=0, controlo_militar_guardado = 0, j, indice = 0;
 
+    //guarda os dados ja conhecidos
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].data = data;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].cont_tripulantes = tipo_miss_escolhida->cont_tripulantes_missao;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].n_voo = 1000+todas_missoes->cont_missoes+1;
     todas_missoes->conj_missoes[todas_missoes->cont_missoes].tipo_de_missao = missao_escolhida;
 
-
+    //percorrer o vetor com os tipos de tripulantes necessarios
     for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
 
+        //percorrer o vetor de militares
         for (j = indice; j < todos_militares->cont_militares; j++) {
 
 
+            //encontrar o militar com a funcao escolhida
             if(todos_militares->total_tripulantes[j].funcao == tipo_miss_escolhida->tipo_tripulantes[i]-1){
 
+                //verificar as datas do militar para saber se esta disponivel
                 for (int k = 0; k < todos_militares->total_tripulantes[j].n_missoes; k++) {
                     if(todos_militares->total_tripulantes[j].data_missoes[k] == data){
                         controlo = 1;
                         break;
                     }
                 }
+
+                //variavel de controlo = 0 quer dizer que esta disponivel
                 if (controlo == 0){
                     todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i] = todos_militares->total_tripulantes[j];
                     controlo_militar_guardado = 1;
@@ -81,17 +87,23 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
                 }
 
             }
+
+            //se controlo = 1 foi guardado um militar
             if (controlo_militar_guardado == 1){
                 indice = j+1;
                 break;
             }
         }
+
+        //mensagem de erro
         if (controlo_militar_guardado == 0){
             printf("Nao ha militares disponiveis para executar a missao");
             return;
         }
         controlo_militar_guardado = 0;
     }
+
+    //adicionar horas e n de missoes a todos os tripulantes
     for (int i = 0; i < tipo_miss_escolhida->cont_tripulantes_missao; i++) {
         adicionar_horas_missoes(todos_militares,todas_missoes->conj_missoes[todas_missoes->cont_missoes].conj_trip[i].nip);
     }
@@ -99,6 +111,7 @@ void criar_equipa (Total_militares * todos_militares, Mission_type * tipo_miss_e
 
 }
 
+//verifica de o indice do tipo de funcao
 int verifica_funcao(char tipos_funcoes[], Total_funcoes_mil * todas_funcoes){
 
     for (int i = 0; i < todas_funcoes->cont_funcoes; i++) {
@@ -109,6 +122,8 @@ int verifica_funcao(char tipos_funcoes[], Total_funcoes_mil * todas_funcoes){
 
 }
 
+
+//verifica o indice do militar e se nao existir devolve -1
 int verifica_militar (Total_militares * lista_mil, int nip){
     int i;
     for (i = 0; i < lista_mil->cont_militares; i++) {
@@ -119,11 +134,12 @@ int verifica_militar (Total_militares * lista_mil, int nip){
     if (i == lista_mil->cont_militares)return -1;
 }
 
+//funcao utilizada para gravar as linhas de dados provenientes da funcao que abre o ficheiro dos militares
 void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, Total_funcoes_mil * lista_func){
 
     char s[2]=";";
-    char *temp;
-    int cont=0, help, verifica;
+    char *temp, *data;
+    int cont=0, help, verifica,data1, data2, data3, cont2;
 
     /* get the first token */
     temp = strtok(linha, s);
@@ -131,6 +147,7 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
     /* walk through other tokens */
     while( temp != NULL ) {
 
+        //ao dividir a linha sabe-se automaticamente cada parte da linha NIP;NOME;etc
         switch (cont) {
             case 0:
                 verifica = verifica_militar(lista_mil_total, atoi(temp));
@@ -149,7 +166,29 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
                     else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].estado = 1;
                     break;
             case 4:
-                    if (help!=0)lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper = atoi(temp);
+                    if (help!=0){
+                        cont2=0;
+                        data = strtok(temp, "/");
+                        while (data != NULL){
+                            switch (cont2) {
+                                case 1:
+                                    data1 = atoi(temp);
+                                    break;
+                                case 2:
+                                    data2 = atoi(temp);
+                                    break;
+                                case 3:
+                                    data3 = atoi(temp);
+                                    break;
+                            }
+                            data = strtok(NULL,"/");
+                            cont2++;
+
+                        }
+                        lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper=data1+data2*100+data3*10000;
+
+                    }
+
                     else lista_mil_total->total_tripulantes[lista_mil_total->cont_militares].oper=-1;
                     break;
             case 5:
@@ -168,6 +207,7 @@ void adicionar_dados_militares(char linha[], Total_militares * lista_mil_total, 
     lista_mil_total->cont_militares++;
 }
 
+//simplificacao codigo para imprimir as funcoes dos militares
 void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
 
     for (int i = 0; i < lista_funcoes->cont_funcoes; i++) {
@@ -175,13 +215,10 @@ void imprimir_funcoes(Total_funcoes_mil * lista_funcoes){
     }
 }
 
-//recebe lista de militares, o seu estado 0 = OP e 1 = INOP
+//recebe lista de militares, o seu estado 0 = OP e 1 = INOP, e a funcao e um inteiro
 void imprimir_lista_militares (Total_militares * lista_militares, int estado, int funcao){
 
-    //testes---------------
-
-    //-----------
-
+    //verifica a existencia de militares na base de dados
     if (lista_militares->cont_militares==0){
         printf("nao ha militares na base de dados\n");
         return;
@@ -190,6 +227,7 @@ void imprimir_lista_militares (Total_militares * lista_militares, int estado, in
     printf("\n----LISTA DE MILITARES----\n");
     printf("NIP\tNOME");
 
+    //imprime o nome e o nip caso cumpra os requisitos ou se for -1, para ignorar esse requisito
     for (int i = 0; i < lista_militares->cont_militares; i++) {
 
         if ((lista_militares->total_tripulantes[i].estado==estado || estado== -1)&&
@@ -303,7 +341,7 @@ void imprimir_dados_voo (Total_missoes * lista_missoes, int voo, Total_tipos_mis
     }
 }
 
-
+//funcoes que leem e guardam dados em binario
 void ler_dados_binario(Total_militares * lista_militares, Total_missoes * lista_missoes){
 
     char filename_mil[] = "militares.bd";
@@ -367,7 +405,7 @@ void guardar_dados_binario (Total_militares * lista_militares, Total_missoes * l
 
 }
 
-
+//funcao para carregar as funcoes dos militares
 void carregar_funcoes (Total_funcoes_mil * lista_func) {
 
 
@@ -423,6 +461,7 @@ void carregar_funcoes (Total_funcoes_mil * lista_func) {
     }
 }
 
+//funcao para carregar os tipos de missao da esquadra
 void carregar_tipos_missao(Total_tipos_missao * lista_missoes){
 
 
